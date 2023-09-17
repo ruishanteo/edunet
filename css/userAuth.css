@@ -1,0 +1,86 @@
+/* Reset some default browser styles */
+body,
+h1,
+form {
+  margin: 0;
+  padding: 0;
+}
+
+/* Apply a background color and text color */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Style the header */
+header {
+  background-color: #fff;
+  color: #000;
+  text-align: center;
+  padding: 20px;
+  width: 40vw;
+}
+
+/* Style the login form container */
+main {
+  width: 40vw;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+}
+
+/* Style form elements */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  background-color: #e7b474;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: medium;
+}
+
+button[type="submit"]:hover {
+  background-color: #1e1b5f;
+}
+
+.info {
+  font-weight: normal;
+  font-size: small;
+  margin-top: 10px;
+  text-align: center;
+  display: block;
+}
+
+.redirect-link {
+  text-decoration: none;
+  color: blue;
+}
