@@ -1,0 +1,97 @@
+/* Reset some default browser styles */
+body,
+h1,
+h2,
+div {
+  margin: 0;
+  padding: 0;
+}
+
+/* Apply a background color and text color */
+body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+/* Style the header */
+header {
+  text-align: center;
+  padding: 20px;
+  color: #000;
+}
+
+/* Style the "Welcome to" and "EduNet" text */
+h2 {
+  font-family: system-ui, sans-serif;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  font-weight: 300;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-family: Arial, sans-serif;
+  font-size: 5rem;
+  letter-spacing: 3px;
+}
+
+/* Style the main content */
+main {
+  text-align: center;
+  background-color: #fff;
+  width: 700px;
+  margin: 5px auto;
+}
+
+/* Style the logo */
+img {
+  display: block;
+  margin: 0 auto;
+}
+
+action {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+/* Style the buttons */
+.redirect-link {
+  text-decoration: none;
+  margin: 10px;
+  display: block;
+}
+
+button {
+  background-color: #e7b474;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100px;
+  font-size: medium;
+}
+
+button:hover {
+  background-color: #1e1b5f;
+}
+
+@media (max-width: 700px) {
+  body {
+    flex-direction: column;
+  }
+  main {
+    flex: none;
+    width: 100%;
+  }
+}
