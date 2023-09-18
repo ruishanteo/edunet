@@ -12,7 +12,16 @@
       <h1>Register</h1>
     </header>
     <main>
-      <form id="login-form">
+      <form id="register-form">
+        <label for="type">I am a:</label>
+        <input list="types" />
+        <select name="types" id="types">
+          <option value="Student">Student</option>
+          <option value="Tutor">Tutor</option>
+          <option value="Parent">Parent</option>
+          <option value="Admin">Admin</option>
+        </select>
+        <br />
         <label for="username">Full Name:</label>
         <input type="text" id="username" name="username" required />
         <br />
@@ -28,8 +37,25 @@
         <button type="submit">Register</button>
       </form>
       <label class="info">Already have an account?</label>
-      <a class="info redirect-link" href="/pages/userAuth/login.html">Login<a>
+      <a class="info redirect-link" href="/pages/userAuth/login.html">Login</a>
     </main>
-    <script src="/js/userAuth/auth.js"></script>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBn59QUGbzIq2-CUdrWm9KOXGsc7ev21ms",
+        authDomain: "edunet-eddy.firebaseapp.com",
+        projectId: "edunet-eddy",
+        storageBucket: "edunet-eddy.appspot.com",
+        messagingSenderId: "309444473455",
+        appId: "1:309444473455:web:2bc7f15d012056d288539a",
+        measurementId: "G-DMMJQ314Y5",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      window.firebaseApp = app;
+    </script>
+    <script type="module" src="/js/userAuth/auth.js"></script>
   </body>
 </html>
