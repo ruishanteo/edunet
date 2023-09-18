@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/userAuth.css" />
     <title>Login</title>
   </head>
@@ -15,7 +16,6 @@
     <main>
       <form id="login-form">
         <label for="type">I am a:</label>
-        <input list="types" />
         <select name="types" id="types">
           <option value="Student">Student</option>
           <option value="Tutor">Tutor</option>
@@ -29,7 +29,7 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required />
         <br />
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
       </form>
       <label class="info">Don't have an account?</label>
       <a class="info redirect-link" href="/pages/userAuth/register.html"
@@ -37,7 +37,6 @@
       >
     </main>
 
-    <script type="module"></script>
-    <script type="module" src="/js/userAuth/auth.js"></script>
+    <script type="module" src="/js/userAuth/login.js"></script>
   </body>
 </html>
