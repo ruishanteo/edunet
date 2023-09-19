@@ -9,7 +9,7 @@ p {
 /* Style pages */
 .page {
   background-color: #fff;
-  margin: 0 20px;
+  margin: 0 20px 20px 20px;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,6 @@ p {
 body {
   background-color: #f0f0f0;
   font-family: Arial, sans-serif;
-  height: 100vh;
 }
 
 /* Style the header */
@@ -65,9 +64,37 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-  width: 100px;
   font-size: medium;
   align-self: center;
+}
+
+button:hover {
+  background-color: #1e1b5f;
+}
+
+table {
+  border-collapse: collapse;
+  border: 2px solid rgb(200, 200, 200);
+  letter-spacing: 1px;
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid rgb(190, 190, 190);
+  padding: 10px;
+  font-size: large;
+}
+
+td {
+  text-align: center;
+  font-size: medium;
+}
+
+tr:nth-child(even) {
+  background-color: #eee;
 }
 
 .subheader {
@@ -79,10 +106,51 @@ button {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
+  width: 100%;
 }
 
-button:hover {
-  background-color: #1e1b5f;
+.icon-button {
+  background-color: transparent;
+  font-size: 20px;
+  color: black;
+  border-radius: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.information-header {
+  margin: 50px 20px 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.information-box {
+  margin: 0 20px;
+  align-items: center;
+}
+
+.information {
+  display: flex;
+  flex-direction: row;
+  margin: 20px 0 0 20px;
+  height: 30px;
+  gap: 10px;
+  align-items: center;
+}
+
+.edit-field {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .grid-container {
