@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Classes</title>
+    <script src="/components/header.js"></script>
+    <!-- <script type="module" src="/js/userAuth/getAuth.js"></script> -->
+  </head>
+
+  <body>
+    <header-navbar></header-navbar>
+
+    <div class="page">
+      <main>
+        <h2 class="subheader">P5_Math</h2>
+
+        <div class="edit-field">
+          <h3>Tutor:</h3>
+          <h4>Name</h4>
+          <button class="icon-button">
+            <i class="fa fa-pencil"></i>
+          </button>
+        </div>
+
+        <h3>Students</h3>
+        <table>
+          <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Contact No.</th>
+            <th>Email</th>
+            <th>Parent's Contact No.</th>
+            <th>Parent's Email</th>
+            <th></th>
+          </tr>
+          <tr>
+            <td>No.</td>
+            <td>Name</td>
+            <td>Contact No.</td>
+            <td>Email</td>
+            <td>Parent's Contact No.</td>
+            <td>Parent's Email</td>
+            <td>
+              <button><i class="fa fa-close"></i></button>
+            </td>
+          </tr>
+        </table>
+        <div class="information-header">
+          <button><i class="fa fa-trash"></i> Delete</button>
+        </div>
+      </main>
+    </div>
+    <!-- <script>
+      const checkUser = setInterval(() => {
+        if (window.user) {
+          clearInterval(checkUser);
+          console.log(window.user);
+        }
+      }, 1000);
+    </script> -->
+  </body>
+</html>
