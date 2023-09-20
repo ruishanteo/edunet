@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/modal.css" />
+    <title>Classes</title>
+    <script src="/components/header.js"></script>
+    <script src="/components/studentCards.js"></script>
+    <!-- <script type="module" src="/js/userAuth/getAuth.js"></script> -->
+  </head>
+
+  <body>
+    <header-navbar></header-navbar>
+
+    <div class="page">
+      <main>
+        <div class="add-button-container">
+          <h2 class="subheader">Students</h2>
+          <button id="add-student-button">+ Student</button>
+        </div>
+        <div class="grid-container">
+          <student-card></student-card>
+          <student-card></student-card>
+          <student-card></student-card>
+          <student-card></student-card>
+        </div>
+      </main>
+    </div>
+    <!-- <script>
+      const checkUser = setInterval(() => {
+        if (window.user) {
+          clearInterval(checkUser);
+          console.log(window.user);
+        }
+      }, 1000);
+    </script> -->
+    <script src="/components/modal.js"></script>
+  </body>
+</html>
