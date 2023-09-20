@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/accordian.css" />
+    <title>Classes</title>
+    <script src="/components/header.js"></script>
+    <script src="/components/classCards.js"></script>
+    <script src="/components/notesCards.js"></script>
+    <!-- <script type="module" src="/js/userAuth/getAuth.js"></script> -->
+  </head>
+
+  <body>
+    <header-navbar></header-navbar>
+
+    <div class="page">
+      <main>
+        <h1>Bobby Lim</h1>
+
+        <div class="information">
+          <h3 class="subheader">Particulars</h3>
+          <button class="icon-button">
+            <i class="fa fa-pencil"></i>
+          </button>
+        </div>
+
+        <div class="information-box">
+          <div class="information">
+            <h4>Contact No. :</h4>
+            <p>12345678</p>
+          </div>
+
+          <div class="information">
+            <h4>Email :</h4>
+            <p>12345678</p>
+          </div>
+        </div>
+
+        <div class="information-header">
+          <div class="add-button-container">
+            <h3 class="subheader">Classes</h3>
+            <button id="add-class-button">+ Class</button>
+          </div>
+        </div>
+
+        <div class="information-box">
+          <div class="grid-container">
+            <class-card></class-card>
+            <class-card></class-card>
+            <class-card></class-card>
+            <class-card></class-card>
+          </div>
+        </div>
+
+        <div class="information-header">
+          <div class="add-button-container">
+            <h3 class="subheader">Notes</h3>
+            <button id="add-note-button">+ Note</button>
+          </div>
+        </div>
+
+        <div class="information-box">
+          <div class="grid-container">
+            <note-card></note-card>
+            <note-card></note-card>
+            <note-card></note-card>
+            <note-card></note-card>
+          </div>
+        </div>
+        <div class="information-header">
+          <button><i class="fa fa-trash"></i> Delete</button>
+        </div>
+      </main>
+    </div>
+    <!-- <script>
+      const checkUser = setInterval(() => {
+        if (window.user) {
+          clearInterval(checkUser);
+          console.log(window.user);
+        }
+      }, 1000);
+    </script> -->
+    <script src="/components/modal.js"></script>
+  </body>
+</html>
