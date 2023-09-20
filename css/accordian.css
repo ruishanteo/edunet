@@ -1,0 +1,59 @@
+/* CSS for the unified accordion */
+button {
+  margin: 10px;
+}
+
+.accordion {
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+.accordion_input {
+  display: none;
+}
+
+.accordion_label {
+  background-color: #f1f1f1;
+  color: #333;
+  cursor: pointer;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  border: 1px solid #ddd;
+  border-bottom: none;
+  transition: background-color 0.3s;
+  margin: 0;
+  height: 20px;
+}
+
+.accordion_input:checked + .accordion_label .fa-chevron-down {
+  transform: rotate(180deg);
+}
+
+.accordion_content {
+  display: none;
+  border-top: 0;
+  border: 1px solid #ddd;
+}
+
+/* Add a hover effect for the labels */
+.accordion_label:hover {
+  background-color: #e0e0e0;
+}
+
+/* Style for the last section to restore the border */
+.accordion_label:last-child {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Make the checked label look different to indicate the active section */
+.accordion_input:checked + .accordion_label {
+  background-color: #ddd;
+}
+
+/* Show the content when checked */
+.accordion_input:checked + .accordion_label + .accordion_content {
+  display: block;
+}
