@@ -1,0 +1,86 @@
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+/* Container for messages */
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  clear: both;
+  width: fit-content;
+}
+
+/* Sender's chat container (align right) */
+.sender {
+  border-color: #ccc;
+  background-color: #ddd;
+  float: right;
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+/* Receiver's chat container (align left) */
+.receiver {
+  border-color: #ccc;
+  background-color: #ddd;
+  float: left;
+  margin-right: 20px;
+  margin-left: 0;
+}
+
+/* Style time text for sender */
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+/* Style time text for receiver */
+.time-left {
+  float: left;
+  color: #999;
+}
+
+/* Style the reply form */
+.reply-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Style the input field */
+.reply-form input[type="text"] {
+  flex: 1;
+  margin: 0px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  width: 100%;
+  align-items: center;
+}
+
+.reply-form button[type="submit"] {
+  background-color: #e7b474;
+  color: #fff;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  margin: 0px 5px;
+  padding: 0px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+  height: 40px;
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.reply-form button[type="submit"]:hover {
+  background-color: #1e1b5f;
+}

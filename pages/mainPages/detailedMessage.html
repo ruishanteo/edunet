@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/detailedMessage.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Messages</title>
+    <script src="/components/header.js"></script>
+    <script src="/components/backButton.js"></script>
+    <!-- <script type="module" src="/js/userAuth/getAuth.js"></script> -->
+  </head>
+
+  <body>
+    <header-navbar></header-navbar>
+
+    <div class="page">
+      <main>
+        <back-button></back-button>
+        <h2 class="subheader">BOOBOO</h2>
+
+        <div class="container sender">
+          <p>Hello. How are you today?</p>
+          <span class="time-right">11:00</span>
+        </div>
+
+        <div class="container receiver">
+          <p>Hey! I'm fine. Thanks for asking!</p>
+          <span class="time-left">11:01</span>
+        </div>
+
+        <div class="container sender">
+          <p>Sweet! So, what do you wanna do today?</p>
+          <span class="time-right">11:02</span>
+        </div>
+
+        <div class="container receiver">
+          <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
+          <span class="time-left">11:05</span>
+        </div>
+      </main>
+      <form class="reply-form">
+        <input type="text" placeholder="Write a message..." name="reply" />
+        <button type="submit">
+          <i class="fa fa-paper-plane"></i>
+        </button>
+      </form>
+    </div>
+  </body>
+</html>

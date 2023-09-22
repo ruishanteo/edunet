@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Messages</title>
+    <script src="/components/header.js"></script>
+    <script src="/components/messageCards.js"></script>
+    <!-- <script type="module" src="/js/userAuth/getAuth.js"></script> -->
+  </head>
+
+  <body>
+    <header-navbar></header-navbar>
+
+    <div class="page">
+      <main>
+        <div class="add-button-container">
+          <h2 class="subheader">Messages</h2>
+          <button id="add-message-button">+ Message</button>
+        </div>
+        <div class="grid">
+          <message-card></message-card>
+          <message-card></message-card>
+          <message-card></message-card>
+          <message-card></message-card>
+        </div>
+      </main>
+    </div>
+
+    <script src="/components/modal.js"></script>
+  </body>
+</html>
