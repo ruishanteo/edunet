@@ -12,13 +12,16 @@ async function getAuth() {
   const userId = userData.id;
 
   try {
-    const response = await fetch(`http://localhost:8000/api/auth/${userId}`, {
-      method: "GET",
-      headers: {
-        Authorization: `${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `https://edunet.onrender.com/api/auth/${userId}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `${accessToken}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       localStorage.clear();
