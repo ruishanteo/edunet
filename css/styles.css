@@ -6,6 +6,10 @@ p {
   padding: 0;
 }
 
+.invisible {
+  display: none;
+}
+
 /* Style pages */
 .page {
   background-color: #fff;
@@ -157,6 +161,24 @@ tr:nth-child(even) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 10px 10px;
+}
+
+.dot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  height: 50px;
+  width: 50px;
+  background-color: #1e1b5f;
+  border-radius: 50%;
+  display: inline-block;
+  justify-content: center;
+  padding: 0;
+}
+
+.dot:hover {
+  background-color: #e7b474;
 }
 
 #types {

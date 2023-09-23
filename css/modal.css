@@ -9,7 +9,7 @@ label {
 form {
   display: flex;
   flex-direction: column;
-  width: "100%";
+  width: 100%;
 }
 
 .section {
@@ -20,10 +20,10 @@ form {
 
 .modal {
   background: rgba(0, 0, 0, 0.5);
-  height: 110%;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
+  height: 100%;
   width: 100%;
 
   &.opened {
@@ -40,9 +40,12 @@ form {
   position: absolute;
   background-color: #fff;
   width: 40%;
+  max-height: 80%;
+  height: fit-content;
   text-align: center;
   top: 50%;
   left: 50%;
+  overflow-y: auto;
   transform: translate(-50%, -50%);
   border-top: 10px solid #1e1b5f;
 
@@ -51,7 +54,7 @@ form {
   }
 }
 
-#close {
+.close-modal {
   font-size: 24px;
   position: absolute;
   right: 5px;
@@ -59,8 +62,17 @@ form {
 }
 
 /* Change the color of the close icon on hover */
-#close:hover {
+.close-modal:hover {
   color: #1e1b5f; /* Change to your desired hover color */
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+  box-sizing: border-box;
 }
 
 .animate-out {
@@ -92,4 +104,29 @@ form {
     opacity: 1;
     transform: translateX(-50%, -50%);
   }
+}
+
+.class-checkbox-text {
+  margin-right: 20px;
+  width: 100%;
+  text-align: left;
+}
+
+.class-checkbox {
+  display: flex;
+  vertical-align: middle;
+}
+
+/* make each row alternative color */
+.class-checkbox-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+.class-checkbox-row:nth-child(even) {
+  background-color: #c9c9c950;
 }

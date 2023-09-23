@@ -55,3 +55,7 @@ a1 {
   color: #fff;
   margin-left: 5px;
 }
+
+.home-button {
+  background-color: transparent;
+}
