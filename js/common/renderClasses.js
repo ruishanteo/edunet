@@ -1,4 +1,4 @@
-function renderClasses(classes, args, reload) {
+function renderClasses(classes, args, handleDelete) {
   const classesGrid = document.getElementById("classes-grid");
   if (!classesGrid) {
     return;
@@ -37,30 +37,29 @@ function renderClasses(classes, args, reload) {
     const deleteClassButton = document.getElementById(
       `action-class-${classInfo.id}`
     );
-    if (!deleteClassButton) {
-      return;
+    if (deleteClassButton) {
+      deleteClassButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        handleDelete(classInfo.id);
+      });
     }
+  });
+}
 
-    deleteClassButton.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const url = args.tutorId
-        ? `${args.baseUrl}/tutor/unassign`
-        : args.studentId
-        ? `${args.baseUrl}/student/remove`
-        : `${args.baseUrl}/class/`;
-      const reqMethod = args.tutorId || args.studentId ? "PUT" : "DELETE";
-      fetch(url, {
-        method: reqMethod,
-        headers: {
-          Authorization: `${args.accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          classId: classInfo.id,
-          tutorId: args.tutorId,
-          studentId: args.studentId,
-        }),
-      }).then(reload);
-    });
+function renderClass(classInfo, handleDelete) {
+  const className = document.getElementById("class-name");
+  className.textContent = classInfo.name;
+
+  const tutorNameRead = document.getElementById("tutor-name-read");
+  if (classInfo.tutors.length === 0) {
+    tutorNameRead.textContent = "No tutor assigned yet";
+  } else {
+    tutorNameRead.textContent = classInfo.tutors[0].user.fullName;
+  }
+
+  const deleteClassButton = document.getElementById("delete-class-button");
+  deleteClassButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    handleDelete(classInfo.id);
   });
 }
