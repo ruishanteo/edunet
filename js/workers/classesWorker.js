@@ -1,8 +1,16 @@
 self.addEventListener("message", (e) => {
   const args = e.data;
   switch (args.updateType) {
+    case "get":
+      return getClass(args);
     case "create":
       return createClass(args);
+    case "delete":
+      return deleteClass(args);
+    case "assign":
+      return assignTutor(args);
+    case "remove":
+      return removeStudent(args);
     default:
       return getClasses(args);
   }
@@ -13,6 +21,11 @@ async function reloadClasses(args) {
   getClasses(args);
 }
 
+async function reloadClass(args) {
+  args.updateType = "get";
+  getClass(args);
+}
+
 async function getClasses(args) {
   try {
     const requestURL = args.studentId
@@ -21,8 +34,27 @@ async function getClasses(args) {
       ? `${args.baseUrl}/class/tutor/${args.tutorId}`
       : `${args.baseUrl}/class`;
 
-    console.log(args.studentId, args.tutorId, requestURL);
     const response = await fetch(requestURL, {
+      method: "GET",
+      headers: {
+        Authorization: `${args.accessToken}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      return;
+    }
+
+    response.json().then((res) => self.postMessage(res));
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function getClass(args) {
+  try {
+    const response = await fetch(`${args.baseUrl}/class/${args.classId}`, {
       method: "GET",
       headers: {
         Authorization: `${args.accessToken}`,
@@ -49,6 +81,85 @@ async function createClass(args) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(args.updateBody),
+    });
+
+    if (!response.ok) {
+      return;
+    }
+
+    response.json().then(() => reloadClasses(args));
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function deleteClass(args) {
+  try {
+    const url = args.tutorId
+      ? `${args.baseUrl}/tutor/unassign`
+      : args.studentId
+      ? `${args.baseUrl}/student/remove`
+      : `${args.baseUrl}/class/`;
+    const reqMethod = args.tutorId || args.studentId ? "PUT" : "DELETE";
+    const response = await fetch(url, {
+      method: reqMethod,
+      headers: {
+        Authorization: `${args.accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        tutorId: args.tutorId,
+        studentId: args.studentId,
+        ...args.updateBody,
+      }),
+    });
+
+    if (!response.ok) {
+      return;
+    }
+
+    response.json().then((res) => {
+      reloadClasses(args);
+      self.postMessage(res);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function assignTutor(args) {
+  try {
+    const response = await fetch(`${args.baseUrl}/tutor/assign`, {
+      method: "PUT",
+      headers: {
+        Authorization: `${args.accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ tutorId: args.tutorId, ...args.updateBody }),
+    });
+
+    if (!response.ok) {
+      return;
+    }
+
+    response.json().then(() => {
+      reloadClasses(args);
+      reloadClass(args);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function removeStudent(args) {
+  try {
+    const response = await fetch(`${args.baseUrl}/student/remove`, {
+      method: "PUT",
+      headers: {
+        Authorization: `${args.accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ classId: args.classId, ...args.updateBody }),
     });
 
     if (!response.ok) {
