@@ -3,59 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/userAuth.css" />
     <title>Register</title>
   </head>
   <body>
-    <img src="/assets/icon.png" alt="eddy" width="100" height="100" />
-    <header>
-      <h1>Register</h1>
-    </header>
     <main>
-      <form id="register-form">
-        <label for="type">I am a:</label>
-        <select name="types" id="types">
-          <option value="Student">Student</option>
-          <option value="Tutor">Tutor</option>
-          <option value="Parent">Parent</option>
-          <option value="Admin">Admin</option>
-        </select>
-        <br />
-        <label for="username">Full Name:</label>
-        <input type="text" id="username" name="username" required />
-        <br />
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-        <br />
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-        <br />
-        <label for="password">Confirm Password:</label>
-        <input type="password" id="confirm-password" name="password" required />
-        <br />
-        <button type="submit">Register</button>
-      </form>
-      <label class="info">Already have an account?</label>
-      <a class="info redirect-link" href="/pages/userAuth/login.html">Login</a>
+      <div class="img">
+        <img src="/assets/icon.png" alt="eddy" width="100" height="100" />
+      </div>
+
+      <header>
+        <h1>Register</h1>
+      </header>
+      <div class="wrapper">
+        <form id="register-form">
+          <label for="centreName">Tuition Centre Name:</label>
+          <input type="text" id="centreName" name="centreName" required />
+          <br />
+          <label for="username">Full Name:</label>
+          <input type="text" id="fullName" name="fullName" required />
+          <br />
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          <br />
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+          <br />
+          <label for="password">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="password"
+            required
+          />
+          <br />
+          <label for="contact">Contact:</label>
+          <input type="number" id="contact" name="contact" required />
+          <br />
+          <button type="submit">Register</button>
+        </form>
+        <label class="info">Already have an account?</label>
+        <a class="info redirect-link" href="/pages/userAuth/login.html"
+          >Login</a
+        >
+      </div>
     </main>
-
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyBn59QUGbzIq2-CUdrWm9KOXGsc7ev21ms",
-        authDomain: "edunet-eddy.firebaseapp.com",
-        projectId: "edunet-eddy",
-        storageBucket: "edunet-eddy.appspot.com",
-        messagingSenderId: "309444473455",
-        appId: "1:309444473455:web:2bc7f15d012056d288539a",
-        measurementId: "G-DMMJQ314Y5",
-      };
-
-      const app = initializeApp(firebaseConfig);
-      window.firebaseApp = app;
-    </script>
-    <script type="module" src="/js/userAuth/auth.js"></script>
+    <script src="/js/common/auth.js"></script>
+    <script src="/js/common/redirect.js"></script>
   </body>
 </html>
