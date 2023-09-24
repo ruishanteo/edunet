@@ -101,6 +101,10 @@ tr:nth-child(even) {
   background-color: #eee;
 }
 
+.section {
+  align-items: center;
+}
+
 .subheader {
   align-self: flex-start;
   margin-right: auto;

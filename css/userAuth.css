@@ -1,40 +1,49 @@
-/* Reset some default browser styles */
-body,
-h1,
-form {
-  margin: 0;
-  padding: 0;
-}
-
 /* Apply a background color and text color */
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
   background-color: #f0f0f0;
   font-family: Arial, sans-serif;
   color: #333;
 }
 
+.img {
+  text-align: center;
+  justify-content: center;
+}
+
 /* Style the header */
 header {
   background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   color: #000;
   text-align: center;
   padding: 20px;
-  width: 40vw;
+  justify-content: center;
+
+  margin-bottom: 20px;
 }
 
-/* Style the login form container */
 main {
   width: 40vw;
+  padding: 20px;
+  border-radius: 5px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 10px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Style form elements */
