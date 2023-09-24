@@ -4,7 +4,14 @@ function renderClasses(classes, args, handleDelete) {
     return;
   }
 
-  classesGrid.innerHTML = classes.length === 0 ? "No classes assigned" : "";
+  classesGrid.innerHTML =
+    classes.length === 0
+      ? `<div class="section">
+          <img src="/assets/empty.png" alt="eddy" width="200" height="200" />
+          <p> No classes found. </p>
+        </div>
+        `
+      : "";
 
   classes.forEach((classInfo) => {
     const card = document.createElement("div");
@@ -54,7 +61,8 @@ function renderClass(classInfo, handleDelete) {
   if (classInfo.tutors.length === 0) {
     tutorNameRead.textContent = "No tutor assigned yet";
   } else {
-    tutorNameRead.textContent = classInfo.tutors[0].user.fullName;
+    const tutor = classInfo.tutors[0];
+    tutorNameRead.innerHTML = `<a href="/pages/admin/detailedTutors.html?tutorId=${tutor.id}">${tutor.user.fullName}</a>`;
   }
 
   const deleteClassButton = document.getElementById("delete-class-button");
