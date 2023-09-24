@@ -6,7 +6,7 @@ function renderClasses(classes, args, handleDelete) {
 
   classesGrid.innerHTML =
     classes.length === 0
-      ? `<div class="section">
+      ? `<div class="notFound">
           <img src="/assets/empty.png" alt="eddy" width="200" height="200" />
           <p> No classes found. </p>
         </div>
