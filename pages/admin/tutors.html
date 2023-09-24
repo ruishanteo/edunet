@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/modal.css" />
+    <link rel="stylesheet" href="/css/card.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <title>Classes</title>
     <script src="/components/header.js"></script>
-    <script src="/components/tutorCards.js"></script>
-    <!-- <script type="module" src="/js/userAuth/getAuth.js"></script> -->
   </head>
 
   <body>
@@ -20,22 +23,13 @@
           <h2 class="subheader">Tutors</h2>
           <button id="add-tutor-button">+ Tutor</button>
         </div>
-        <div class="grid-container">
-          <tutor-card></tutor-card>
-          <tutor-card></tutor-card>
-          <tutor-card></tutor-card>
-          <tutor-card></tutor-card>
-        </div>
+        <div class="grid-container" id="tutors-grid"></div>
       </main>
     </div>
-    <!-- <script>
-      const checkUser = setInterval(() => {
-        if (window.user) {
-          clearInterval(checkUser);
-          console.log(window.user);
-        }
-      }, 1000);
-    </script> -->
-    <script src="/components/modal.js"></script>
+
+    <script src="/js/common/auth.js"></script>
+    <script src="/js/common/modal.js"></script>
+    <script src="/js/common/renderTutors.js"></script>
+    <script type="module" src="/js/admin/tutors.js"></script>
   </body>
 </html>

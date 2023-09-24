@@ -1,10 +1,10 @@
-function renderTutors(tutors, args, reload) {
-  const tutorsGrids = document.getElementById("tutors-grid");
-  if (!tutorsGrids) {
+function renderTutors(tutors, args, handleDelete) {
+  const tutorsGrid = document.getElementById("tutors-grid");
+  if (!tutorsGrid) {
     return;
   }
 
-  tutorsGrids.innerHTML = tutors.length === 0 ? "No tutors found" : "";
+  tutorsGrid.innerHTML = tutors.length === 0 ? "No tutors found" : "";
 
   tutors.forEach((tutorInfo) => {
     const card = document.createElement("div");
@@ -15,7 +15,7 @@ function renderTutors(tutors, args, reload) {
         <h4><b>${tutorInfo.user.fullName}</b></h4>
         ${
           args.canEdit &&
-          `<button class="icon-button" id="action-class-${tutorInfo.id}">
+          `<button class="icon-button" id="action-tutor-${tutorInfo.id}">
               <i class="fa fa-trash"></i>
             </button>`
         }
@@ -37,10 +37,10 @@ function renderTutors(tutors, args, reload) {
       });
     }
 
-    tutorsGrids.appendChild(card);
+    tutorsGrid.appendChild(card);
 
     const deleteClassButton = document.getElementById(
-      `action-class-${tutorInfo.id}`
+      `action-tutor-${tutorInfo.id}`
     );
     if (!deleteClassButton) {
       return;
@@ -48,32 +48,16 @@ function renderTutors(tutors, args, reload) {
 
     deleteClassButton.addEventListener("click", (event) => {
       event.stopPropagation();
-      fetch(`${args.baseUrl}/tutor`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `${args.accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          tutorId: args.tutorId,
-        }),
-      }).then(reload);
+      handleDelete(tutorInfo.id);
     });
   });
 }
 
-function renderTutor(tutor, args, reload) {
+function renderTutor(tutor) {
   const tutorFullName = document.getElementById("tutor-full-name");
   tutorFullName.textContent = tutor.user.fullName;
   const tutorContact = document.getElementById("tutor-contact");
   tutorContact.textContent = tutor.contact;
   const tutorEmail = document.getElementById("tutor-email");
   tutorEmail.textContent = tutor.user.email;
-
-  const editTutorButton = document.getElementById(
-    `action-tutor-${tutorInfo.id}`
-  );
-  if (!editTutorButton) {
-    return;
-  }
 }

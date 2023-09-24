@@ -3,17 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/card.css" />
+    <link rel="stylesheet" href="/css/modal.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/css/accordian.css" />
     <title>Classes</title>
     <script src="/components/header.js"></script>
-    <script src="/components/classCards.js"></script>
-    <script src="/components/notesCards.js"></script>
-    <!-- <script type="module" src="/js/userAuth/getAuth.js"></script> -->
   </head>
 
   <body>
@@ -21,24 +19,24 @@
 
     <div class="page">
       <main>
-        <h1>Bobby Lim</h1>
+        <h1 id="tutor-full-name"></h1>
 
         <div class="information">
           <h3 class="subheader">Particulars</h3>
-          <button class="icon-button">
+          <button class="icon-button" id="edit-tutor-button">
             <i class="fa fa-pencil"></i>
           </button>
         </div>
 
         <div class="information-box">
           <div class="information">
-            <h4>Contact No. :</h4>
-            <p>12345678</p>
+            <h4>Contact No:</h4>
+            <p id="tutor-contact"></p>
           </div>
 
           <div class="information">
-            <h4>Email :</h4>
-            <p>12345678</p>
+            <h4>Email:</h4>
+            <p id="tutor-email"></p>
           </div>
         </div>
 
@@ -50,12 +48,7 @@
         </div>
 
         <div class="information-box">
-          <div class="grid-container">
-            <class-card></class-card>
-            <class-card></class-card>
-            <class-card></class-card>
-            <class-card></class-card>
-          </div>
+          <div class="grid-container" id="classes-grid"></div>
         </div>
 
         <div class="information-header">
@@ -66,26 +59,21 @@
         </div>
 
         <div class="information-box">
-          <div class="grid-container">
-            <note-card></note-card>
-            <note-card></note-card>
-            <note-card></note-card>
-            <note-card></note-card>
-          </div>
+          <div class="grid-container" id="notes-grid"></div>
         </div>
         <div class="information-header">
-          <button><i class="fa fa-trash"></i> Delete</button>
+          <button id="delete-tutor-button">
+            <i class="fa fa-trash"></i> Delete
+          </button>
         </div>
       </main>
     </div>
-    <!-- <script>
-      const checkUser = setInterval(() => {
-        if (window.user) {
-          clearInterval(checkUser);
-          console.log(window.user);
-        }
-      }, 1000);
-    </script> -->
-    <script src="/components/modal.js"></script>
+
+    <script src="/js/common/auth.js"></script>
+    <script src="/js/common/modal.js"></script>
+    <script src="/js/common/renderClasses.js"></script>
+    <script src="/js/common/renderTutors.js"></script>
+    <script src="/js/common/renderNotes.js"></script>
+    <script type="module" src="/js/admin/detailedTutors.js"></script>
   </body>
 </html>
