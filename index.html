@@ -3,13 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="stylesheet" href="/css/landing.css" />
     <title>EduNet</title>
   </head>
   <body>
-    <main id="content">
-      <!-- Content will be loaded here based on routing -->
+    <img src="/assets/icon.png" alt="eddy" width="350" height="350" />
+
+    <main>
+      <header>
+        <h2>Welcome to</h2>
+        <h1>EduNet</h1>
+      </header>
+
+      <label> Your trusted tuition management system. </label>
+
+      <action>
+        <div>
+          <a class="info redirect-link" href="/pages/userAuth/login.html">
+            <button>Login</button>
+          </a>
+        </div>
+        <div>
+          <a class="info redirect-link" href="/pages/userAuth/register.html">
+            <button>Register</button>
+          </a>
+        </div>
+      </action>
     </main>
-    <script src="js/script.js"></script>
+    <script src="/js/common/auth.js"></script>
+    <script src="/js/common/redirect.js"></script>
   </body>
 </html>
