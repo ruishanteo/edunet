@@ -1,17 +1,22 @@
 .loader-window {
   position: fixed;
-  background-color: rgba(106, 106, 106, 0.165);
   top: 0%;
   left: 0%;
   width: 100%;
   height: 100%;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .is-loading {
-  display: flex;
+  animation: fadein 0.5s forwards;
+  pointer-events: all;
+}
+
+.hidden {
+  animation: fadeout 0.5s forwards;
+  pointer-events: none;
 }
 
 .loader-container {
@@ -22,6 +27,37 @@
   width: 400px;
   height: 400px;
 }
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+  100% {
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+  100% {
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+  }
+}
+
 /*--------------------------------------------------------------
                           BUSH
 -------------------------------------------------------------*/
@@ -69,7 +105,7 @@
   margin-right: auto;
   height: 100px;
   width: 100px;
-  animation: bearPeek 5s linear infinite;
+  animation: bearPeek 3s linear infinite;
 }
 
 .loader-icon {
@@ -92,29 +128,29 @@
   display: inline-block;
   position: relative;
 
-  -webkit-animation: dotloader 2.5s infinite;
-  -moz-animation: dotloader 2.5s infinite;
-  -ms-animation: dotloader 2.5s infinite;
-  -o-animation: dotloader 2.5s infinite;
-  animation: dotloader 2.5s infinite;
+  -webkit-animation: dotloader 1.5s infinite;
+  -moz-animation: dotloader 1.5s infinite;
+  -ms-animation: dotloader 1.5s infinite;
+  -o-animation: dotloader 1.5s infinite;
+  animation: dotloader 1.5s infinite;
 }
 
 .loading-dot + .loading-dot {
   margin-left: -25px;
   /* staggered effect cause by delay property */
-  -webkit-animation: dotloader 2.5s 0.2s infinite;
-  -moz-animation: dotloader 2.5s 0.2s infinite;
-  -ms-animation: dotloader 2.5s 0.2s infinite;
-  -o-animation: dotloader 2.5s 0.2s infinite;
-  animation: dotloader 2.5s 0.2s infinite;
+  -webkit-animation: dotloader 1.5s 0.2s infinite;
+  -moz-animation: dotloader 1.5s 0.2s infinite;
+  -ms-animation: dotloader 1.5s 0.2s infinite;
+  -o-animation: dotloader 1.5s 0.2s infinite;
+  animation: dotloader 1.5s 0.2s infinite;
 }
 .loading-dot + .loading-dot + .loading-dot {
   margin-left: -25px;
-  -webkit-animation: dotloader 2.5s 0.4s infinite;
-  -moz-animation: dotloader 2.5s 0.4s infinite;
-  -ms-animation: dotloader 2.5s 0.4s infinite;
-  -o-animation: dotloader 2.5s 0.4s infinite;
-  animation: dotloader 2.5s 0.4s infinite;
+  -webkit-animation: dotloader 1.5s 0.4s infinite;
+  -moz-animation: dotloader 1.5s 0.4s infinite;
+  -ms-animation: dotloader 1.5s 0.4s infinite;
+  -o-animation: dotloader 1.5s 0.4s infinite;
+  animation: dotloader 1.5s 0.4s infinite;
 }
 
 /*------------------------------------------------------------
@@ -124,13 +160,13 @@
   0% {
     top: 170px;
   }
-  10% {
+  20% {
     top: 85px;
   }
-  30% {
+  50% {
     top: 85px;
   }
-  40% {
+  60% {
     top: 170px;
   }
 }
