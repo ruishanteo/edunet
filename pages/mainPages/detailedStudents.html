@@ -3,17 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/card.css" />
+    <link rel="stylesheet" href="/css/modal.css" />
+    <link rel="stylesheet" href="/css/accordian.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/css/accordian.css" />
     <title>Classes</title>
     <script src="/components/header.js"></script>
-    <script src="/components/classCards.js"></script>
-    <script src="/components/notesCards.js"></script>
-    <!-- <script type="module" src="/js/userAuth/getAuth.js"></script> -->
   </head>
 
   <body>
@@ -21,34 +21,34 @@
 
     <div class="page">
       <main>
-        <h1>Bobby Lim</h1>
+        <h1 id="student-full-name"></h1>
 
         <div class="information">
           <h3 class="subheader">Particulars</h3>
-          <button class="icon-button">
+          <button id="edit-student-button" class="icon-button">
             <i class="fa fa-pencil"></i>
           </button>
         </div>
 
         <div class="information-box">
           <div class="information">
-            <h4>Contact No. :</h4>
-            <p>12345678</p>
+            <h4>Contact No:</h4>
+            <p id="student-contact"></p>
           </div>
 
           <div class="information">
-            <h4>Email :</h4>
-            <p>12345678</p>
+            <h4>Email:</h4>
+            <p id="student-email"></p>
           </div>
 
           <div class="information">
-            <h4>Parent's Contact No. :</h4>
-            <p>12345678</p>
+            <h4>Parent's Contact No:</h4>
+            <p id="parent-contact"></p>
           </div>
 
           <div class="information">
-            <h4>Parent's Email :</h4>
-            <p>12345678</p>
+            <h4>Parent's Email:</h4>
+            <p id="parent-email"></p>
           </div>
         </div>
 
@@ -60,12 +60,7 @@
         </div>
 
         <div class="information-box">
-          <div class="grid-container">
-            <class-card></class-card>
-            <class-card></class-card>
-            <class-card></class-card>
-            <class-card></class-card>
-          </div>
+          <div class="grid-container" id="classes-grid"></div>
         </div>
 
         <div class="information-header">
@@ -73,79 +68,32 @@
         </div>
 
         <div class="information-box">
-          <div class="accordion">
-            <input type="checkbox" id="section1" class="accordion_input" />
-            <label for="section1" class="accordion_label">
-              Section #1 <i class="fa fa-chevron-down"></i>
-            </label>
-            <div class="accordion_content">
-              <table>
-                <tr>
-                  <th>Assessment</th>
-                  <th>Total</th>
-                  <th>Score</th>
-                </tr>
-                <tr>
-                  <td>math test</td>
-                  <td>100</td>
-                  <td>50</td>
-                </tr>
-                <tr>
-                  <td>math test</td>
-                  <td>100</td>
-                  <td>50</td>
-                </tr>
-                <tr>
-                  <td>math test</td>
-                  <td>100</td>
-                  <td>50</td>
-                </tr>
-                <button>+ Assessment</button>
-              </table>
-            </div>
-
-            <input type="checkbox" id="section2" class="accordion_input" />
-            <label for="section2" class="accordion_label"
-              >Section #2 <i class="fa fa-chevron-down"></i
-            ></label>
-            <div class="accordion_content">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa,
-                earum, magnam? Alias error, placeat! Accusamus accusantium alias
-                eum iure laborum odit porro quaerat? Animi enim id labore
-                officiis quam sint.
-              </p>
-            </div>
-          </div>
+          <div class="accordion" id="accordion-sections"></div>
         </div>
 
-        <div class="information-header">
+        <div class="information-header" id="note-information-header">
           <div class="add-button-container">
             <h3 class="subheader">Notes</h3>
             <button id="add-note-button">+ Note</button>
           </div>
         </div>
 
-        <div class="information-box">
-          <div class="grid-container">
-            <note-card></note-card>
-            <note-card></note-card>
-            <note-card></note-card>
-            <note-card></note-card>
-          </div>
+        <div class="information-header" id="note-information-header">
+          <div class="grid-container" id="notes-grid"></div>
         </div>
         <div class="information-header">
-          <button><i class="fa fa-trash"></i> Delete</button>
+          <button id="delete-student-button">
+            <i class="fa fa-trash"></i> Delete
+          </button>
         </div>
       </main>
     </div>
-    <!-- <script>
-      const checkUser = setInterval(() => {
-        if (window.user) {
-          clearInterval(checkUser);
-          console.log(window.user);
-        }
-      }, 1000);
-    </script> -->
+    <script src="/js/common/auth.js"></script>
+    <script src="/js/common/modal.js"></script>
+    <script src="/js/common/renderClasses.js"></script>
+    <script src="/js/common/renderStudents.js"></script>
+    <script src="/js/common/renderAssessments.js"></script>
+    <script src="/js/common/renderNotes.js"></script>
+    <script type="module" src="/js/mainPages/detailedStudents.js"></script>
   </body>
 </html>

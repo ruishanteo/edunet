@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/card.css" />
+    <link rel="stylesheet" href="/css/modal.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Students</title>
+    <script src="/components/header.js"></script>
+  </head>
+
+  <body>
+    <header-navbar></header-navbar>
+
+    <div class="page">
+      <main>
+        <div class="add-button-container">
+          <h2 class="subheader">Students</h2>
+          <button id="add-student-button">+ Student</button>
+        </div>
+        <div class="grid-container" id="students-grid"></div>
+      </main>
+    </div>
+
+    <script src="/js/common/auth.js"></script>
+    <script src="/js/common/modal.js"></script>
+    <script src="/js/common/renderStudents.js"></script>
+    <script type="module" src="/js/admin/students.js"></script>
+  </body>
+</html>
