@@ -36,18 +36,18 @@ function renderClasses(classes, args, handleDelete, handleAddClass) {
     classesGrid.appendChild(card);
 
     if (args.isAdmin) {
-      card.addEventListener("click", (event) => {
+      card.onclick = (event) => {
         event.stopPropagation();
         window.location.href = `/pages/admin/detailedClasses.html?classId=${classInfo.id}`;
-      });
+      };
 
       const deleteClassButton = document.getElementById(
         `action-class-${classInfo.id}`
       );
-      deleteClassButton.addEventListener("click", (event) => {
+      deleteClassButton.onclick = (event) => {
         event.stopPropagation();
         handleDelete(classInfo.id);
-      });
+      };
     }
   });
   const addClassButton = document.getElementById("add-class-button");
@@ -57,10 +57,10 @@ function renderClasses(classes, args, handleDelete, handleAddClass) {
   }
 
   if (addClassButton) {
-    addClassButton.addEventListener("click", (event) => {
+    addClassButton.onclick = (event) => {
       event.preventDefault();
       handleAddClass();
-    });
+    };
   }
 }
 
@@ -77,8 +77,8 @@ function renderClass(classInfo, handleDelete) {
   }
 
   const deleteClassButton = document.getElementById("delete-class-button");
-  deleteClassButton.addEventListener("click", (event) => {
+  deleteClassButton.onclick = (event) => {
     event.preventDefault();
     handleDelete(classInfo.id);
-  });
+  };
 }

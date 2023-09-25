@@ -1,3 +1,5 @@
+importScripts("/js/common/api.js");
+
 self.addEventListener("message", (e) => {
   const args = e.data;
   switch (args.updateType) {
@@ -9,6 +11,8 @@ self.addEventListener("message", (e) => {
       return deleteClass(args);
     case "assign":
       return assignTutor(args);
+    case "enroll":
+      return enrollStudent(args);
     case "remove":
       return removeStudent(args);
     default:
@@ -34,13 +38,15 @@ async function getClasses(args) {
       ? `${args.baseUrl}/class/tutor/${args.tutorId}`
       : `${args.baseUrl}/class`;
 
-    const response = await fetch(requestURL, {
-      method: "GET",
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await handleApiCall(
+      fetch(requestURL, {
+        method: "GET",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      })
+    );
 
     if (!response.ok) {
       return;
@@ -54,15 +60,18 @@ async function getClasses(args) {
 
 async function getClass(args) {
   try {
-    const response = await fetch(`${args.baseUrl}/class/${args.classId}`, {
-      method: "GET",
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/class/${args.classId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      })
+    );
 
     if (!response.ok) {
+      self.postMessage({ failedGet: true });
       return;
     }
 
@@ -74,14 +83,16 @@ async function getClass(args) {
 
 async function createClass(args) {
   try {
-    const response = await fetch(`${args.baseUrl}/class/`, {
-      method: "POST",
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(args.updateBody),
-    });
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/class/`, {
+        method: "POST",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(args.updateBody),
+      })
+    );
 
     if (!response.ok) {
       return;
@@ -101,18 +112,20 @@ async function deleteClass(args) {
       ? `${args.baseUrl}/student/remove`
       : `${args.baseUrl}/class/`;
     const reqMethod = args.tutorId || args.studentId ? "PUT" : "DELETE";
-    const response = await fetch(url, {
-      method: reqMethod,
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        tutorId: args.tutorId,
-        studentId: args.studentId,
-        ...args.updateBody,
-      }),
-    });
+    const response = await handleApiCall(
+      fetch(url, {
+        method: reqMethod,
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          tutorId: args.tutorId,
+          studentId: args.studentId,
+          ...args.updateBody,
+        }),
+      })
+    );
 
     if (!response.ok) {
       return;
@@ -120,7 +133,7 @@ async function deleteClass(args) {
 
     response.json().then((res) => {
       reloadClasses(args);
-      self.postMessage(res);
+      self.postMessage({ isDeleted: args.isSelf });
     });
   } catch (error) {
     console.error("Error:", error);
@@ -129,14 +142,42 @@ async function deleteClass(args) {
 
 async function assignTutor(args) {
   try {
-    const response = await fetch(`${args.baseUrl}/tutor/assign`, {
-      method: "PUT",
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ tutorId: args.tutorId, ...args.updateBody }),
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/tutor/assign`, {
+        method: "PUT",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tutorId: args.tutorId, ...args.updateBody }),
+      })
+    );
+
+    if (!response.ok) {
+      return;
+    }
+
+    response.json().then(() => {
+      reloadClasses(args);
+      reloadClass(args);
     });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function enrollStudent(args) {
+  try {
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/student/enroll`, {
+        method: "PUT",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ studentId: args.studentId, ...args.updateBody }),
+      })
+    );
 
     if (!response.ok) {
       return;
@@ -153,14 +194,16 @@ async function assignTutor(args) {
 
 async function removeStudent(args) {
   try {
-    const response = await fetch(`${args.baseUrl}/student/remove`, {
-      method: "PUT",
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ classId: args.classId, ...args.updateBody }),
-    });
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/student/remove`, {
+        method: "PUT",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ classId: args.classId, ...args.updateBody }),
+      })
+    );
 
     if (!response.ok) {
       return;

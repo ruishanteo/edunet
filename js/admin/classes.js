@@ -6,37 +6,30 @@ const reloadClasses = () => {
 };
 
 const createClass = (params) => {
+  const args = getArgs();
   args.updateType = "create";
   args.updateBody = params;
   classesWorker.postMessage(args);
 };
 
 const deleteClass = (params) => {
+  const args = getArgs();
   args.updateType = "delete";
   args.updateBody = params;
   classesWorker.postMessage(args);
 };
 
-addCallback(reloadClasses);
-classesWorker.addEventListener("message", function (e) {
-  if (e.data.classes) {
-    renderClasses(e.data.classes, args, (id) => deleteClass({ classId: id }));
-  }
-});
-
-const addClassButton = document.getElementById("add-class-button");
-addClassButton.addEventListener("click", (event) => {
-  event.preventDefault();
+const handleAddClass = () =>
   addModal(
     "Add Class",
     "add-class-form",
     `<div class="section">
-          <label>Name</label> <input type="text" id="form-name" required/><br />
-          <label>Day</label><input type="text" id="form-day" required/> <br />
-          <label>Time</label><input type="text" id="form-time" required/> <br /> 
-          <label>Venue</label> <input type="text" id="form-venue"/> 
-          <button type="submit">Create</button>
-      </div>`,
+        <label>Name</label> <input type="text" id="form-name" maxlength="20" required/><br />
+        <label>Day</label><input type="text" id="form-day" maxlength="10" required/> <br />
+        <label>Time</label><input type="text" id="form-time" maxlength="10" required/> <br /> 
+        <label>Venue</label> <input type="text" id="form-venue" maxlength="20"/> 
+        <button type="submit">Create</button>
+    </div>`,
     null,
     (close) => {
       const name = document.getElementById("form-name").value;
@@ -49,4 +42,17 @@ addClassButton.addEventListener("click", (event) => {
     },
     null
   );
+
+addCallback(reloadClasses);
+classesWorker.addEventListener("message", function (e) {
+  handleNotifications(e);
+
+  if (e.data.classes) {
+    renderClasses(
+      e.data.classes,
+      args,
+      (id) => deleteClass({ classId: id }),
+      handleAddClass
+    );
+  }
 });
