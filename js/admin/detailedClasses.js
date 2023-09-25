@@ -3,16 +3,51 @@ const classId = parseInt(urlParams.get("classId"));
 let classInfo = null;
 let tutors = null;
 
+const tutorsWorker = new Worker("/js/workers/tutorsWorker.js");
+const classesWorker = new Worker("/js/workers/classesWorker.js");
+
+const reloadTutors = () => {
+  const args = getArgs();
+  args.updateType = "";
+  tutorsWorker.postMessage(args);
+};
+
+const reloadClass = () => {
+  const args = getArgs();
+  args.updateType = "get";
+  args.classId = classId;
+  classesWorker.postMessage(args);
+};
+
+const deleteClass = (params) => {
+  const args = getArgs();
+  args.updateType = "delete";
+  args.updateBody = params;
+  args.classId = classId;
+  args.isSelf = true;
+  classesWorker.postMessage(args);
+};
+
+const removeStudent = (params) => {
+  const args = getArgs();
+  args.updateType = "remove";
+  args.updateBody = params;
+  args.classId = classId;
+  classesWorker.postMessage(args);
+};
+
+const assignTutor = (params) => {
+  const args = getArgs();
+  args.updateType = "assign";
+  args.updateBody = params;
+  args.classId = classId;
+  classesWorker.postMessage(args);
+};
+
 {
-  const tutorsWorker = new Worker("/js/workers/tutorsWorker.js");
-
-  const reloadTutors = () => {
-    args.updateType = "";
-    tutorsWorker.postMessage(args);
-  };
-
-  addCallback(reloadTutors);
   tutorsWorker.addEventListener("message", function (e) {
+    handleNotifications(e);
+
     if (e.data.tutors) {
       tutors = e.data.tutors;
     }
@@ -20,36 +55,9 @@ let tutors = null;
 }
 
 {
-  const classesWorker = new Worker("/js/workers/classesWorker.js");
-
-  const reloadClass = () => {
-    args.classId = classId;
-    args.updateType = "get";
-    classesWorker.postMessage(args);
-  };
-
-  const deleteClass = (params) => {
-    args.classId = classId;
-    args.updateType = "delete";
-    args.updateBody = params;
-    classesWorker.postMessage(args);
-  };
-
-  const removeStudent = (params) => {
-    args.classId = classId;
-    args.updateType = "remove";
-    args.updateBody = params;
-    classesWorker.postMessage(args);
-  };
-
-  const assignTutor = (params) => {
-    args.updateType = "assign";
-    args.updateBody = params;
-    classesWorker.postMessage(args);
-  };
-
-  addCallback(reloadClass);
   classesWorker.addEventListener("message", function (e) {
+    handleNotifications(e);
+
     if (e.data.class) {
       classInfo = e.data.class;
       renderClass(e.data.class, (id) => {
@@ -58,10 +66,6 @@ let tutors = null;
       renderStudentRows(e.data.class.students, (id) =>
         removeStudent({ studentId: id })
       );
-    }
-
-    if (e.data.isDeleted) {
-      window.history.back();
     }
   });
 
@@ -124,3 +128,8 @@ let tutors = null;
     );
   });
 }
+
+addCallback(() => {
+  reloadClass();
+  reloadTutors();
+});

@@ -1,4 +1,4 @@
-function renderClasses(classes, args, handleDelete) {
+function renderClasses(classes, args, handleDelete, handleAddClass) {
   const classesGrid = document.getElementById("classes-grid");
   if (!classesGrid) {
     return;
@@ -19,38 +19,49 @@ function renderClasses(classes, args, handleDelete) {
 
     card.innerHTML = `
         <div class="subclass">
-        <h4><b>${classInfo.name}</b></h4>
-        ${
-          args.canEdit &&
-          `<button class="icon-button" id="action-class-${classInfo.id}">
-                <i class="fa fa-trash"></i>
-            </button>`
-        }
+          <h4><b>${classInfo.name}</b></h4>
+          ${
+            args.isAdmin
+              ? `<button class="icon-button" id="action-class-${classInfo.id}">
+                  <i class="fa fa-trash"></i>
+              </button>`
+              : ""
+          }
         </div>
 
         <p>${classInfo.day} ${classInfo.time}</p>
         <p>${classInfo.venue}</p>
         <p>${classInfo.students.length} students enrolled</p>`;
 
+    classesGrid.appendChild(card);
+
     if (args.isAdmin) {
       card.addEventListener("click", (event) => {
         event.stopPropagation();
         window.location.href = `/pages/admin/detailedClasses.html?classId=${classInfo.id}`;
       });
-    }
 
-    classesGrid.appendChild(card);
-
-    const deleteClassButton = document.getElementById(
-      `action-class-${classInfo.id}`
-    );
-    if (deleteClassButton) {
+      const deleteClassButton = document.getElementById(
+        `action-class-${classInfo.id}`
+      );
       deleteClassButton.addEventListener("click", (event) => {
         event.stopPropagation();
         handleDelete(classInfo.id);
       });
     }
   });
+  const addClassButton = document.getElementById("add-class-button");
+  if (!args.isAdmin && addClassButton) {
+    addClassButton.remove();
+    return;
+  }
+
+  if (addClassButton) {
+    addClassButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      handleAddClass();
+    });
+  }
 }
 
 function renderClass(classInfo, handleDelete) {
@@ -62,7 +73,7 @@ function renderClass(classInfo, handleDelete) {
     tutorNameRead.textContent = "No tutor assigned yet";
   } else {
     const tutor = classInfo.tutors[0];
-    tutorNameRead.innerHTML = `<a href="/pages/admin/detailedTutors.html?tutorId=${tutor.id}">${tutor.user.fullName}</a>`;
+    tutorNameRead.innerHTML = `<a href="/pages/mainPages/detailedTutors.html?tutorId=${tutor.id}">${tutor.user.fullName}</a>`;
   }
 
   const deleteClassButton = document.getElementById("delete-class-button");
