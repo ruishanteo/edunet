@@ -16,7 +16,7 @@ button {
   background-color: #f1f1f1;
   color: #333;
   cursor: pointer;
-  padding: 10px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,6 +26,7 @@ button {
   transition: background-color 0.3s;
   margin: 0;
   height: 20px;
+  width: calc(100% - 40px);
 }
 
 .accordion_input:checked + .accordion_label .fa-chevron-down {

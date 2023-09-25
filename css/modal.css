@@ -106,27 +106,48 @@ textarea {
   }
 }
 
-.class-checkbox-text {
-  margin-right: 20px;
-  width: 100%;
-  text-align: left;
-}
-
-.class-checkbox {
-  display: flex;
-  vertical-align: middle;
-}
-
 /* make each row alternative color */
 .class-checkbox-row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
-  padding-left: 10px;
+  padding: 10px;
 }
 
 .class-checkbox-row:nth-child(even) {
   background-color: #c9c9c950;
+}
+
+.class-checkbox-text {
+  text-align: left;
+}
+
+/* Style for the checkbox itself */
+.class-checkbox {
+  margin: 0;
+  padding: 0;
+  height: 20px;
+  width: 20px;
+  -webkit-appearance: none;
+  appearance: none;
+  border: 2px solid #1e1b5f;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Style for the checked checkbox */
+.class-checkbox:checked {
+  background-color: #1e1b5f;
+}
+
+/* Add a tick mark to the checked checkbox */
+.class-checkbox:checked::after {
+  content: "\2713";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 16px;
 }

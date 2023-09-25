@@ -10,6 +10,13 @@ p {
   display: none;
 }
 
+.back {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Style pages */
 .page {
   background-color: #fff;
@@ -83,6 +90,7 @@ table {
   font-family: sans-serif;
   font-size: 0.8rem;
   width: 100%;
+  overflow-x: auto;
 }
 
 td,

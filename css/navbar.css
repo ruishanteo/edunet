@@ -2,7 +2,7 @@
 nav ul {
   list-style-type: none;
   align-items: center;
-  padding: 0 20px;
+  padding: 0;
   margin: 0;
   margin-bottom: 20px;
   display: flex;
@@ -13,6 +13,7 @@ nav ul {
 
 nav ul li {
   margin: 0 10px;
+  font-size: small;
 }
 
 nav ul li a {
@@ -25,7 +26,6 @@ nav ul li a {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-self: flex-start;
 }
 
 .menu {
@@ -33,7 +33,6 @@ nav ul li a {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* mar */
 }
 
 .logout-button {
@@ -42,12 +41,13 @@ nav ul li a {
   border-width: 0px;
   align-items: center;
   margin-left: auto;
+  margin-right: 10px;
   font-weight: 550;
 }
 
 a1,
 b1 {
-  font-size: xx-large;
+  font-size: x-large;
   color: #e7b474;
 }
 

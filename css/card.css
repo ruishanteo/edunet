@@ -1,6 +1,14 @@
+p,
 h4 {
   color: #1e1b5f;
   margin: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+p {
+  color: black;
 }
 
 .card {
@@ -11,7 +19,11 @@ h4 {
   transition: 0.3s;
   background-color: #e2c7a5;
   align-items: center;
-  padding: 0px 0px 20px 20px;
+  padding: 15px 20px;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -22,7 +34,6 @@ h4 {
 .subclass {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   justify-content: space-between;
   align-items: center;
   text-align: left;
