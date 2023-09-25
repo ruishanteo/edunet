@@ -1,3 +1,5 @@
+importScripts("/js/common/api.js");
+
 self.addEventListener("message", (e) => {
   const args = e.data;
   switch (args.updateType) {
@@ -26,13 +28,15 @@ async function reloadTutor(args) {
 
 async function getTutors(args) {
   try {
-    const response = await fetch(`${args.baseUrl}/tutor`, {
-      method: "GET",
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/tutor`, {
+        method: "GET",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      })
+    );
 
     if (!response.ok) {
       return;
@@ -46,15 +50,18 @@ async function getTutors(args) {
 
 async function getTutor(args) {
   try {
-    const response = await fetch(`${args.baseUrl}/tutor/${args.tutorId}`, {
-      method: "GET",
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/tutor/${args.tutorId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      })
+    );
 
     if (!response.ok) {
+      self.postMessage({ failedGet: true });
       return;
     }
 
@@ -66,14 +73,16 @@ async function getTutor(args) {
 
 async function createTutor(args) {
   try {
-    const response = await fetch(`${args.baseUrl}/tutor`, {
-      method: "POST",
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(args.updateBody),
-    });
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/tutor`, {
+        method: "POST",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(args.updateBody),
+      })
+    );
 
     if (!response.ok) {
       return;
@@ -87,14 +96,16 @@ async function createTutor(args) {
 
 async function editTutor(args) {
   try {
-    const response = await fetch(`${args.baseUrl}/tutor`, {
-      method: "PUT",
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ tutorId: args.tutorId, ...args.updateBody }),
-    });
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/tutor`, {
+        method: "PUT",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tutorId: args.tutorId, ...args.updateBody }),
+      })
+    );
 
     if (!response.ok) {
       return;
@@ -108,14 +119,16 @@ async function editTutor(args) {
 
 async function deleteTutor(args) {
   try {
-    const response = await fetch(`${args.baseUrl}/tutor`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `${args.accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ tutorId: args.tutorId, ...args.updateBody }),
-    });
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/tutor`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tutorId: args.tutorId, ...args.updateBody }),
+      })
+    );
 
     if (!response.ok) {
       return;
@@ -123,7 +136,7 @@ async function deleteTutor(args) {
 
     response.json().then((res) => {
       reloadTutors(args);
-      self.postMessage(res);
+      self.postMessage({ isDeleted: args.isSelf });
     });
   } catch (error) {
     console.error("Error:", error);
