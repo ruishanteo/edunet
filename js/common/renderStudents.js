@@ -38,10 +38,10 @@ function renderStudents(students, args, handleDelete, handleAddStudent) {
           : "No classes"
       }`;
 
-    card.addEventListener("click", (event) => {
+    card.onclick = (event) => {
       event.stopPropagation();
       window.location.href = `/pages/mainPages/detailedStudents.html?studentId=${studentInfo.id}`;
-    });
+    };
 
     studentsGrid.appendChild(card);
 
@@ -52,10 +52,10 @@ function renderStudents(students, args, handleDelete, handleAddStudent) {
       return;
     }
 
-    deleteClassButton.addEventListener("click", (event) => {
+    deleteClassButton.onclick = (event) => {
       event.stopPropagation();
       handleDelete(studentInfo.id);
-    });
+    };
   });
 
   const addStudentButton = document.getElementById("add-student-button");
@@ -65,10 +65,10 @@ function renderStudents(students, args, handleDelete, handleAddStudent) {
   }
 
   if (addStudentButton) {
-    addStudentButton.addEventListener("click", (event) => {
+    addStudentButton.onclick = (event) => {
       event.preventDefault();
       handleAddStudent();
-    });
+    };
   }
 }
 
@@ -95,17 +95,17 @@ function renderStudent(student, args, handleEdit, handleDelete) {
   }
 
   if (editStudentButton && handleEdit) {
-    editStudentButton.addEventListener("click", (event) => {
+    editStudentButton.onclick = (event) => {
       event.preventDefault();
       handleEdit();
-    });
+    };
   }
 
   if (deleteStudentButton && handleDelete) {
-    deleteStudentButton.addEventListener("click", (event) => {
+    deleteStudentButton.onclick = (event) => {
       event.preventDefault();
       handleDelete();
-    });
+    };
   }
 }
 
@@ -150,9 +150,9 @@ function renderStudentRows(students, handleDelete) {
     const removeStudentButton = document.getElementById(
       `remove-student-${student.id}`
     );
-    removeStudentButton.addEventListener("click", (event) => {
+    removeStudentButton.onclick = (event) => {
       event.stopPropagation();
       handleDelete(student.id);
-    });
+    };
   });
 }

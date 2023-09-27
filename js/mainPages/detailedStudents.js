@@ -193,14 +193,15 @@ const deleteAssessment = (params) => {
                       <div class="class-checkbox-row">
                         <p class="class-checkbox-text">${classInfo.name}</p>
                         
-                        <input ${
+                        <input class="class-checkbox" 
+                        ${
                           currentClassesEnrolledMap[classInfo.id] &&
                           "checked='true'"
-                        }" value="${
-                      classInfo.id
-                    }"  type="checkbox" name="classes-enrolled" id="classes-enrolled-${
-                      classInfo.id
-                    }" class="class-checkbox"/>
+                        }" 
+                          value="${classInfo.id}"
+                          type="checkbox" name="classes-enrolled" id="classes-enrolled-${
+                            classInfo.id
+                          }" />
                       </div>`
                   )
                   .join("")
@@ -229,9 +230,14 @@ const deleteAssessment = (params) => {
     handleNotifications(e);
 
     if (e.data.classes) {
-      return renderClasses(e.data.classes, args, (id) => {
-        deleteClass({ classId: id }, handleAddClass);
-      });
+      return renderClasses(
+        e.data.classes,
+        args,
+        (id) => {
+          deleteClass({ classId: id });
+        },
+        handleAddClass
+      );
     }
   });
 }
