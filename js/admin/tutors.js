@@ -1,17 +1,20 @@
 const tutorsWorker = new Worker("/js/workers/tutorsWorker.js");
 
 const reloadTutors = () => {
+  const args = getArgs();
   args.updateType = "";
   tutorsWorker.postMessage(args);
 };
 
 const createTutor = (params) => {
+  const args = getArgs();
   args.updateType = "create";
   args.updateBody = params;
   tutorsWorker.postMessage(args);
 };
 
 const deleteTutor = (params) => {
+  const args = getArgs();
   args.updateType = "delete";
   args.updateBody = params;
   tutorsWorker.postMessage(args);
@@ -19,6 +22,8 @@ const deleteTutor = (params) => {
 
 addCallback(reloadTutors);
 tutorsWorker.addEventListener("message", function (e) {
+  handleNotifications(e);
+
   if (e.data.tutors) {
     renderTutors(e.data.tutors, args, (id) => deleteTutor({ tutorId: id }));
   }
