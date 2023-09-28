@@ -14,10 +14,11 @@ function renderTutors(tutors, args, handleDelete) {
       <div class="subclass">
         <h4><b>${tutorInfo.user.fullName}</b></h4>
         ${
-          args.canEdit &&
-          `<button class="icon-button" id="action-tutor-${tutorInfo.id}">
+          args.isAdmin
+            ? `<button class="icon-button" id="action-tutor-${tutorInfo.id}">
               <i class="fa fa-trash"></i>
             </button>`
+            : ""
         }
       </div>
 
@@ -31,10 +32,10 @@ function renderTutors(tutors, args, handleDelete) {
       }`;
 
     if (args.isAdmin) {
-      card.addEventListener("click", (event) => {
+      card.onclick = (event) => {
         event.stopPropagation();
-        window.location.href = `/pages/admin/detailedTutors.html?tutorId=${tutorInfo.id}`;
-      });
+        window.location.href = `/pages/mainPages/detailedTutors.html?tutorId=${tutorInfo.id}`;
+      };
     }
 
     tutorsGrid.appendChild(card);
@@ -46,18 +47,41 @@ function renderTutors(tutors, args, handleDelete) {
       return;
     }
 
-    deleteClassButton.addEventListener("click", (event) => {
+    deleteClassButton.onclick = (event) => {
       event.stopPropagation();
       handleDelete(tutorInfo.id);
-    });
+    };
   });
 }
 
-function renderTutor(tutor) {
+function renderTutor(tutor, args, handleEdit, handleDelete) {
   const tutorFullName = document.getElementById("tutor-full-name");
   tutorFullName.textContent = tutor.user.fullName;
   const tutorContact = document.getElementById("tutor-contact");
   tutorContact.textContent = tutor.contact;
   const tutorEmail = document.getElementById("tutor-email");
   tutorEmail.textContent = tutor.user.email;
+
+  const deleteTutorButton = document.getElementById("delete-tutor-button");
+  const editTutorButton = document.getElementById("edit-tutor-button");
+
+  if (!args.isAdmin) {
+    if (deleteTutorButton) deleteTutorButton.remove();
+    if (editTutorButton) editTutorButton.remove();
+    return;
+  }
+
+  if (editTutorButton && handleEdit) {
+    editTutorButton.onclick = (event) => {
+      event.preventDefault();
+      handleEdit();
+    };
+  }
+
+  if (deleteTutorButton && handleDelete) {
+    deleteTutorButton.onclick = (event) => {
+      event.preventDefault();
+      handleDelete();
+    };
+  }
 }

@@ -101,7 +101,7 @@ const deleteStudent = (params) => {
 };
 
 {
-  const handleEdit = () =>
+  const handleEdit = () => {
     addModal(
       "Edit Tutor",
       "edit-tutor-form",
@@ -120,6 +120,7 @@ const deleteStudent = (params) => {
       },
       null
     );
+  };
   const handleDelete = () => deleteTutor({});
   tutorsWorker.addEventListener("message", function (e) {
     handleNotifications(e);
@@ -291,7 +292,6 @@ addCallback((args) => {
     );
   }
 
-  reloadTutor();
   reloadClasses();
   reloadNotes();
   reloadStudents();
