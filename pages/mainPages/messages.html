@@ -3,11 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     <link rel="stylesheet" href="/css/styles.css" />
-    <title>Messages</title>
+    <link rel="stylesheet" href="/css/messageCard.css" />
+    <link rel="stylesheet" href="/css/modal.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Messages - EduNet</title>
     <script src="/components/header.js"></script>
-    <script src="/components/messageCards.js"></script>
-    <!-- <script type="module" src="/js/userAuth/getAuth.js"></script> -->
   </head>
 
   <body>
@@ -19,15 +24,14 @@
           <h2 class="subheader">Messages</h2>
           <button id="add-message-button">+ Message</button>
         </div>
-        <div class="grid">
-          <message-card></message-card>
-          <message-card></message-card>
-          <message-card></message-card>
-          <message-card></message-card>
-        </div>
+        <div class="grid" id="chats-grid"></div>
       </main>
     </div>
 
+    <script src="/js/common/auth.js"></script>
+    <script src="/js/common/modal.js"></script>
+    <script src="/js/common/renderMessages.js"></script>
+    <script type="module" src="/js/mainPages/messages.js"></script>
     <script src="/components/modal.js"></script>
   </body>
 </html>
