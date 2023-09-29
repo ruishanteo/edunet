@@ -1,7 +1,6 @@
-p,
 h4 {
   color: #1e1b5f;
-  margin: 0;
+  margin: 10px 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -9,6 +8,11 @@ h4 {
 
 p {
   color: black;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .card {
@@ -19,11 +23,9 @@ p {
   transition: 0.3s;
   background-color: #e2c7a5;
   align-items: center;
-  padding: 15px 20px;
-
+  padding: 10px 15px;
+  height: 110px;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 /* On mouse-over, add a deeper shadow */
@@ -37,4 +39,5 @@ p {
   justify-content: space-between;
   align-items: center;
   text-align: left;
+  margin: -10px 0;
 }
