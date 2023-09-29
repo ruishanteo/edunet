@@ -105,6 +105,17 @@ td {
   font-size: medium;
 }
 
+@media (max-width: 1000px) {
+  .hideable {
+    display: none;
+  }
+}
+
+.smallest-column {
+  width: 1px;
+  white-space: nowrap;
+}
+
 tr:nth-child(even) {
   background-color: #eee;
 }
