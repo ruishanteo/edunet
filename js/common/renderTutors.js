@@ -10,26 +10,21 @@ function renderTutors(tutors, args, handleDelete) {
     const card = document.createElement("div");
     card.classList.add("card");
 
+    const enrolledClasses = tutorInfo.classes
+      .map((classInfo) => `${classInfo.name}`)
+      .slice(0, 3);
+    if (enrolledClasses.length > 2) {
+      enrolledClasses[2] += "...";
+    }
     card.innerHTML = `
-      <div class="subclass">
-        <h4><b>${tutorInfo.user.fullName}</b></h4>
-        ${
-          args.isAdmin
-            ? `<button class="icon-button" id="action-tutor-${tutorInfo.id}">
-              <i class="fa fa-trash"></i>
-            </button>`
-            : ""
-        }
-      </div>
+    <h4><b>${tutorInfo.user.fullName}</b></h4>
 
-      <p><b>Assigned classes:</b></p>
-      ${
-        tutorInfo.classes.length > 0
-          ? tutorInfo.classes
-              .map((classInfo) => `<p>${classInfo.name}</p>`)
-              .join("")
-          : "No classes"
-      }`;
+    <p><b>Enrolled classes:</b></p>
+    ${
+      tutorInfo.classes.length > 0
+        ? enrolledClasses.map((className) => `<p>${className}</p>`).join("")
+        : "No classes"
+    }`;
 
     if (args.isAdmin) {
       card.onclick = (event) => {

@@ -1,62 +1,33 @@
-function filterDropDown(items) {
-  const filterInput = document.getElementById("filterInput");
-  const dropdownList = document.getElementById("dropdownList");
-  const options = document.querySelectorAll(".dropdown-option");
-
-  let selectedOption = null;
-
-  for (let i = 0; i < items.length; i++) {
-    let dropdownItem = document.createElement("a");
-    dropdownItem.classList.add("dropdown-option");
-    dropdownItem.innerHTML = items[i];
-    dropdown.appendChild(dropdownItem);
+function filterDropDown(filterInput, dropdownList, items) {
+  if (!items) {
+    return;
   }
+
+  items.forEach((item) => {
+    const option = document.createElement("div");
+    option.classList.add("class-checkbox-row");
+    option.id = item;
+    option.innerHTML = `
+        <p class="class-checkbox-text">${item.fullName} (${
+      item.type.charAt(0).toUpperCase() + item.type.slice(1)
+    })</p>
+        <input value="${item.id}" type="radio" name="receiver-name" id="${
+      item.fullName
+    }" class="class-checkbox"/>`;
+    dropdownList.appendChild(option);
+  });
+
+  const options = document.getElementsByName("receiver-name");
 
   filterInput.addEventListener("input", function () {
     const filterValue = this.value.toLowerCase();
-    options.forEach((option) => {
-      const optionValue = option.dataset.value.toLowerCase();
-      option.style.display = optionValue.includes(filterValue)
-        ? "block"
-        : "none";
+    Array.from(options, (option) => option).forEach((option) => {
+      const optionValue = option.id.toLowerCase();
+      const div = option.parentElement;
+      div.style.display = optionValue.includes(filterValue) ? "flex" : "none";
     });
-    dropdownList.style.display = "block";
-  });
-
-  options.forEach((option) => {
-    option.addEventListener("click", function () {
-      if (selectedOption) {
-        selectedOption.classList.remove("selected");
-      }
-      selectedOption = this;
-      filterInput.value = this.dataset.value;
-      dropdownList.style.display = "none";
-      selectedOption.classList.add("selected");
-    });
-  });
-
-  input.addEventListener("input", function () {
-    let dropdown_items = dropdown.querySelectorAll(".dropdown-item");
-    if (!dropdown_items) return false;
-    for (let i = 0; i < dropdown_items.length; i++) {
-      if (
-        dropdown_items[i].innerHTML
-          .toUpperCase()
-          .includes(input.value.toUpperCase())
-      )
-        dropdown_items[i].style.display = "block";
-      else dropdown_items[i].style.display = "none";
-    }
   });
 }
-
-//call filterDropDown function
-filterDropDown(
-  document.getElementById("toggle"),
-  document.getElementById("dropdown"),
-  document.getElementById("input"),
-  devices
-);
 
 function renderMessages(args, messages, receiver, handleSendMessage) {
   const receiverName = document.getElementById("receiver-name");
@@ -118,4 +89,10 @@ function renderChats(args, chats, handleAddMessage) {
       window.location.href = `/pages/mainPages/detailedMessage.html?receiverId=${chatInfo.otherParty.id}`;
     };
   });
+
+  const addMessageButton = document.getElementById("add-message-button");
+  addMessageButton.onclick = (e) => {
+    e.preventDefault();
+    handleAddMessage();
+  };
 }

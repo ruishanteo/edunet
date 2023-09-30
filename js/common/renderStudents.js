@@ -7,7 +7,7 @@ function renderStudents(students, args, handleDelete, handleAddStudent) {
   studentsGrid.innerHTML =
     students.length === 0
       ? `<div class="notFound">
-          <img src="/assets/empty.png" alt="eddy" width="350" height="350" />
+          <img src="/assets/empty.png" alt="eddy" width="200" height="200" />
           <p>No students found.</p>
         </div>
         `
@@ -17,24 +17,19 @@ function renderStudents(students, args, handleDelete, handleAddStudent) {
     const card = document.createElement("div");
     card.classList.add("card");
 
+    const enrolledClasses = studentInfo.classes
+      .map((classInfo) => `${classInfo.name}`)
+      .slice(0, 3);
+    if (enrolledClasses.length > 2) {
+      enrolledClasses[2] += "...";
+    }
     card.innerHTML = `
-      <div class="subclass">
-        <h4><b>${studentInfo.user.fullName}</b></h4>
-        ${
-          args.isAdmin
-            ? `<button class="icon-button" id="action-student-${studentInfo.id}">
-              <i class="fa fa-trash"></i>
-            </button>`
-            : ""
-        }
-      </div>
+      <h4><b>${studentInfo.user.fullName}</b></h4>
 
       <p><b>Enrolled classes:</b></p>
       ${
         studentInfo.classes.length > 0
-          ? studentInfo.classes
-              .map((classInfo) => `<p>${classInfo.name}</p>`)
-              .join("")
+          ? enrolledClasses.map((className) => `<p>${className}</p>`).join("")
           : "No classes"
       }`;
 
@@ -44,18 +39,6 @@ function renderStudents(students, args, handleDelete, handleAddStudent) {
     };
 
     studentsGrid.appendChild(card);
-
-    const deleteClassButton = document.getElementById(
-      `action-student-${studentInfo.id}`
-    );
-    if (!deleteClassButton) {
-      return;
-    }
-
-    deleteClassButton.onclick = (event) => {
-      event.stopPropagation();
-      handleDelete(studentInfo.id);
-    };
   });
 
   const addStudentButton = document.getElementById("add-student-button");
@@ -116,9 +99,9 @@ function renderStudentRows(students, handleDelete) {
           <th>No.</th>
           <th>Name</th>
           <th>Contact No.</th>
-          <th>Email</th>
+          <th class="hideable">Email</th>
           <th>Parent's Contact No.</th>
-          <th>Parent's Email</th>
+          <th class="hideable">Parent's Email</th>
           <th></th>
       </tr>`;
 
@@ -139,9 +122,9 @@ function renderStudentRows(students, handleDelete) {
             student.id
           }">${student.user.fullName}</a></td>
           <td>${student.contact}</td>
-          <td>${student.user.email}</td>
+          <td class="hideable">${student.user.email}</td>
           <td>${student.parent.contact}</td>
-          <td>${student.parent.user.email}</td>
+          <td class="hideable">${student.parent.user.email}</td>
           <td><button id="remove-student-${
             student.id
           }"><i class="fa fa-close"></i></button></td>

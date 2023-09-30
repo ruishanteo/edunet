@@ -1,4 +1,6 @@
+const openedSections = {};
 async function makeAccordionSection(
+  args,
   classInfo,
   assessments,
   handleEditAssessment,
@@ -10,7 +12,16 @@ async function makeAccordionSection(
   const input = document.createElement("input");
   input.type = "checkbox";
   input.id = `class-${classInfo.id}`;
+  input.checked = openedSections[classInfo.id];
   input.classList.add("accordion_input");
+
+  input.onclick = () => {
+    if (openedSections[classInfo.id]) {
+      openedSections[classInfo.id] = false;
+    } else {
+      openedSections[classInfo.id] = true;
+    }
+  };
 
   const label = document.createElement("label");
   label.htmlFor = `class-${classInfo.id}`;
@@ -21,29 +32,31 @@ async function makeAccordionSection(
 
   const div = document.createElement("div");
   div.classList.add("accordion_content");
-  const button = document.createElement("button");
-  button.id = `add-assessment-${classInfo.id}`;
-  button.textContent = "+ Assessment";
 
-  button.addEventListener("click", (e) => {
-    e.preventDefault();
-    handleAddAssessment(classInfo.id);
-  });
+  if (args.user.type !== "student") {
+    const button = document.createElement("button");
+    button.id = `add-assessment-${classInfo.id}`;
+    button.textContent = "+ Assessment";
 
-  // const addAssessmentHandler = document.createElement("script");
-  // addAssessmentHandler.src = "/js/modals/addAssessmentModal.js";
-  // addAssessmentHandler.setAttribute("classId", classInfo.id);
-  // addAssessmentHandler.setAttribute("studentId", studentId);
-  // button.appendChild(addAssessmentHandler);
+    button.onclick = (e) => {
+      e.preventDefault();
+      handleAddAssessment(classInfo.id);
+    };
+    div.appendChild(button);
+  }
 
   const table = document.createElement("table");
   table.innerHTML = `
     <tr>
       <th>Assessment</th>
-      <th>Total</th>
       <th>Score</th>
-      <th></th>
-      <th></th>
+      <th>Total</th>
+      ${
+        assessments.length === 0
+          ? ""
+          : `<th class="smallest-column"></th>
+      <th class="smallest-column"></th>`
+      }
     </tr>`;
 
   if (assessments.length === 0) {
@@ -57,14 +70,13 @@ async function makeAccordionSection(
     table.innerHTML += `
       <tr>
         <td>${assessment.name}</td>
-        <td>${assessment.total}</td>
         <td>${assessment.score}</td>
-        <td><button id="edit-assessment-${assessment.id}"><i class="fa fa-close"></i></button></td>
-        <td><button id="delete-assessment-${assessment.id}"><i class="fa fa-close"></i></button></td>
+        <td>${assessment.total}</td>
+        <td class="smallest-column"><button id="edit-assessment-${assessment.id}"><i class="fa fa-pencil"></i></button></td>
+        <td class="smallest-column"><button id="delete-assessment-${assessment.id}"><i class="fa fa-close"></i></button></td>
       </tr>`;
   });
 
-  div.appendChild(button);
   div.appendChild(table);
   accordionSections.appendChild(input);
   accordionSections.appendChild(label);
@@ -77,10 +89,16 @@ async function makeAccordionSection(
     const deleteAssessmentButton = document.getElementById(
       `delete-assessment-${assessment.id}`
     );
-    deleteAssessmentButton.addEventListener("click", (e) => {
+
+    deleteAssessmentButton.onclick = (e) => {
       e.preventDefault();
       handleDeleteAssessment(assessment);
-    });
+    };
+
+    editAssessmentButton.onclick = (e) => {
+      e.preventDefault();
+      handleEditAssessment(assessment);
+    };
   });
 }
 
@@ -100,6 +118,7 @@ function renderAssessments(
   accordionSections.innerHTML = "";
   classes.map((classInfo, index) =>
     makeAccordionSection(
+      args,
       classInfo,
       assessments.filter((assessment) => assessment.classId === classInfo.id),
       handleEdit,
