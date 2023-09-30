@@ -1,9 +1,44 @@
+function handleRouting(button) {
+  const args = getArgs();
+  const currLocation = window.location.href;
+
+  if (currLocation.includes("userAuth")) {
+    return backButton.remove();
+  }
+  if (
+    currLocation.includes("detailedStudents") &&
+    args.user.type === "student"
+  ) {
+    return button.remove();
+  }
+  if (currLocation.includes("detailedTutors") && args.user.type === "tutor") {
+    return button.remove();
+  }
+
+  button.onclick = (e) => {
+    e.preventDefault();
+    if (
+      currLocation.includes("detailedStudents") &&
+      args.user.type === "tutor"
+    ) {
+      window.location.href = getHomePage(args.user);
+      return;
+    }
+
+    if (currLocation.includes("detailedMessages")) {
+      window.location.href = "/pages/mainPages/messages.html";
+      return;
+    }
+  };
+}
 class BackButton extends HTMLElement {
   constructor() {
     super();
   }
 
   connectedCallback() {
+    const args = getArgs();
+
     this.innerHTML = `
       <nav>
         <button id="back-button">
@@ -13,17 +48,7 @@ class BackButton extends HTMLElement {
         `;
 
     const backButton = window.document.getElementById("back-button");
-    if (
-      document.referrer === document.location.href ||
-      document.referrer.toLowerCase().includes("userauth")
-    ) {
-      backButton.remove();
-    } else {
-      backButton.onclick = (e) => {
-        e.preventDefault();
-        window.location.replace(document.referrer);
-      };
-    }
+    handleRouting(backButton);
   }
 }
 
