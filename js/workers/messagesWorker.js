@@ -6,7 +6,6 @@ self.addEventListener("message", (e) => {
     case "create":
       return createMessage(args);
     case "get":
-      console.log("x");
       return getChats(args);
     default:
       return getMessages(args);
@@ -80,7 +79,7 @@ async function createMessage(args) {
       return;
     }
 
-    response.json().then(() => reloadMessages(args));
+    response.json().then(() => getChats(args));
   } catch (error) {
     console.error("Error:", error);
   }
