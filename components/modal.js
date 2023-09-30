@@ -18,16 +18,13 @@ class Modal {
     this.bindEvents();
   }
 
-  // Bind events.
   bindEvents() {
-    // Check if the event listener has already been attached
     if (!this.openTrigger.hasEventListener) {
       this.openTrigger.addEventListener("click", this.open.bind(this));
-      this.openTrigger.hasEventListener = true; // Mark that the event listener has been attached
+      this.openTrigger.hasEventListener = true;
     }
   }
 
-  // Open the modal.
   open() {
     this.render();
     this.modalDiv = document.getElementById("modal");
@@ -63,12 +60,18 @@ class Modal {
     return false;
   }
 
-  // Render the modal.
   render() {
     const html = this.htmlTemplate();
-    const docFrag = document.createDocumentFragment();
+
     this.containerDiv = document.createElement("div");
+
     this.containerDiv.innerHTML = html;
+
+    if (this.config.scriptHandler) {
+      const script = document.createElement("script");
+      script.src = this.config.scriptHandler;
+      this.containerDiv.appendChild(script);
+    }
     document.body.appendChild(this.containerDiv);
   }
 
@@ -84,9 +87,8 @@ class Modal {
 				<div class="modal-content">
           <button id="close" class="icon-button fa fa-close"></button>
 					<h1>${this.config.modalTitle}</h1>
-          <form id="modal-form">
+          <form id=${this.config.formID}>
             <p>${this.config.modalText}</p>
-           
           </form>
 				</div>
 			</div>
@@ -98,19 +100,20 @@ const addClassModal = document.getElementById("add-class-button");
 const addStudentModal = document.getElementById("add-student-button");
 const addTutorModal = document.getElementById("add-tutor-button");
 const addNoteModal = document.getElementById("add-note-button");
+const addMessageModal = document.getElementById("add-message-button");
+
 const openNoteModals = document.getElementsByClassName("node-card");
 
 if (addClassModal) {
   new Modal(addClassModal, {
     modalTitle: "Add Class",
     modalText: `
-    <div class="section">
-      <label>Name</label> <input type="name" required/><br />
-      <label>Day</label><input type="day" required/> <br />
-      <label>Time</label><input type="timing" required/> <br /> 
-      <label>Location</label> <input type="location" /> 
-      <button type="submit">Create</button>
-    </div> `,
+      <div class="section">
+        
+        <button type="submit">Create</button>
+      </div>`,
+    scriptHandler: "/js/modals/addClass.js",
+    formID: "add-class-form",
     onAfter: () => null,
     onBefore: () => null,
   });
@@ -120,15 +123,16 @@ if (addStudentModal) {
   new Modal(addStudentModal, {
     modalTitle: "Add Student",
     modalText: `
-    <div class="section">
-      <label>Name</label> <input type="name" required/><br />
-      <label>Contact No.</label><input type="num" required/> <br />
-      <label>Email</label><input type="email" required/> <br /> 
-      <label>Parent's Contact No.</label><input type="p_num" required/> <br />
-      <label>Parent's Email</label><input type="p_email" required/> <br /> 
-      <label>Classes Enrolled</label> <input type="location" /> 
-      <button type="submit">Create</button>
-    </div> `,
+      <div class="section">
+        <label>Name</label> <input type="name" required/><br />
+        <label>Contact No.</label><input type="num" required/> <br />
+        <label>Email</label><input type="email" required/> <br /> 
+        <label>Parent's Contact No.</label><input type="p_num" required/> <br />
+        <label>Parent's Email</label><input type="p_email" required/> <br /> 
+        <label>Classes Enrolled</label> <input type="location" /> 
+        <button type="submit">Create</button>
+      </div>`,
+    formID: "add-student-form",
     onAfter: () => null,
     onBefore: () => null,
   });
@@ -138,12 +142,13 @@ if (addTutorModal) {
   new Modal(addTutorModal, {
     modalTitle: "Add Tutor",
     modalText: `
-    <div class="section">
-      <label>Name</label> <input type="name" required/><br />
-      <label>Contact No.</label><input type="num" required/> <br />
-      <label>Email</label><input type="email" required/> <br /> 
-      <button type="submit">Create</button>
-    </div> `,
+      <div class="section">
+        <label>Name</label> <input type="name" required/><br />
+        <label>Contact No.</label><input type="num" required/> <br />
+        <label>Email</label><input type="email" required/> <br /> 
+        <button type="submit">Create</button>
+      </div>`,
+    formID: "add-tutor-form",
     onAfter: () => null,
     onBefore: () => null,
   });
@@ -153,11 +158,27 @@ if (addNoteModal) {
   new Modal(addNoteModal, {
     modalTitle: "Add Note",
     modalText: `
-    <div class="section">
-      <label>Title</label> <input type="title" required/><br />
-      <label>Text</label><input type="text" required/> <br />
-      <button type="submit">Create</button>
-    </div> `,
+      <div class="section">
+        <label>Title</label> <input type="title" required/><br />
+        <label>Text</label><input type="text" required/> <br />
+        <button type="submit">Create</button>
+      </div>`,
+    formID: "add-note-form",
+    onAfter: () => null,
+    onBefore: () => null,
+  });
+}
+
+if (addMessageModal) {
+  new Modal(addMessageModal, {
+    modalTitle: "Send Message",
+    modalText: `
+      <div class="section">
+        <label>To:</label> <input type="to" required/><br />
+        <label>Text:</label> <textarea placeholder="Type message.." name="msg" required></textarea> <br />
+        <button type="submit"><i class="fa fa-paper-plane"></i> Send</button>
+      </div>`,
+    formID: "add-message-form",
     onAfter: () => null,
     onBefore: () => null,
   });
@@ -168,9 +189,10 @@ if (openNoteModals && openNoteModals.length > 0) {
     new Modal(openNoteModal, {
       modalTitle: "Title",
       modalText: `
-    <div class="section">
-      <p> text description</p>
-    </div> `,
+        <div class="section">
+          <p> text description</p>
+        </div>`,
+      formID: "open-note-form",
       onAfter: () => null,
       onBefore: () => null,
     });
