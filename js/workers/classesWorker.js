@@ -98,7 +98,10 @@ async function createClass(args) {
       return;
     }
 
-    response.json().then(() => reloadClasses(args));
+    response.json().then((res) => {
+      reloadClasses(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
@@ -133,7 +136,7 @@ async function deleteClass(args) {
 
     response.json().then((res) => {
       reloadClasses(args);
-      self.postMessage({ isDeleted: args.isSelf });
+      self.postMessage({ isDeleted: args.isSelf, ...res });
     });
   } catch (error) {
     console.error("Error:", error);
@@ -157,9 +160,13 @@ async function assignTutor(args) {
       return;
     }
 
-    response.json().then(() => {
-      reloadClasses(args);
-      reloadClass(args);
+    response.json().then((res) => {
+      if (args.classId) {
+        reloadClass(args);
+      } else {
+        reloadClasses(args);
+      }
+      self.postMessage({ res });
     });
   } catch (error) {
     console.error("Error:", error);
@@ -183,9 +190,13 @@ async function enrollStudent(args) {
       return;
     }
 
-    response.json().then(() => {
-      reloadClasses(args);
-      reloadClass(args);
+    response.json().then((res) => {
+      if (args.classId) {
+        reloadClass(args);
+      } else {
+        reloadClasses(args);
+      }
+      self.postMessage(res);
     });
   } catch (error) {
     console.error("Error:", error);
@@ -209,7 +220,15 @@ async function removeStudent(args) {
       return;
     }
 
-    response.json().then(() => reloadClasses(args));
+    response.json().then((res) => {
+      if (args.classId) {
+        reloadClass(args);
+      } else {
+        reloadClasses(args);
+      }
+      reloadClasses(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
