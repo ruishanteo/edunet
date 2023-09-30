@@ -6,7 +6,7 @@
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/userAuth.css" />
-    <title>Register</title>
+    <title>Register - EduNet</title>
   </head>
   <body>
     <main>
@@ -20,10 +20,10 @@
       <div class="wrapper">
         <form id="register-form">
           <label for="centreName">Tuition Centre Name:</label>
-          <input type="text" id="centreName" name="centreName" required />
+          <input type="text" id="centre-name" name="centre-name" required />
           <br />
           <label for="username">Full Name:</label>
-          <input type="text" id="fullName" name="fullName" required />
+          <input type="text" id="full-name" name="full-name" required />
           <br />
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required />
@@ -35,12 +35,12 @@
           <input
             type="password"
             id="confirm-password"
-            name="password"
+            name="confirm-password"
             required
           />
           <br />
           <label for="contact">Contact:</label>
-          <input type="number" id="contact" name="contact" required />
+          <input type="text" id="contact" name="contact" required />
           <br />
           <button type="submit">Register</button>
         </form>
@@ -50,6 +50,7 @@
         >
       </div>
     </main>
+    <script type="module" src="/js/userAuth/register.js"></script>
     <script src="/js/common/auth.js"></script>
     <script src="/js/common/redirect.js"></script>
   </body>
