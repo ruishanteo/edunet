@@ -23,6 +23,7 @@ function getHomePage(user) {
 }
 
 const URL = "http://localhost:8000";
+// const URL = "https://edunet.onrender.com";
 const args = getArgs();
 
 function getArgs() {

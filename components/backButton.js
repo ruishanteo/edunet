@@ -7,7 +7,7 @@ function handleRouting(button) {
   }
   if (
     currLocation.includes("detailedStudents") &&
-    (args.user.type === "student" || args.user.type === "parent")
+    args.user.type === "student"
   ) {
     return button.remove();
   }
@@ -22,6 +22,25 @@ function handleRouting(button) {
       args.user.type === "tutor"
     ) {
       window.location.href = getHomePage(args.user);
+      return;
+    }
+
+    if (currLocation.includes("detailedStudents")) {
+      if (args.user.type === "parent") {
+        window.location.href = args.homePageURL;
+        return;
+      }
+      window.location.href = "/pages/admin/students.html";
+      return;
+    }
+
+    if (currLocation.includes("detailedTutors")) {
+      window.location.href = "/pages/admin/tutors.html";
+      return;
+    }
+
+    if (currLocation.includes("detailedClasses")) {
+      window.location.href = "/pages/admin/classes.html";
       return;
     }
 

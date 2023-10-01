@@ -35,6 +35,10 @@ form {
   }
 }
 
+.modal-content-full {
+  width: 80% !important;
+}
+
 .modal-content {
   padding: 30px;
   position: absolute;
@@ -157,4 +161,21 @@ textarea {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.confirm-modal-button {
+  margin: 10px;
+}
+
+.content-title {
+  text-align: left;
+}
+
+.content-text {
+  text-align: left;
+  white-space: pre-wrap;
+  overflow-y: scroll;
+  height: 100px;
+  resize: vertical;
+  background-color: #f1f1f1;
 }
