@@ -7,7 +7,7 @@ function handleRouting(button) {
   }
   if (
     currLocation.includes("detailedStudents") &&
-    args.user.type === "student"
+    (args.user.type === "student" || args.user.type === "parent")
   ) {
     return button.remove();
   }
@@ -25,7 +25,7 @@ function handleRouting(button) {
       return;
     }
 
-    if (currLocation.includes("detailedMessages")) {
+    if (currLocation.includes("detailedMessage")) {
       window.location.href = "/pages/mainPages/messages.html";
       return;
     }
