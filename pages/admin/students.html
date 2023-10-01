@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/modal.css" />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <title>Students - EduNet</title>
     <script src="/components/header.js"></script>
@@ -25,15 +25,23 @@
           <button id="add-student-button">+ Student</button>
         </div>
         <div class="grid-container" id="students-grid">
-          <div class="card" name="placeholder-card"">
+          <div class="card" name="placeholder-card">
             <h4><b> </b></h4>
 
-            <p> </p>
-            <p> </p>
-            <p> </p>
+            <p></p>
+            <p></p>
+            <p></p>
           </div>
         </div>
       </main>
+
+      <button
+        class="dot"
+        onclick="window.location.href = '/pages/mainPages/messages.html'"
+        id="open-message-button"
+      >
+        <i class="fa fa-message"></i>
+      </button>
     </div>
 
     <script src="/js/common/auth.js"></script>
