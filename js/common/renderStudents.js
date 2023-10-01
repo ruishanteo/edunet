@@ -56,6 +56,8 @@ function renderStudents(students, args, handleDelete, handleAddStudent) {
 }
 
 function renderStudent(student, args, handleEdit, handleDelete) {
+  document.title = `${student.user.fullName} - EduNet`;
+
   const studentFullName = document.getElementById("student-full-name");
   studentFullName.textContent = student.user.fullName;
   const studentEmail = document.getElementById("student-email");
@@ -135,7 +137,9 @@ function renderStudentRows(students, handleDelete) {
     );
     removeStudentButton.onclick = (event) => {
       event.stopPropagation();
-      handleDelete(student.id);
+      addConfirmModal("remove a student", "remove-student", () =>
+        handleDelete(student.id)
+      );
     };
   });
 }

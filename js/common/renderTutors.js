@@ -50,6 +50,8 @@ function renderTutors(tutors, args, handleDelete) {
 }
 
 function renderTutor(tutor, args, handleEdit, handleDelete) {
+  document.title = `${tutor.user.fullName} - EduNet`;
+
   const tutorFullName = document.getElementById("tutor-full-name");
   tutorFullName.textContent = tutor.user.fullName;
   const tutorContact = document.getElementById("tutor-contact");

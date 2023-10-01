@@ -4,15 +4,6 @@ function renderNotes(notes, args, handleDelete, handleView) {
     return;
   }
 
-  if (!args.isAdmin) {
-    notesGrid.remove();
-    const infoHeader = document.getElementById("note-information-header");
-    const infoBox = document.getElementById("note-information-box");
-    if (infoHeader) infoHeader.remove();
-    if (infoBox) infoBox.remove();
-    return;
-  }
-
   notesGrid.innerHTML = notes.length === 0 ? "No notes created" : "";
 
   notes.forEach((noteInfo) => {
@@ -23,13 +14,13 @@ function renderNotes(notes, args, handleDelete, handleView) {
       <div class="subclass">
         <h4><b>${noteInfo.title}</b></h4>
         ${
-          args.isAdmin
+          args.isAdmin || (args.isTutor && args.user.id === noteInfo.creatorId)
             ? `<button class="icon-button" id="action-note-${noteInfo.id}">
                 <i class="fa fa-trash"></i>
             </button>`
             : ""
         }
-      </div>  
+      </div><br />
         
       <p>${noteInfo.content}</p>`;
 

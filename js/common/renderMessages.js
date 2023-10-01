@@ -57,7 +57,9 @@ function renderMessages(args, messages, receiver, handleSendMessage) {
     messagesList.appendChild(card);
   });
 
-  messagesList.scrollTo = messagesList.scrollHeight;
+  setTimeout(() => {
+    messagesList.scrollTop = messagesList.scrollHeight;
+  }, 1000);
 }
 
 function renderChats(args, chats, handleAddMessage) {
@@ -74,7 +76,10 @@ function renderChats(args, chats, handleAddMessage) {
     card.innerHTML = `
       <div class="subclass">
         <div class="message-body">
-          <h4><b>${chatInfo.otherParty.fullName}</b></h4>
+          <h4><b>${chatInfo.otherParty.fullName} (${
+      chatInfo.otherParty.type.charAt(0).toUpperCase() +
+      chatInfo.otherParty.type.slice(1)
+    })</b></h4>
           <p>${chatInfo.chat.content}</p>
         </div>
         <button class="icon-button" id="view-chat-${chatInfo.chat.id}">

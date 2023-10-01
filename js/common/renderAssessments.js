@@ -33,17 +33,38 @@ async function makeAccordionSection(
   const div = document.createElement("div");
   div.classList.add("accordion_content");
 
-  if (args.user.type !== "student") {
-    const button = document.createElement("button");
-    button.id = `add-assessment-${classInfo.id}`;
-    button.textContent = "+ Assessment";
+  if (args.isTutor) {
+    const addAssessmentButton = document.createElement("button");
+    addAssessmentButton.id = `add-assessment-${classInfo.id}`;
+    addAssessmentButton.textContent = "+ Assessment";
 
-    button.onclick = (e) => {
+    addAssessmentButton.onclick = (e) => {
       e.preventDefault();
       handleAddAssessment(classInfo.id);
     };
-    div.appendChild(button);
+    div.appendChild(addAssessmentButton);
   }
+
+  if (assessments.length === 0) {
+    const noAssesmentFound = document.createElement("p");
+    noAssesmentFound.className = "empty-table-row";
+    noAssesmentFound.textContent = "No assessments found";
+    div.appendChild(noAssesmentFound);
+    accordionSections.appendChild(input);
+    accordionSections.appendChild(label);
+    accordionSections.appendChild(div);
+    return;
+  }
+
+  const visualiseAssessmentButton = document.createElement("button");
+  visualiseAssessmentButton.innerHTML = `<i class="fa fa-bar-chart"></i>`;
+  visualiseAssessmentButton.id = `visualise-assessment-${classInfo.id}`;
+  div.appendChild(visualiseAssessmentButton);
+
+  visualiseAssessmentButton.onclick = (e) => {
+    e.preventDefault();
+    handleViewAssessments(assessments, classInfo);
+  };
 
   const table = document.createElement("table");
   table.innerHTML = `
@@ -52,19 +73,11 @@ async function makeAccordionSection(
       <th>Score</th>
       <th>Total</th>
       ${
-        assessments.length === 0
+        assessments.length === 0 || !args.isTutor
           ? ""
-          : `<th class="smallest-column"></th>
-      <th class="smallest-column"></th>`
+          : `<th class="smallest-column"></th><th class="smallest-column"></th>`
       }
     </tr>`;
-
-  if (assessments.length === 0) {
-    table.innerHTML += `
-        <tr>
-          <td colspan="7">No assessments found</td>
-        <tr>`;
-  }
 
   assessments.forEach((assessment) => {
     table.innerHTML += `
@@ -72,8 +85,13 @@ async function makeAccordionSection(
         <td>${assessment.name}</td>
         <td>${assessment.score}</td>
         <td>${assessment.total}</td>
+        ${
+          !args.isTutor
+            ? ""
+            : `
         <td class="smallest-column"><button id="edit-assessment-${assessment.id}"><i class="fa fa-pencil"></i></button></td>
-        <td class="smallest-column"><button id="delete-assessment-${assessment.id}"><i class="fa fa-close"></i></button></td>
+        <td class="smallest-column"><button id="delete-assessment-${assessment.id}"><i class="fa fa-close"></i></button></td>`
+        }
       </tr>`;
   });
 
@@ -90,15 +108,19 @@ async function makeAccordionSection(
       `delete-assessment-${assessment.id}`
     );
 
-    deleteAssessmentButton.onclick = (e) => {
-      e.preventDefault();
-      handleDeleteAssessment(assessment);
-    };
+    if (deleteAssessmentButton) {
+      deleteAssessmentButton.onclick = (e) => {
+        e.preventDefault();
+        handleDeleteAssessment(assessment);
+      };
+    }
 
-    editAssessmentButton.onclick = (e) => {
-      e.preventDefault();
-      handleEditAssessment(assessment);
-    };
+    if (editAssessmentButton) {
+      editAssessmentButton.onclick = (e) => {
+        e.preventDefault();
+        handleEditAssessment(assessment);
+      };
+    }
   });
 }
 
