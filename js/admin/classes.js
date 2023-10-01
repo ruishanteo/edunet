@@ -39,8 +39,7 @@ const handleAddClass = () =>
 
       createClass({ name, day, time, venue });
       close();
-    },
-    null
+    }
   );
 
 addCallback(reloadClasses);

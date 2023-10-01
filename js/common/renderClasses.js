@@ -48,6 +48,8 @@ function renderClasses(classes, args, handleDelete, handleAddClass) {
 }
 
 function renderClass(classInfo, handleDelete) {
+  document.title = `${classInfo.name} - EduNet`;
+
   const className = document.getElementById("class-name");
   className.textContent = classInfo.name;
 

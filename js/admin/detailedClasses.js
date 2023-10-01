@@ -24,7 +24,6 @@ const deleteClass = (params) => {
   args.updateType = "delete";
   args.updateBody = params;
   args.classId = classId;
-  args.isSelf = true;
   classesWorker.postMessage(args);
 };
 
@@ -60,9 +59,11 @@ const assignTutor = (params) => {
 
     if (e.data.class) {
       classInfo = e.data.class;
-      renderClass(e.data.class, (id) => {
-        deleteClass({ classId: id });
-      });
+      renderClass(e.data.class, (id) =>
+        addConfirmModal("delete a class", "delete-class", () =>
+          deleteClass({ classId: id })
+        )
+      );
       renderStudentRows(e.data.class.students, (id) =>
         removeStudent({ studentId: id })
       );
@@ -87,10 +88,10 @@ const assignTutor = (params) => {
             <div>
              <br>
               ${
-                tutors &&
-                tutors
-                  .map(
-                    (tutor) => `
+                tutors && tutors.length > 0
+                  ? tutors
+                      .map(
+                        (tutor) => `
                       <div class="class-checkbox-row">
                         <p class="class-checkbox-text">${
                           tutor.user.fullName
@@ -99,14 +100,16 @@ const assignTutor = (params) => {
                         <input ${
                           currentAssignedTutorMap[tutor.id] && "checked='true'"
                         }" value="${
-                      tutor.id
-                    }"  type="radio" name="assigned-tutor" id="assigned-tutor-${
-                      tutor.id
-                    }" class="class-checkbox"/>
+                          tutor.id
+                        }"  type="radio" name="assigned-tutor" id="assigned-tutor-${
+                          tutor.id
+                        }" class="class-checkbox"/>
                       </div>`
-                  )
-                  .join("")
+                      )
+                      .join("")
+                  : "<p>No tutors found</p>"
               }
+              <br/><br/>
             <div>
             <button type="submit">Assign</button>
         </div>`,
@@ -123,8 +126,7 @@ const assignTutor = (params) => {
 
         assignTutor({ tutorId: tutorIds[0], classIds: [classId] });
         close();
-      },
-      null
+      }
     );
   });
 }

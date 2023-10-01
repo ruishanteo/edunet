@@ -11,7 +11,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <title>Classes - EduNet</title>
+    <title>Class - EduNet</title>
     <script src="/components/header.js"></script>
   </head>
 
@@ -19,9 +19,12 @@
     <header-navbar></header-navbar>
 
     <div class="page">
-      <main>
-        <h1 id="class-name"></h1>
+      <div class="back">
+        <back-button></back-button>
+        <h2 class="subheader" id="class-name"></h2>
+      </div>
 
+      <main>
         <div class="information">
           <h3 class="subheader">Assigned tutor</h3>
           <button class="icon-button" id="edit-tutor-button">
@@ -65,6 +68,7 @@
     <script src="/js/common/modal.js"></script>
     <script src="/js/common/renderClasses.js"></script>
     <script src="/js/common/renderStudents.js"></script>
+    <script src="/components/backButton.js"></script>
     <script type="module" src="/js/admin/detailedClasses.js"></script>
   </body>
 </html>
