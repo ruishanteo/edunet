@@ -4,7 +4,7 @@ self.addEventListener("message", (e) => {
   const args = e.data;
   switch (args.updateType) {
     case "create":
-      return editTutor(args);
+      return createTutor(args);
     case "get":
       return getTutor(args);
     case "edit":
@@ -88,7 +88,10 @@ async function createTutor(args) {
       return;
     }
 
-    response.json().then(() => reloadTutors(args));
+    response.json().then((res) => {
+      reloadTutors(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
@@ -111,7 +114,10 @@ async function editTutor(args) {
       return;
     }
 
-    response.json().then(() => reloadTutor(args));
+    response.json().then((res) => {
+      reloadTutor(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
@@ -136,7 +142,7 @@ async function deleteTutor(args) {
 
     response.json().then((res) => {
       reloadTutors(args);
-      self.postMessage({ isDeleted: args.isSelf });
+      self.postMessage(res);
     });
   } catch (error) {
     console.error("Error:", error);

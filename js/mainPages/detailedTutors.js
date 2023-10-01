@@ -51,7 +51,6 @@ const deleteTutor = (params) => {
   args.updateType = "delete";
   args.updateBody = params;
   args.tutorId = tutorId;
-  args.isSelf = true;
   tutorsWorker.postMessage(args);
 };
 
@@ -117,11 +116,12 @@ const deleteStudent = (params) => {
 
         editTutor({ fullName: fullName, contact: contact });
         close();
-      },
-      null
+      }
     );
   };
-  const handleDelete = () => deleteTutor({});
+
+  const handleDelete = () =>
+    addConfirmModal("delete a tutor", "delete-tutor", () => deleteTutor({}));
   tutorsWorker.addEventListener("message", function (e) {
     handleNotifications(e);
 
@@ -184,12 +184,15 @@ const deleteStudent = (params) => {
 
         assignTutor({ classIds });
         close();
-      },
-      null
+      }
     );
   };
   classesWorker.addEventListener("message", function (e) {
     handleNotifications(e);
+
+    if (e.data.isAssigned) {
+      reloadTutor();
+    }
 
     if (e.data.classes) {
       reloadTutor();
@@ -215,23 +218,31 @@ const deleteStudent = (params) => {
         args,
         (id) => deleteNote({ noteId: id }),
         (noteInfo) => {
+          const canEdit = args.isAdmin || args.user.id === noteInfo.creatorId;
           addModal(
-            "Edit Note",
+            canEdit ? "Edit Note" : "View Note",
             "edit-note-form",
-            `<div class="section">
-                <label>Title</label> <input value="${noteInfo.title}" type="text" id="form-title" required/><br />
-                <label>Content</label><textarea type="text" id="form-content" rows="20" required>${noteInfo.content}</textarea> <br />
-                <button type="submit">Update</button>
-            </div>`,
+            canEdit
+              ? `<div class="section">
+              <label>Title</label> <input value="${noteInfo.title}" type="text" id="form-title" maxlength="100" required/><br />
+              <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required>${noteInfo.content}</textarea> <br />
+              <button type="submit">Update</button>
+            </div>`
+              : `<div class="section">
+                <label>Title</label><p class="content-title">${noteInfo.title}</p><br />
+                <label>Content</label><p class="content-text">${noteInfo.content}</p><br />
+                <label>Created by ${noteInfo.creator.fullName}</label><br />
+              </div>`,
             null,
-            (close) => {
-              const title = document.getElementById("form-title").value;
-              const content = document.getElementById("form-content").value;
+            canEdit
+              ? (close) => {
+                  const title = document.getElementById("form-title").value;
+                  const content = document.getElementById("form-content").value;
 
-              editNote({ noteId: noteInfo.id, title, content });
-              close();
-            },
-            null
+                  editNote({ noteId: noteInfo.id, title, content });
+                  close();
+                }
+              : null
           );
         }
       );
@@ -245,10 +256,11 @@ const deleteStudent = (params) => {
       "Add Note",
       "add-note-form",
       `<div class="section">
-          <label>Title</label> <input type="text" id="form-title" required/><br />
-          <label>Content</label><input type="text" id="form-content" required/> <br />
-          <button type="submit">Create</button>
+        <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
+        <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
+        <button type="submit">Create</button>
       </div>`,
+
       null,
       (close) => {
         const title = document.getElementById("form-title").value;
@@ -256,8 +268,7 @@ const deleteStudent = (params) => {
 
         createNote({ title, content });
         close();
-      },
-      null
+      }
     );
   });
 }
