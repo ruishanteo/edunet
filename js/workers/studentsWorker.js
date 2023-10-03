@@ -34,6 +34,8 @@ async function getStudents(args) {
   try {
     const requestURL = args.tutorId
       ? `${args.baseUrl}/student/tutor/${args.tutorId}`
+      : args.parentId
+      ? `${args.baseUrl}/student/parent/${args.parentId}`
       : `${args.baseUrl}/student`;
     const response = await handleApiCall(
       fetch(requestURL, {
@@ -95,7 +97,10 @@ async function createStudent(args) {
       return;
     }
 
-    response.json().then(() => reloadStudents(args));
+    response.json().then((res) => {
+      reloadStudents(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
@@ -118,7 +123,10 @@ async function editStudent(args) {
       return;
     }
 
-    response.json().then(() => reloadStudent(args));
+    response.json().then((res) => {
+      reloadStudent(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
@@ -141,9 +149,9 @@ async function deleteStudent(args) {
       return;
     }
 
-    response.json().then(() => {
+    response.json().then((res) => {
       reloadStudents(args);
-      self.postMessage({ isDeleted: args.isSelf });
+      self.postMessage(res);
     });
   } catch (error) {
     console.error("Error:", error);
@@ -167,7 +175,10 @@ async function enrollStudent(args) {
       return;
     }
 
-    response.json().then(() => reloadStudents(args));
+    response.json().then((res) => {
+      reloadStudents(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
@@ -190,7 +201,10 @@ async function removeStudent(args) {
       return;
     }
 
-    response.json().then(() => reloadStudents(args));
+    response.json().then((res) => {
+      reloadStudents(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }

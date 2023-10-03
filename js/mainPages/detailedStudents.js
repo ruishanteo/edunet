@@ -28,7 +28,6 @@ const deleteStudent = (params) => {
   args.updateType = "delete";
   args.updateBody = params;
   args.studentId = studentId;
-  args.isSelf = true;
   studentsWorker.postMessage(args);
 };
 
@@ -146,11 +145,13 @@ const deleteAssessment = (params) => {
           parentContact: parentContact,
         });
         close();
-      },
-      null
+      }
     );
 
-  const handleDeleteStudent = () => deleteStudent({});
+  const handleDeleteStudent = () =>
+    addConfirmModal("delete a student", "delete-student", () =>
+      deleteStudent({})
+    );
 
   studentsWorker.addEventListener("message", function (e) {
     handleNotifications(e);
@@ -186,10 +187,10 @@ const deleteAssessment = (params) => {
             <div>
              <br>
               ${
-                classes &&
-                classes
-                  .map(
-                    (classInfo) => `
+                classes && classes.length > 0
+                  ? classes
+                      .map(
+                        (classInfo) => `
                       <div class="class-checkbox-row">
                         <p class="class-checkbox-text">${classInfo.name}</p>
                         
@@ -203,8 +204,9 @@ const deleteAssessment = (params) => {
                             classInfo.id
                           }" />
                       </div>`
-                  )
-                  .join("")
+                      )
+                      .join("")
+                  : "<p>No classes found</p>"
               }
             <div>
             <button type="submit">Assign</button>
@@ -222,12 +224,16 @@ const deleteAssessment = (params) => {
 
         enrollStudent({ classIds });
         close();
-      },
-      null
+      }
     );
   };
   classesWorker.addEventListener("message", function (e) {
     handleNotifications(e);
+
+    if (e.data.isAssigned) {
+      reloadStudent();
+      reloadAssessments();
+    }
 
     if (e.data.classes) {
       return renderClasses(
@@ -252,23 +258,31 @@ const deleteAssessment = (params) => {
         args,
         (id) => deleteNote({ noteId: id }),
         (noteInfo) => {
+          const canEdit = args.isAdmin || args.user.id === noteInfo.creatorId;
           addModal(
-            "Edit Note",
+            canEdit ? "Edit Note" : "View Note",
             "edit-note-form",
-            `<div class="section">
-                <label>Title</label> <input value="${noteInfo.title}" type="text" id="form-title" required/><br />
-                <label>Content</label><textarea type="text" id="form-content" rows="20" required>${noteInfo.content}</textarea> <br />
-                <button type="submit">Update</button>
-            </div>`,
+            canEdit
+              ? `<div class="section">
+              <label>Title</label> <input value="${noteInfo.title}" type="text" id="form-title" maxlength="100" required/><br />
+              <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required>${noteInfo.content}</textarea> <br />
+              <button type="submit">Update</button>
+            </div>`
+              : `<div class="section">
+                <label>Title</label><p class="content-title">${noteInfo.title}</p><br />
+                <label>Content</label><p class="content-text">${noteInfo.content}</p><br />
+                <label>Created by ${noteInfo.creator.fullName}</label><br />
+              </div>`,
             null,
-            (close) => {
-              const title = document.getElementById("form-title").value;
-              const content = document.getElementById("form-content").value;
+            canEdit
+              ? (close) => {
+                  const title = document.getElementById("form-title").value;
+                  const content = document.getElementById("form-content").value;
 
-              editNote({ noteId: noteInfo.id, title, content });
-              close();
-            },
-            null
+                  editNote({ noteId: noteInfo.id, title, content });
+                  close();
+                }
+              : null
           );
         }
       );
@@ -276,34 +290,37 @@ const deleteAssessment = (params) => {
   });
 
   const addNoteButton = document.getElementById("add-note-button");
-  addNoteButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    addModal(
-      "Add Note",
-      "add-note-form",
-      `<div class="section">
-          <label>Title</label> <input type="text" id="form-title" required/><br />
-          <label>Content</label><input type="text" id="form-content" required/> <br />
+  if (!getArgs().isTutor) {
+    addNoteButton.remove();
+  } else {
+    addNoteButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      addModal(
+        "Add Note",
+        "add-note-form",
+        `<div class="section">
+          <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
+          <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
           <button type="submit">Create</button>
       </div>`,
-      null,
-      (close) => {
-        const title = document.getElementById("form-title").value;
-        const content = document.getElementById("form-content").value;
+        null,
+        (close) => {
+          const title = document.getElementById("form-title").value;
+          const content = document.getElementById("form-content").value;
 
-        createNote({ title, content });
-        close();
-      },
-      null
-    );
-  });
+          createNote({ title, content });
+          close();
+        }
+      );
+    });
+  }
 }
 
 {
   const handleAddAssessment = (classId) =>
     addModal(
-      "Add Note",
-      "add-note-form",
+      "Add Assessment",
+      "add-assessment-form",
       `<div class="section">
         <label>Name</label> <input type="text" id="form-name" required/><br />
         <label>Score</label> <input type="number" id="form-score" required/><br />
@@ -318,8 +335,34 @@ const deleteAssessment = (params) => {
 
         createAssessment({ classId, name, score, total });
         close();
-      },
-      null
+      }
+    );
+
+  const handleEditAssessment = (assessment) =>
+    addModal(
+      "Update Assessment",
+      "add-assessment-form",
+      `<div class="section">
+        <label>Name</label> <input value=${assessment.name} type="text" id="form-name" required/><br />
+        <label>Score</label> <input value=${assessment.score} type="number" id="form-score" required/><br />
+        <label>Total</label><input value=${assessment.total} type="number" id="form-total" required/> <br />
+        <button type="submit">Update</button>
+    </div>`,
+      null,
+      (close) => {
+        const name = document.getElementById("form-name").value;
+        const score = parseInt(document.getElementById("form-score").value);
+        const total = parseInt(document.getElementById("form-total").value);
+
+        editAssessment({
+          classId: assessment.classId,
+          assessmentId: assessment.id,
+          name,
+          score,
+          total,
+        });
+        close();
+      }
     );
   assessmentsWorker.addEventListener("message", function (e) {
     handleNotifications(e);
@@ -329,19 +372,21 @@ const deleteAssessment = (params) => {
         e.data.assessments,
         student.classes,
         args,
-        () => {},
+        handleEditAssessment,
         (assessment) =>
-          deleteAssessment({
-            assessmentId: assessment.id,
-            classId: assessment.classId,
-          }),
+          addConfirmModal("delete a assessment", "delete-assessment", () =>
+            deleteAssessment({
+              assessmentId: assessment.id,
+              classId: assessment.classId,
+            })
+          ),
         handleAddAssessment
       );
     }
   });
 }
 
-addCallback((args) => {
+function fetchAllClasses() {
   if (args.isAdmin) {
     fetch(`${args.baseUrl}/class`, {
       method: "GET",
@@ -355,7 +400,10 @@ addCallback((args) => {
       })
     );
   }
+}
 
+addCallback((args) => {
+  fetchAllClasses();
   reloadStudent();
   reloadNotes();
 });

@@ -30,7 +30,7 @@ const deleteStudent = (params) => {
 
 const handleAddStudent = () =>
   addModal(
-    "Add Tutor",
+    "Add Student",
     "add-tutor-form",
     `<div class="section">
         <label>Name</label> <input type="text" id="form-student-name" required/><br />
@@ -43,17 +43,19 @@ const handleAddStudent = () =>
         <div>
            <br>
           ${
-            classes &&
-            classes
-              .map(
-                (classInfo) => `
+            classes && classes.length > 0
+              ? classes
+                  .map(
+                    (classInfo) => `
                 <div class="class-checkbox-row">
                   <p class="class-checkbox-text">${classInfo.name}</p>
                   <input value="${classInfo.id}"  type="checkbox" name="classes-enrolled" id="classes-enrolled-${classInfo.id}" class="class-checkbox"/>
                 </div>`
-              )
-              .join("")
+                  )
+                  .join("")
+              : "<p>No classes found</p>"
           }
+          <br/><br/>
         <div>
         <button type="submit">Create</button>
     </div>`,
@@ -89,8 +91,7 @@ const handleAddStudent = () =>
         parentEmail,
       });
       close();
-    },
-    null
+    }
   );
 
 studentsWorker.addEventListener("message", function (e) {
