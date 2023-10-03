@@ -25,8 +25,8 @@ const handleAddClass = () =>
     "add-class-form",
     `<div class="section">
         <label>Name</label> <input type="text" id="form-name" maxlength="20" required/><br />
-        <label>Day</label><input type="text" id="form-day" maxlength="10" required/> <br />
-        <label>Time</label><input type="text" id="form-time" maxlength="10" required/> <br /> 
+        <label>Day</label><input type="text" id="form-day" maxlength="15" required/> <br />
+        <label>Time</label><input type="text" id="form-time" maxlength="15" required/> <br /> 
         <label>Venue</label> <input type="text" id="form-venue" maxlength="20"/> 
         <button type="submit">Create</button>
     </div>`,
