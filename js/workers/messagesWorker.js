@@ -79,7 +79,13 @@ async function createMessage(args) {
       return;
     }
 
-    response.json().then(() => getChats(args));
+    response.json().then(() => {
+      if (args.receiverId) {
+        reloadMessages(args);
+      } else {
+        getChats(args);
+      }
+    });
   } catch (error) {
     console.error("Error:", error);
   }
