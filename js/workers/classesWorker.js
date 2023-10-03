@@ -136,7 +136,7 @@ async function deleteClass(args) {
 
     response.json().then((res) => {
       reloadClasses(args);
-      self.postMessage({ isDeleted: args.isSelf, ...res });
+      self.postMessage(res);
     });
   } catch (error) {
     console.error("Error:", error);
@@ -166,7 +166,7 @@ async function assignTutor(args) {
       } else {
         reloadClasses(args);
       }
-      self.postMessage({ res });
+      self.postMessage(res);
     });
   } catch (error) {
     console.error("Error:", error);
