@@ -22,7 +22,7 @@ function getHomePage(user) {
   return "/pages/mainPages/notFound.html";
 }
 
-const URL = "http://52.77.240.97:8000";
+const URL = "http://edunet.cloudns.ph";
 const args = getArgs();
 
 function getArgs() {
