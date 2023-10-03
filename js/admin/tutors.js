@@ -49,7 +49,6 @@ addTutorButton.addEventListener("click", (event) => {
 
       createTutor({ fullName, contact, email });
       close();
-    },
-    null
+    }
   );
 });
