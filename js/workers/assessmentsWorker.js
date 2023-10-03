@@ -63,7 +63,10 @@ async function createAssessment(args) {
       return;
     }
 
-    response.json().then(() => reloadAssessments(args));
+    response.json().then((res) => {
+      reloadAssessments(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
@@ -90,7 +93,10 @@ async function editAssessment(args) {
       return;
     }
 
-    response.json().then(() => reloadAssessments(args));
+    response.json().then((res) => {
+      reloadAssessments(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
@@ -113,7 +119,10 @@ async function deleteAssessment(args) {
       return;
     }
 
-    response.json().then(() => reloadAssessments(args));
+    response.json().then((res) => {
+      reloadAssessments(args);
+      self.postMessage(res);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
