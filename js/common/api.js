@@ -6,7 +6,8 @@ async function handleApiCall(call) {
       const errorResponse = await res.json();
       self.postMessage({ errorResponse: errorResponse });
     } catch {}
+  } else {
+    self.postMessage({ doneLoading: true });
   }
-  self.postMessage({ doneLoading: true });
   return res;
 }
