@@ -1,31 +1,31 @@
 function handleRouting(button) {
   const args = getArgs();
-  const currLocation = window.location.href;
+  const currLocation = window.location.href.toLowerCase();
 
-  if (currLocation.includes("userAuth")) {
+  if (currLocation.includes("userauth")) {
     return backButton.remove();
   }
   if (
-    currLocation.includes("detailedStudents") &&
+    currLocation.includes("detailedstudents") &&
     args.user.type === "student"
   ) {
     return button.remove();
   }
-  if (currLocation.includes("detailedTutors") && args.user.type === "tutor") {
+  if (currLocation.includes("detailedtutors") && args.user.type === "tutor") {
     return button.remove();
   }
 
   button.onclick = (e) => {
     e.preventDefault();
     if (
-      currLocation.includes("detailedStudents") &&
+      currLocation.includes("detailedstudents") &&
       args.user.type === "tutor"
     ) {
       window.location.href = getHomePage(args.user);
       return;
     }
 
-    if (currLocation.includes("detailedStudents")) {
+    if (currLocation.includes("detailedstudents")) {
       if (args.user.type === "parent") {
         window.location.href = args.homePageURL;
         return;
@@ -34,17 +34,17 @@ function handleRouting(button) {
       return;
     }
 
-    if (currLocation.includes("detailedTutors")) {
+    if (currLocation.includes("detailedtutors")) {
       window.location.href = "/pages/admin/tutors.html";
       return;
     }
 
-    if (currLocation.includes("detailedClasses")) {
+    if (currLocation.includes("detailedclasses")) {
       window.location.href = "/pages/admin/classes.html";
       return;
     }
 
-    if (currLocation.includes("detailedMessage")) {
+    if (currLocation.includes("detailedmessage")) {
       window.location.href = "/pages/mainPages/messages.html";
       return;
     }
