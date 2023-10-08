@@ -176,6 +176,19 @@ tr:nth-child(even) {
 }
 
 @media screen and (max-width: 750px) {
+  th {
+    font-size: 0.7rem;
+  }
+  td {
+    font-size: 1rem;
+  }
+  .responsive-button {
+    padding: 0.5rem;
+    font-size: 0.7rem;
+  }
+  .empty-table-row {
+    margin-top: 0 !important;
+  }
   .information-header {
     margin: 50px 0px 0 0px;
     display: flex;

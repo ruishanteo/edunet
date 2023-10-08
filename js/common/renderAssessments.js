@@ -89,8 +89,8 @@ async function makeAccordionSection(
           !args.isTutor
             ? ""
             : `
-        <td class="smallest-column"><button id="edit-assessment-${assessment.id}"><i class="fa fa-pencil"></i></button></td>
-        <td class="smallest-column"><button id="delete-assessment-${assessment.id}"><i class="fa fa-close"></i></button></td>`
+        <td class="smallest-column"><button id="edit-assessment-${assessment.id}" class="responsive-button"><i class="fa fa-pencil"></i></button></td>
+        <td class="smallest-column"><button id="delete-assessment-${assessment.id}" class="responsive-button"><i class="fa fa-close"></i></button></td>`
         }
       </tr>`;
   });
