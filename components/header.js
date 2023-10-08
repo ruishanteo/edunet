@@ -8,20 +8,26 @@ class Header extends HTMLElement {
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/navbar.css" />
     <nav>
-      <ul>
-        <button class="home-button" id="home-button">
+      <ul class="topnav" id="topnav">
+        <div class="nav-item">
           <div class="bar">
-            <img src="/assets/icon.png" alt="eddy" width="60" height="60" />
-            <a1>Edu</a1>
-            <b1>Net</b1>
+            <button class="home-button bar" id="home-button">
+              <img src="/assets/icon.png" alt="eddy" width="60" height="60" />
+              <a1>Edu</a1>
+              <b1>Net</b1>
+            </button>
+            <a href="javascript:void(0);" class="nav-icon" id="nav-icon" onclick="myFunction()">
+              <i class="fa fa-bars"></i>
+            </a>  
           </div>
-        </button>
-        
-        <div class="menu" id="header-links"></div>
+        </div>
 
-        <button class="logout-button" id="logout-button">
+        <div class="menu nav-item" id="header-links"></div>
+
+        <button class="logout-button nav-item" id="logout-button">
           LOGOUT
         </button>
+
       </ul>
     </nav>
       `;
@@ -61,4 +67,15 @@ function setupHeader(user) {
     localStorage.removeItem("accessToken");
     window.location.href = "/";
   });
+
+  const hamburgerButton = document.getElementById("nav-icon");
+  hamburgerButton.onclick = (event) => {
+    event.preventDefault();
+    var topnav = document.getElementById("topnav");
+    if (topnav.className === "topnav") {
+      topnav.classList.add("responsive");
+    } else {
+      topnav.classList.remove("responsive");
+    }
+  };
 }
