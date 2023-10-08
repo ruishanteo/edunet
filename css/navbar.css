@@ -35,6 +35,12 @@ nav ul li a {
   align-items: center;
 }
 
+.menu-selected {
+  color: #e7b474;
+  pointer-events: none;
+  cursor: default;
+}
+
 .logout-button {
   background-color: #e7b474;
   border-radius: 3px;
@@ -95,7 +101,7 @@ a1 {
   }
 
   .topnav.responsive li {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     margin-left: 0;
   }
   .topnav.responsive .menu {
