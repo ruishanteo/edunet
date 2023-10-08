@@ -177,7 +177,7 @@ tr:nth-child(even) {
 
 @media screen and (max-width: 750px) {
   .information-header {
-    margin: 50px 20px 0 0px;
+    margin: 50px 0px 0 0px;
     display: flex;
     flex-direction: row;
     align-items: center;
