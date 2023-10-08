@@ -61,7 +61,8 @@ class BackButton extends HTMLElement {
     this.innerHTML = `
       <nav>
         <button id="back-button">
-            <i class="fa fa-chevron-left"></i> Back
+            <i class="fa fa-chevron-left"></i> 
+            <span class="back-label">Back</span>
         </button>
       </nav>
         `;
