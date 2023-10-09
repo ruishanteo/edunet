@@ -176,11 +176,18 @@ tr:nth-child(even) {
 }
 
 @media screen and (max-width: 750px) {
+  th,
+  td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 7rem;
+  }
   th {
     font-size: 0.7rem;
   }
   td {
-    font-size: 1rem;
+    font-size: 0.5rem;
   }
   .responsive-button {
     padding: 0.5rem;

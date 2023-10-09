@@ -322,9 +322,9 @@ const deleteAssessment = (params) => {
       "Add Assessment",
       "add-assessment-form",
       `<div class="section">
-        <label>Name</label> <input type="text" id="form-name" required/><br />
-        <label>Score</label> <input type="number" id="form-score" required/><br />
-        <label>Total</label><input type="number" id="form-total" required/> <br />
+        <label>Name</label> <input type="text" id="form-name" maxlength="30" required/><br />
+        <label>Score</label> <input type="number" id="form-score" min="0" max="9999" required/><br />
+        <label>Total</label><input type="number" id="form-total" min="0" max="9999" required/> <br />
         <button type="submit">Create</button>
     </div>`,
       null,

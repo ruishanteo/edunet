@@ -71,5 +71,6 @@ function addConfirmModal(desc, modalId, onConfirm) {
   confirmModalButton.onclick = (e) => {
     e.preventDefault();
     onConfirm();
+    modal.remove();
   };
 }
