@@ -1,0 +1,29 @@
+.icon {
+  font-size: 40px;
+}
+
+.grid-container {
+  justify-items: center;
+  align-items: center;
+  min-height: 70vh;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px 10px;
+}
+
+.dir-card {
+  border-radius: 10px;
+  border-color: #1e1b5f;
+  border-style: solid;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 200px;
+  gap: 10px;
+}
+
+.dir-class:hover {
+  box-shadow: 0 8px 16px 0 #1e1b5f;
+}

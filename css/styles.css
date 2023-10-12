@@ -24,6 +24,7 @@ p {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  min-height: 80vh;
 }
 
 /* Set a background color and default text color */
