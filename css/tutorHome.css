@@ -1,0 +1,12 @@
+.home-grid-container {
+  min-height: 70vh;
+}
+
+@media (max-width: 1000px) {
+  .home-grid-container {
+    grid-template-columns: auto auto;
+  }
+  .hide {
+    display: none;
+  }
+}
