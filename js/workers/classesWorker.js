@@ -7,6 +7,8 @@ self.addEventListener("message", (e) => {
       return getClass(args);
     case "create":
       return createClass(args);
+    case "edit":
+      return editClass(args);
     case "delete":
       return deleteClass(args);
     case "assign":
@@ -136,6 +138,35 @@ async function deleteClass(args) {
 
     response.json().then((res) => {
       reloadClasses(args);
+      self.postMessage(res);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function editClass(args) {
+  try {
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/class`, {
+        method: "PUT",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          classId: args.classId,
+          ...args.updateBody,
+        }),
+      })
+    );
+
+    if (!response.ok) {
+      return;
+    }
+
+    response.json().then((res) => {
+      reloadClass(args);
       self.postMessage(res);
     });
   } catch (error) {

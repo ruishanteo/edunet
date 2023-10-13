@@ -5,12 +5,14 @@ let classes = null;
 const reloadClasses = () => {
   const args = getArgs();
   args.updateType = "";
+  args.tutorId = args.user.tutorId;
   classesWorker.postMessage(args);
 };
 
 const reloadStudents = () => {
   const args = getArgs();
   args.updateType = "";
+  args.tutorId = args.user.tutorId;
   studentsWorker.postMessage(args);
 };
 

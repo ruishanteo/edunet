@@ -53,7 +53,6 @@ function handleViewAssessments(assessments, classInfo) {
             .tickSizeOuter(0)
         );
 
-      // Add the y-axis, remove the domain line, add grid lines and a label.
       svg
         .append("g")
         .attr("transform", `translate(${marginLeft},0)`)
@@ -76,7 +75,6 @@ function handleViewAssessments(assessments, classInfo) {
             .text("% Score")
         );
 
-      // Append a path for the line.
       svg
         .append("path")
         .attr("fill", "none")

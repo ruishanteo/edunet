@@ -46,25 +46,25 @@ const checkUser = setInterval(() => {
 
 function setupHeader(user) {
   const menu = document.getElementById("header-links");
+  menu.innerHTML = `<li><a id="nav-classes" href="/pages/mainPages/classes.html">Classes</a></li>`;
   if (user.type === "admin") {
-    menu.innerHTML = `
-    <li><a id="nav-classes" href="/pages/admin/classes.html">Classes</a></li>
-    <li><a id="nav-students" href="/pages/admin/students.html">Students</a></li>
+    menu.innerHTML += `
+    <li><a id="nav-students" href="/pages/mainPages/students.html">Students</a></li>
     <li><a id="nav-tutors" href="/pages/admin/tutors.html">Tutors</a></li>`;
+  } else if (user.type === "tutor") {
+    menu.innerHTML += `<li><a id="nav-students" href="/pages/mainPages/students.html">Students</a></li>`;
+  }
 
-    const currLocation = window.location.href.toLowerCase();
-    const navClasses = document.getElementById("nav-classes");
-    const navStudents = document.getElementById("nav-students");
-    const navTutors = document.getElementById("nav-tutors");
-    if (currLocation.includes("classes")) {
-      navClasses.classList.add("menu-selected");
-    } else if (currLocation.includes("students")) {
-      navStudents.classList.add("menu-selected");
-    } else if (currLocation.includes("tutors")) {
-      navTutors.classList.add("menu-selected");
-    }
-  } else {
-    menu.innerHTML = "";
+  const currLocation = window.location.href.toLowerCase();
+  const navClasses = document.getElementById("nav-classes");
+  const navStudents = document.getElementById("nav-students");
+  const navTutors = document.getElementById("nav-tutors");
+  if (currLocation.includes("classes") && navClasses) {
+    navClasses.classList.add("menu-selected");
+  } else if (currLocation.includes("students") && navStudents) {
+    navStudents.classList.add("menu-selected");
+  } else if (currLocation.includes("tutors") && navTutors) {
+    navTutors.classList.add("menu-selected");
   }
 
   const homeButton = document.getElementById("home-button");

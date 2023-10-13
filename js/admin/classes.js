@@ -2,6 +2,7 @@ const classesWorker = new Worker("/js/workers/classesWorker.js");
 
 const reloadClasses = () => {
   args.updateType = "";
+  args.studentId = args.user.studentId;
   classesWorker.postMessage(args);
 };
 

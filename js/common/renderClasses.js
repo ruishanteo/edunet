@@ -41,12 +41,10 @@ function renderClasses(classes, args, handleDelete, handleAddClass) {
 
     classesGrid.appendChild(card);
 
-    if (args.isAdmin) {
-      card.onclick = (event) => {
-        event.stopPropagation();
-        window.location.href = `/pages/admin/detailedClasses.html?classId=${classInfo.id}`;
-      };
-    }
+    card.onclick = (event) => {
+      event.stopPropagation();
+      window.location.href = `/pages/mainPages/detailedClasses.html?classId=${classInfo.id}`;
+    };
   });
   const addClassButton = document.getElementById("add-class-button");
   if (!args.isAdmin && addClassButton) {
@@ -62,7 +60,7 @@ function renderClasses(classes, args, handleDelete, handleAddClass) {
   }
 }
 
-function renderClass(classInfo, handleDelete) {
+function renderClass(classInfo, args, handleDelete) {
   document.title = `${classInfo.name} - EduNet`;
 
   const className = document.getElementById("class-name");
@@ -73,12 +71,25 @@ function renderClass(classInfo, handleDelete) {
     tutorNameRead.textContent = "No tutor assigned yet";
   } else {
     const tutor = classInfo.tutors[0];
-    tutorNameRead.innerHTML = `<a href="/pages/mainPages/detailedTutors.html?tutorId=${tutor.id}">${tutor.user.fullName}</a>`;
+    tutorNameRead.innerHTML = args.isAdmin
+      ? `<a href="/pages/mainPages/detailedTutors.html?tutorId=${tutor.id}">${tutor.user.fullName}</a>`
+      : tutor.user.fullName;
   }
 
+  const classDay = document.getElementById("class-day");
+  classDay.textContent = classInfo.day;
+  const classTime = document.getElementById("class-time");
+  classTime.textContent = classInfo.time;
+  const classVenue = document.getElementById("class-venue");
+  classVenue.textContent = classInfo.venue;
+  const classStudentEnrolled = document.getElementById("class-enrolled");
+  classStudentEnrolled.textContent = classInfo.students.length;
+
   const deleteClassButton = document.getElementById("delete-class-button");
-  deleteClassButton.onclick = (event) => {
-    event.preventDefault();
-    handleDelete(classInfo.id);
-  };
+  if (deleteClassButton) {
+    deleteClassButton.onclick = (event) => {
+      event.preventDefault();
+      handleDelete(classInfo.id);
+    };
+  }
 }

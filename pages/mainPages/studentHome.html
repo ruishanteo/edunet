@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/card.css" />
     <link rel="stylesheet" href="/css/studentHome.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <title>Home - EduNet</title>
     <script src="/components/header.js"></script>
   </head>
@@ -19,7 +25,7 @@
 
     <div class="page">
       <header>
-        <h1>Welcome!</h1>
+        <h1>Welcome <span id="student-name"></span>!</h1>
       </header>
       <main>
         <div class="home-grid-container">
@@ -49,7 +55,7 @@
 
           <div class="home-box">
             <h2>Homework</h2>
-            <p>There is no homework due soon.</p>
+            <table class="fl-table" id="homework-table"></table>
           </div>
         </div>
       </main>
@@ -83,6 +89,7 @@
     <script src="/js/common/auth.js"></script>
     <script src="/js/common/modal.js"></script>
     <script src="/js/common/renderAnnouncements.js"></script>
+    <script src="/js/common/renderHomework.js"></script>
     <script src="/components/backButton.js"></script>
     <script type="module" src="/js/mainPages/studentHome.js"></script>
   </body>

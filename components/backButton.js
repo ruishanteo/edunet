@@ -21,7 +21,7 @@ function handleRouting(button) {
       currLocation.includes("detailedstudents") &&
       args.user.type === "tutor"
     ) {
-      window.location.href = getHomePage(args.user);
+      window.history.back();
       return;
     }
 
@@ -30,7 +30,7 @@ function handleRouting(button) {
         window.location.href = args.homePageURL;
         return;
       }
-      window.location.href = "/pages/admin/students.html";
+      window.location.href = "/pages/mainPages/students.html";
       return;
     }
 
@@ -40,7 +40,7 @@ function handleRouting(button) {
     }
 
     if (currLocation.includes("detailedclasses")) {
-      window.location.href = "/pages/admin/classes.html";
+      window.location.href = "/pages/mainPages/classes.html";
       return;
     }
 

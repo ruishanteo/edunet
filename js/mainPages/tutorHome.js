@@ -1,11 +1,10 @@
 const classesWorker = new Worker("/js/workers/classesWorker.js");
 const studentsWorker = new Worker("/js/workers/studentsWorker.js");
-const tutorsWorkers = new Worker("/js/workers/tutorsWorker.js");
 const messagesWorker = new Worker("/js/workers/messagesWorker.js");
 
 const classesCard = document.getElementById("classes-card");
 const studentsCard = document.getElementById("students-card");
-const tutorsCard = document.getElementById("tutors-card");
+const profileCard = document.getElementById("profile-card");
 const messagesCard = document.getElementById("messages-card");
 
 classesCard.onclick = () => {
@@ -16,8 +15,10 @@ studentsCard.onclick = () => {
   window.location.href = "/pages/mainPages/students.html";
 };
 
-tutorsCard.onclick = () => {
-  window.location.href = "/pages/admin/tutors.html";
+profileCard.onclick = () => {
+  window.location.href = `/pages/mainPages/detailedTutors.html?tutorId=${
+    getArgs().user.tutorId
+  }`;
 };
 
 messagesCard.onclick = () => {
@@ -27,19 +28,15 @@ messagesCard.onclick = () => {
 const reloadClasses = () => {
   const args = getArgs();
   args.updateType = "";
+  args.tutorId = args.user.tutorId;
   classesWorker.postMessage(args);
 };
 
 const reloadStudents = () => {
   const args = getArgs();
   args.updateType = "";
+  args.tutorId = args.user.tutorId;
   studentsWorker.postMessage(args);
-};
-
-const reloadTutors = () => {
-  const args = getArgs();
-  args.updateType = "";
-  tutorsWorkers.postMessage(args);
 };
 
 const reloadChats = () => {
@@ -66,15 +63,6 @@ studentsWorker.addEventListener("message", function (e) {
   }
 });
 
-tutorsWorkers.addEventListener("message", function (e) {
-  handleNotifications(e);
-
-  if (e.data.tutors) {
-    const tutorsCount = document.getElementById("tutors-count");
-    tutorsCount.textContent = `(${e.data.tutors.length})  tutors`;
-  }
-});
-
 messagesWorker.addEventListener("message", function (e) {
   handleNotifications(e);
 
@@ -86,10 +74,9 @@ messagesWorker.addEventListener("message", function (e) {
 
 addCallback(() => {
   const user = getArgs().user;
-  const adminName = document.getElementById("admin-name");
-  adminName.textContent = user.fullName;
+  const tutorNme = document.getElementById("tutor-name");
+  tutorNme.textContent = user.fullName;
   reloadClasses();
   reloadStudents();
-  reloadTutors();
   reloadChats();
 });

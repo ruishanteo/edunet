@@ -110,7 +110,7 @@ function renderStudent(student, args, handleEdit, handleDelete) {
   }
 }
 
-function renderStudentRows(students, handleDelete) {
+function renderStudentRows(students, canEdit, handleDelete) {
   const studentsTable = document.getElementById("students-table");
   studentsTable.innerHTML = `
     <thead>
@@ -121,7 +121,7 @@ function renderStudentRows(students, handleDelete) {
           <th class="hideable">Email</th>
           <th>Parent's Contact No.</th>
           <th class="hideable">Parent's Email</th>
-          <th class="smallest-column"></th>
+          ${canEdit ? `<th class="smallest-column"></th>` : ""}
       </tr>
     </thead>`;
   const body = document.createElement("tbody");
@@ -147,19 +147,23 @@ function renderStudentRows(students, handleDelete) {
           <td class="hideable">${student.user.email}</td>
           <td>${student.parent.contact}</td>
           <td class="hideable">${student.parent.user.email}</td>
-          <td><button id="remove-student-${
-            student.id
-          }"><i class="fa fa-close"></i></button></td>
+          ${
+            canEdit
+              ? `<td><button id="remove-student-${student.id}"><i class="fa fa-close"></i></button></td>`
+              : ""
+          }
       </tr>`;
     body.appendChild(row);
     const removeStudentButton = document.getElementById(
       `remove-student-${student.id}`
     );
-    removeStudentButton.onclick = (event) => {
-      event.stopPropagation();
-      addConfirmModal("remove a student", "remove-student", () =>
-        handleDelete(student.id)
-      );
-    };
+    if (removeStudentButton) {
+      removeStudentButton.onclick = (event) => {
+        event.stopPropagation();
+        addConfirmModal("remove a student", "remove-student", () =>
+          handleDelete(student.id)
+        );
+      };
+    }
   });
 }

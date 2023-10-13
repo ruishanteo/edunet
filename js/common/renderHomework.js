@@ -61,7 +61,6 @@ function renderHomeworkRows(homework, canEdit, onDelete, onEdit) {
     );
 
     if (editHomework) {
-      console.log(new Date(homework.dueDate));
       editHomework.onclick = (event) => {
         event.stopPropagation();
         addModal(
@@ -76,7 +75,6 @@ function renderHomeworkRows(homework, canEdit, onDelete, onEdit) {
           (close) => {
             const title = document.getElementById("form-title").value;
             const content = document.getElementById("form-description").value;
-            // const dueDate = document.getElementById("form-due-date").value;
 
             if (title === homework.title && content === homework.description) {
               close();

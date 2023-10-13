@@ -153,15 +153,19 @@
                 </button>
               </div>
             </div>
-            <div class="announcements-list" id="announcements-list"></div>
+            <div class="announcements-list" id="announcements-list">
+              <p class="no-announcements">Loading...</p>
+            </div>
           </div>
 
           <div class="tab__content__item table-wrapper" id="Homework">
             <div class="tab__controls">
               <h3 class="tab__title">Homework</h3>
-              <button id="add-homework-button">
-                <i class="fa fa-plus"></i> Add Homework
-              </button>
+              <div class="tab__right_controls">
+                <button id="add-homework-button">
+                  <i class="fa fa-plus"></i> Add Homework
+                </button>
+              </div>
             </div>
             <table id="homework-table" class="fl-table">
               <thead>
@@ -175,9 +179,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td colspan="7">Loading...</td>
-                </tr>
+                <tr></tr>
               </tbody>
             </table>
           </div>
@@ -193,10 +195,37 @@
                 <th>Parent's Contact No.</th>
                 <th></th>
               </tr>
-              <tr>
-                <td colspan="7">Loading...</td>
-              </tr>
+              <tr></tr>
             </table>
+          </div>
+          <div class="tab__content__item" id="Class Information">
+            <div class="tab__controls">
+              <h3 class="tab__title">Class Information</h3>
+              <div class="tab__right__controls" id="admin-only">
+                <button id="edit-class-button">
+                  <i class="fa fa-pencil"></i> Edit Information
+                </button>
+              </div>
+            </div>
+            <div class="information-box">
+              <div class="information">
+                <h3>Day:</h3>
+                <span id="class-day"></span>
+              </div>
+              <div class="information">
+                <h3>Time:</h3>
+                <span id="class-time"></span>
+              </div>
+              <div class="information">
+                <h3>Venue:</h3>
+                <span id="class-venue"></span>
+              </div>
+              <div class="information">
+                <h3>Enrolled students:</h3>
+                <span id="class-enrolled"></span>
+              </div>
+              <br />
+            </div>
           </div>
         </div>
       </main>

@@ -250,27 +250,31 @@ const deleteStudent = (params) => {
   });
 
   const addNoteButton = document.getElementById("add-note-button");
-  addNoteButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    addModal(
-      "Add Note",
-      "add-note-form",
-      `<div class="section">
+  if (!args.isAdmin) {
+    addNoteButton.remove();
+  } else {
+    addNoteButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      addModal(
+        "Add Note",
+        "add-note-form",
+        `<div class="section">
         <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
         <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
         <button type="submit">Create</button>
       </div>`,
 
-      null,
-      (close) => {
-        const title = document.getElementById("form-title").value;
-        const content = document.getElementById("form-content").value;
+        null,
+        (close) => {
+          const title = document.getElementById("form-title").value;
+          const content = document.getElementById("form-content").value;
 
-        createNote({ title, content });
-        close();
-      }
-    );
-  });
+          createNote({ title, content });
+          close();
+        }
+      );
+    });
+  }
 }
 
 {

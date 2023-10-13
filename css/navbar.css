@@ -37,8 +37,6 @@ nav ul li a {
 
 .menu-selected {
   color: #ebd2b4;
-  pointer-events: none;
-  cursor: default;
 }
 
 .logout-button {

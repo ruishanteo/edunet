@@ -30,4 +30,14 @@
   border-color: #1e1b5f;
   border-style: solid;
   border-radius: 10px;
+
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  max-width: 50%;
+  width: 50%;
+  min-width: 50%;
 }

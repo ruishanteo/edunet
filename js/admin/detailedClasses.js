@@ -11,6 +11,9 @@ const homeworkWorker = new Worker("/js/workers/homeworkWorker.js");
 const reloadTutors = () => {
   const args = getArgs();
   args.updateType = "";
+  if (!args.isAdmin) {
+    return;
+  }
   tutorsWorker.postMessage(args);
 };
 
@@ -35,6 +38,14 @@ const reloadHomework = () => {
   homeworkWorker.postMessage(args);
 };
 
+const editClass = (params) => {
+  const args = getArgs();
+  args.updateType = "edit";
+  args.updateBody = params;
+  args.classId = classId;
+  classesWorker.postMessage(args);
+};
+
 const createAnnouncement = (classId, params) => {
   const args = getArgs();
   args.updateType = "create";
@@ -44,7 +55,6 @@ const createAnnouncement = (classId, params) => {
 };
 
 const deleteAnnouncement = (params) => {
-  console.log(params);
   const args = getArgs();
   args.updateType = "delete";
   args.updateBody = params;
@@ -124,14 +134,16 @@ const assignTutor = (params) => {
 
     if (e.data.class) {
       classInfo = e.data.class;
-      renderClass(e.data.class, (id) =>
+      renderClass(e.data.class, args, (id) =>
         addConfirmModal("delete a class", "delete-class", () =>
           deleteClass({ classId: id })
         )
       );
-      renderStudentRows(e.data.class.students, (id) =>
-        removeStudent({ studentId: id })
-      );
+      if (args.isAdmin || args.isTutor) {
+        renderStudentRows(e.data.class.students, args.isAdmin, (id) =>
+          removeStudent({ studentId: id })
+        );
+      }
     }
   });
 
@@ -194,6 +206,40 @@ const assignTutor = (params) => {
       }
     );
   });
+
+  const editClassButton = document.getElementById("edit-class-button");
+  if (editClassButton) {
+    editClassButton.addEventListener("click", (event) => {
+      event.preventDefault();
+      addModal(
+        "Edit Class Information",
+        "edit-class-form",
+        `<div class="section">
+            <label>Name</label> <input value="${classInfo.name}" type="text" id="form-name" maxlength="100" required/><br />
+            <label>Day</label> <input <input value="${classInfo.day}" type="text" id="form-day" maxlength="100" required/><br />
+            <label>Time</label> <input <input value="${classInfo.time}" type="text" id="form-time" maxlength="100" required/><br />
+            <label>Venue</label> <input <input value="${classInfo.venue}" type="text" id="form-venue" maxlength="100" required/><br />
+            <button type="submit">Update</button>
+        </div>`,
+        null,
+        (close) => {
+          const name = document.getElementById("form-name").value;
+          const day = document.getElementById("form-day").value;
+          const time = document.getElementById("form-time").value;
+          const venue = document.getElementById("form-venue").value;
+
+          editClass({
+            classId,
+            name,
+            day,
+            time,
+            venue,
+          });
+          close();
+        }
+      );
+    });
+  }
 }
 
 {
@@ -291,12 +337,23 @@ addCallback(() => {
   reloadHomework();
   reloadAnnouncements();
 
-  if (!args.isAdmin && !args.isTutor) {
-    const rightControls = document.querySelectorAll(".tab__right_controls");
-    rightControls.forEach((control) => control.remove());
+  if (!args.isAdmin) {
+    if (!args.isTutor) {
+      const rightControls = document.querySelectorAll(".tab__right_controls");
+      rightControls.forEach((control) => control.remove());
 
-    const studentsTab = document.querySelectorAll("#Students");
-    studentsTab.forEach((tab) => tab.remove());
+      const studentsTab = document.querySelectorAll("#Students");
+      studentsTab.forEach((tab) => tab.remove());
+    }
+
+    const adminOnly = document.querySelectorAll("#admin-only");
+    adminOnly.forEach((tab) => tab.remove());
+
+    const editClassButton = document.getElementById("edit-tutor-button");
+    editClassButton.remove();
+
+    const deleteClassButton = document.getElementById("delete-class-button");
+    deleteClassButton.remove();
   }
 });
 
