@@ -215,9 +215,9 @@ window.addEventListener("load", function () {
     }
 
     item.classList.add("active");
-    tabTitle.textContent = item.getAttribute("data-tab");
+    tabTitle.textContent = item.id;
     tabItems.forEach((tabItem) => {
-      if (tabItem.getAttribute("data-tab") === item.getAttribute("data-tab")) {
+      if (tabItem.id === item.id) {
         tabItem.classList.add("tab_active");
       } else {
         tabItem.classList.remove("tab_active");
