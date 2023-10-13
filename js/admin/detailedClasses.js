@@ -6,6 +6,7 @@ let tutors = null;
 const tutorsWorker = new Worker("/js/workers/tutorsWorker.js");
 const classesWorker = new Worker("/js/workers/classesWorker.js");
 const announcementsWorker = new Worker("/js/workers/announcementsWorker.js");
+const homeworkWorker = new Worker("/js/workers/homeworkWorker.js");
 
 const reloadTutors = () => {
   const args = getArgs();
@@ -25,6 +26,13 @@ const reloadAnnouncements = () => {
   args.updateType = "";
   args.classId = classId;
   announcementsWorker.postMessage(args);
+};
+
+const reloadHomework = () => {
+  const args = getArgs();
+  args.updateType = "";
+  args.classId = classId;
+  homeworkWorker.postMessage(args);
 };
 
 const createAnnouncement = (classId, params) => {
@@ -50,6 +58,30 @@ const editAnnouncement = (params) => {
   args.updateBody = params;
   args.classId = classId;
   announcementsWorker.postMessage(args);
+};
+
+const createHomework = (classId, params) => {
+  const args = getArgs();
+  args.updateType = "create";
+  args.updateBody = params;
+  args.classId = classId;
+  homeworkWorker.postMessage(args);
+};
+
+const deleteHomework = (params) => {
+  const args = getArgs();
+  args.updateType = "delete";
+  args.updateBody = params;
+  args.classId = classId;
+  homeworkWorker.postMessage(args);
+};
+
+const editHomework = (params) => {
+  const args = getArgs();
+  args.updateType = "edit";
+  args.updateBody = params;
+  args.classId = classId;
+  homeworkWorker.postMessage(args);
 };
 
 const deleteClass = (params) => {
@@ -182,16 +214,89 @@ const assignTutor = (params) => {
       );
     }
   });
+
+  const addAnnouncementButton = document.getElementById(
+    "add-announcement-button"
+  );
+  addAnnouncementButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    addModal(
+      "Add Announcement",
+      "add-announcement-form",
+      `<div class="section">
+            <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
+            <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
+            <button type="submit">Add</button>
+        </div>`,
+      null,
+      (close) => {
+        const title = document.getElementById("form-title").value;
+        const content = document.getElementById("form-content").value;
+
+        createHomework(classId, { title, content });
+        close();
+      }
+    );
+  });
+}
+
+{
+  homeworkWorker.addEventListener("message", function (e) {
+    handleNotifications(e);
+
+    if (e.data.homework) {
+      renderHomeworkRows(
+        e.data.homework,
+        args.isAdmin || args.isTutor,
+        (id) => deleteHomework({ homeworkId: id }),
+        (id, title, description, dueDate) =>
+          editHomework({
+            homeworkId: id,
+            title,
+            description,
+            dueDate,
+          })
+      );
+    }
+  });
+
+  const addHomeworkButton = document.getElementById("add-homework-button");
+  addHomeworkButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    addModal(
+      "Add Homework",
+      "add-homework-form",
+      `<div class="section">
+            <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
+            <label>Description</label><textarea type="text" id="form-description" rows="20" maxlength="1000" required></textarea> <br />
+            <label>Due Date</label><input type="datetime-local" id="form-due-date" required/><br />
+            <button type="submit">Add</button>
+        </div>`,
+      null,
+      (close) => {
+        const title = document.getElementById("form-title").value;
+        const description = document.getElementById("form-description").value;
+        const dueDate = document.getElementById("form-due-date").value;
+
+        createHomework(classId, { title, description, dueDate });
+        close();
+      }
+    );
+  });
 }
 
 addCallback(() => {
   reloadClass();
   reloadTutors();
+  reloadHomework();
   reloadAnnouncements();
 
   if (!args.isAdmin && !args.isTutor) {
     const rightControls = document.querySelectorAll(".tab__right_controls");
     rightControls.forEach((control) => control.remove());
+
+    const studentsTab = document.querySelectorAll("#Students");
+    studentsTab.forEach((tab) => tab.remove());
   }
 });
 
@@ -249,29 +354,3 @@ window.addEventListener("load", function () {
     menu.style.setProperty("--timeOut", "none");
   });
 });
-
-{
-  const addAnnouncementButton = document.getElementById(
-    "add-announcement-button"
-  );
-  addAnnouncementButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    addModal(
-      "Add Announcement",
-      "add-announcement-form",
-      `<div class="section">
-            <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
-            <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
-            <button type="submit">Add</button>
-        </div>`,
-      null,
-      (close) => {
-        const title = document.getElementById("form-title").value;
-        const content = document.getElementById("form-content").value;
-
-        createAnnouncement(classId, { title, content });
-        close();
-      }
-    );
-  });
-}

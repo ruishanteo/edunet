@@ -4,6 +4,15 @@ function renderAnnouncements(announcements, canEdit, onDelete, onEdit) {
   const announcementsContainer = document.getElementById("announcements-list");
 
   announcementsContainer.innerHTML = "";
+
+  if (announcements.length === 0) {
+    const noAnnouncements = document.createElement("h3");
+    noAnnouncements.classList.add("no-announcements");
+    noAnnouncements.innerHTML = "No announcements yet!";
+    announcementsContainer.appendChild(noAnnouncements);
+    return;
+  }
+
   announcements.map((announcement, index) => {
     const announcementCard = document.createElement("div");
     announcementCard.classList.add("announcement-card");

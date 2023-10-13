@@ -23,8 +23,8 @@ async function reloadHomework(args) {
 async function getHomework(args) {
   try {
     const requestURL = args.studentId
-      ? `${args.baseUrl}/announcement/student/${args.studentId}`
-      : `${args.baseUrl}/announcement/class/${args.classId}`;
+      ? `${args.baseUrl}/homework/student/${args.studentId}`
+      : `${args.baseUrl}/homework/class/${args.classId}`;
 
     const response = await handleApiCall(
       fetch(requestURL, {
@@ -49,7 +49,7 @@ async function getHomework(args) {
 async function createHomework(args) {
   try {
     const response = await handleApiCall(
-      fetch(`${args.baseUrl}/announcement`, {
+      fetch(`${args.baseUrl}/homework`, {
         method: "POST",
         headers: {
           Authorization: `${args.accessToken}`,
@@ -78,7 +78,7 @@ async function createHomework(args) {
 async function editHomework(args) {
   try {
     const response = await handleApiCall(
-      fetch(`${args.baseUrl}/announcement`, {
+      fetch(`${args.baseUrl}/homework`, {
         method: "PUT",
         headers: {
           Authorization: `${args.accessToken}`,
@@ -104,7 +104,7 @@ async function editHomework(args) {
 async function deleteHomework(args) {
   try {
     const response = await handleApiCall(
-      fetch(`${args.baseUrl}/announcement`, {
+      fetch(`${args.baseUrl}/homework`, {
         method: "DELETE",
         headers: {
           Authorization: `${args.accessToken}`,

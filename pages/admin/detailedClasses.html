@@ -12,6 +12,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <title>Class - EduNet</title>
     <script src="/components/header.js"></script>
   </head>
@@ -159,26 +164,26 @@
               </button>
             </div>
             <table id="homework-table" class="fl-table">
-              <tr>
-                <th></th>
-                <th>Homework Name</th>
-                <th>Release Date</th>
-                <th>Due Date</th>
-                <th></th>
-              </tr>
-              <tr>
-                <td colspan="7">Loading...</td>
-              </tr>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Homework Name</th>
+                  <th>Description</th>
+                  <th>Due Date</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="7">Loading...</td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <div class="tab__content__item table-wrapper" id="Students">
             <div class="tab__controls">
               <h3 class="tab__title">Students</h3>
-              <div class="tab__right_controls">
-                <button id="add-student-button" class="responsive-button">
-                  <i class="fa fa-plus"></i> Add Students
-                </button>
-              </div>
             </div>
             <table id="students-table" class="fl-table">
               <tr>
@@ -199,7 +204,9 @@
 
     <script src="/js/common/auth.js"></script>
     <script src="/js/common/modal.js"></script>
+    im s
     <script src="/js/common/renderAnnouncements.js"></script>
+    <script src="/js/common/renderHomework.js"></script>
     <script src="/js/common/renderClasses.js"></script>
     <script src="/js/common/renderStudents.js"></script>
     <script src="/components/backButton.js"></script>

@@ -121,7 +121,7 @@ function renderStudentRows(students, handleDelete) {
           <th class="hideable">Email</th>
           <th>Parent's Contact No.</th>
           <th class="hideable">Parent's Email</th>
-          <th></th>
+          <th class="smallest-column"></th>
       </tr>
     </thead>`;
   const body = document.createElement("tbody");

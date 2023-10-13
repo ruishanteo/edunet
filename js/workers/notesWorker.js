@@ -5,22 +5,22 @@ self.addEventListener("message", (e) => {
 
   switch (args.updateType) {
     case "create":
-      return createAnnouncement(args);
+      return createHomework(args);
     case "edit":
-      return editAnnouncement(args);
+      return editHomework(args);
     case "delete":
-      return deleteAnnouncement(args);
+      return deleteHomework(args);
     default:
-      return getAnnouncements(args);
+      return getHomework(args);
   }
 });
 
-async function reloadAnnouncements(args) {
+async function reloadHomework(args) {
   args.updateType = "";
-  getAnnouncements(args);
+  getHomework(args);
 }
 
-async function getAnnouncements(args) {
+async function getHomework(args) {
   try {
     const requestURL = args.studentId
       ? `${args.baseUrl}/note/student/${args.studentId}`
@@ -48,7 +48,7 @@ async function getAnnouncements(args) {
   }
 }
 
-async function createAnnouncement(args) {
+async function createHomework(args) {
   try {
     const requestURL = args.studentId
       ? `${args.baseUrl}/note/student`
@@ -76,7 +76,7 @@ async function createAnnouncement(args) {
     }
 
     response.json().then((res) => {
-      reloadAnnouncements(args);
+      reloadHomework(args);
       self.postMessage(res);
     });
   } catch (error) {
@@ -84,7 +84,7 @@ async function createAnnouncement(args) {
   }
 }
 
-async function editAnnouncement(args) {
+async function editHomework(args) {
   try {
     const response = await handleApiCall(
       fetch(`${args.baseUrl}/note`, {
@@ -102,7 +102,7 @@ async function editAnnouncement(args) {
     }
 
     response.json().then((res) => {
-      reloadAnnouncements(args);
+      reloadHomework(args);
       self.postMessage(res);
     });
   } catch (error) {
@@ -110,7 +110,7 @@ async function editAnnouncement(args) {
   }
 }
 
-async function deleteAnnouncement(args) {
+async function deleteHomework(args) {
   try {
     const response = await handleApiCall(
       fetch(`${args.baseUrl}/note`, {
@@ -128,7 +128,7 @@ async function deleteAnnouncement(args) {
     }
 
     response.json().then((res) => {
-      reloadAnnouncements(args);
+      reloadHomework(args);
       self.postMessage(res);
     });
   } catch (error) {
