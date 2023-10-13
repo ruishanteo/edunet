@@ -71,8 +71,8 @@ action {
 }
 
 button {
-  background-color: #e7b474;
-  color: #fff;
+  background-color: #ebd2b4;
+  color: #000;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
@@ -84,6 +84,7 @@ button {
 
 button:hover {
   background-color: #1e1b5f;
+  color: #fff;
 }
 
 @media (max-width: 700px) {

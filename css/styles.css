@@ -56,8 +56,8 @@ input {
 }
 
 button[type="submit"] {
-  background-color: #e7b474;
-  color: #fff;
+  background-color: #ebd2b4;
+  color: #000;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
@@ -69,8 +69,8 @@ button[type="submit"] {
 }
 
 button {
-  background-color: #e7b474;
-  color: #fff;
+  background-color: #ebd2b4;
+  color: #000;
   border: none;
   padding: 10px 20px;
   border-radius: 4px;
@@ -82,6 +82,7 @@ button {
 
 button:hover {
   background-color: #1e1b5f;
+  color: #fff;
 }
 
 table {
@@ -140,7 +141,7 @@ tr:nth-child(even) {
 .icon-button {
   background-color: transparent;
   font-size: 20px;
-  color: black;
+  color: #000;
   border-radius: 100%;
   aspect-ratio: 1;
   display: flex;
@@ -238,6 +239,7 @@ tr:nth-child(even) {
   height: 50px;
   width: 50px;
   background-color: #1e1b5f;
+  color: #fff;
   border-radius: 50%;
   display: inline-block;
   justify-content: center;
@@ -245,7 +247,7 @@ tr:nth-child(even) {
 }
 
 .dot:hover {
-  background-color: #e7b474;
+  background-color: #ebd2b4;
 }
 
 #types {
@@ -284,7 +286,7 @@ tr:nth-child(even) {
 
 .button-link {
   text-decoration: none;
-  color: black;
+  color: #000;
   font-weight: bold;
   font-size: 15px;
   position: relative;

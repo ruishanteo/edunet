@@ -36,13 +36,14 @@ nav ul li a {
 }
 
 .menu-selected {
-  color: #e7b474;
+  color: #ebd2b4;
   pointer-events: none;
   cursor: default;
 }
 
 .logout-button {
-  background-color: #e7b474;
+  background-color: #ebd2b4;
+  color: #000;
   border-radius: 3px;
   border-width: 0px;
   align-items: center;
@@ -54,7 +55,7 @@ nav ul li a {
 a1,
 b1 {
   font-size: x-large;
-  color: #e7b474;
+  color: #ebd2b4;
 }
 
 a1 {
@@ -71,12 +72,12 @@ a1 {
 }
 
 .topnav a:hover {
-  color: #e7b474;
+  color: #ebd2b4;
 }
 
 .topnav .nav-icon {
   display: none;
-  color: #e7b474;
+  color: #ebd2b4;
 }
 
 @media screen and (max-width: 750px) {
@@ -114,7 +115,7 @@ a1 {
   }
 
   .topnav.topnav.responsive .logout-button {
-    background-color: #e7b474;
+    background-color: #ebd2b4;
     border-radius: 0px;
     border-width: 0px;
     align-items: normal;

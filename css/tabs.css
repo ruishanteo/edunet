@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  --bgColorMenu: #e7b474;
+  --bgColorMenu: #ebd2b4;
   --duration: 0.7s;
 }
 
@@ -111,7 +111,7 @@ html *::after {
 
 .tab__content {
   border-width: 5px;
-  border-color: #e7b474;
+  border-color: #ebd2b4;
   border-style: solid;
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
