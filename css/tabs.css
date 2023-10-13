@@ -125,15 +125,13 @@ html *::after {
   transition: 0.3s;
 }
 
-.tab__content {
-  .tab__content__item {
-    transition: 0.3s;
-    display: none;
-  }
-  .tab_active {
-    transition: 0.3s;
-    display: block;
-  }
+.tab__content__item {
+  transition: 0.3s;
+  display: none;
+}
+.tab_active {
+  transition: 0.3s;
+  display: block;
 }
 
 .tab__controls {
