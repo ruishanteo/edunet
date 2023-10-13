@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/studentHome.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <title>Home - EduNet</title>
+    <script src="/components/header.js"></script>
+  </head>
+
+  <body>
+    <header-navbar></header-navbar>
+
+    <div class="page">
+      <header>
+        <h1>Welcome!</h1>
+      </header>
+      <main>
+        <div class="home-grid-container">
+          <div class="hide"></div>
+          <div class="dir-card" id="classes-card">
+            <h3>View Classes</h3>
+            <i class="fa fa-school icon"></i>
+            <p id="classes-count">-</p>
+          </div>
+          <div class="dir-card" id="profile-card">
+            <h3>View Profile</h3>
+            <i class="fa fa-user icon"></i>
+            <p>-</p>
+          </div>
+          <div class="dir-card" id="messages-card">
+            <h3>View Messages</h3>
+            <i class="fa fa-message icon"></i>
+            <p id="messages-count">-</p>
+          </div>
+          <div class="hide"></div>
+        </div>
+        <div class="info">
+          <div class="home-box">
+            <h2>Announcements</h2>
+            <div class="announcements-list" id="announcements-list"></div>
+          </div>
+
+          <div class="home-box">
+            <h2>Homework</h2>
+            <p>There is no homework due soon.</p>
+          </div>
+        </div>
+      </main>
+      <button
+        class="dot"
+        onclick="window.location.href = '/pages/mainPages/messages.html'"
+        id="open-message-button"
+      >
+        <i class="fa fa-message"></i>
+      </button>
+    </div>
+
+    <script>
+      const colors = [
+        "#DAC4F7",
+        "#D6F6DD",
+        "#F4989C",
+        "#ACECF7",
+        "#DEE7E7",
+        "#D0A5C0",
+        "#F0B7B3",
+      ];
+      const cards = document.querySelectorAll(".dir-card");
+
+      cards.forEach((card) => {
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        card.style.backgroundColor = randomColor;
+        card.dataset.color = randomColor;
+      });
+    </script>
+    <script src="/js/common/auth.js"></script>
+    <script src="/js/common/modal.js"></script>
+    <script src="/js/common/renderAnnouncements.js"></script>
+    <script src="/components/backButton.js"></script>
+    <script type="module" src="/js/mainPages/studentHome.js"></script>
+  </body>
+</html>

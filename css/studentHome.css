@@ -1,0 +1,33 @@
+.home-grid-container {
+  min-height: 20vh;
+  grid-template-columns: auto 200px 200px 200px auto;
+}
+
+@media (max-width: 900px) {
+  .home-grid-container {
+    grid-template-columns: auto auto;
+  }
+}
+
+.info {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: auto auto;
+  flex-direction: row;
+  justify-content: stretch;
+  width: 100%;
+  gap: 20px;
+}
+
+@media (max-width: 800px) {
+  .info {
+    grid-template-columns: auto;
+  }
+}
+
+.home-box {
+  padding: 15px;
+  border-color: #1e1b5f;
+  border-style: solid;
+  border-radius: 10px;
+}

@@ -11,11 +11,11 @@ function getHomePage(user) {
     return "/";
   }
   if (user.type === "student") {
-    return `/pages/mainPages/detailedStudents.html?studentId=${user.studentId}`;
+    return `/pages/mainPages/studentHome.html`;
   } else if (user.type === "parent") {
     return `/pages/mainPages/detailedParents.html?parentId=${user.tutorId}`;
   } else if (user.type === "tutor") {
-    return `/pages/mainPages/detailedTutors.html?tutorId=${user.tutorId}`;
+    return `/pages/mainPages/tutorHome.html`;
   } else if (user.type === "admin") {
     return `/pages/admin/home.html`;
   }
