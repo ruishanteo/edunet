@@ -2,13 +2,23 @@
   font-size: 40px;
 }
 
-.grid-container {
+.home-grid-container {
   justify-items: center;
   align-items: center;
   min-height: 70vh;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 10px 10px;
+  grid-template-columns: auto 200px 200px 200px 200px auto;
+  grid-column-start: 0;
+  grid-gap: 30px;
+}
+
+@media (max-width: 900px) {
+  .home-grid-container {
+    grid-template-columns: auto auto;
+  }
+  .hide {
+    display: none;
+  }
 }
 
 .dir-card {
@@ -24,6 +34,7 @@
   gap: 10px;
 }
 
-.dir-class:hover {
+.dir-card:hover {
   box-shadow: 0 8px 16px 0 #1e1b5f;
+  cursor: pointer;
 }

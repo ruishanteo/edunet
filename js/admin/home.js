@@ -1,5 +1,28 @@
 const classesWorker = new Worker("/js/workers/classesWorker.js");
 const studentsWorker = new Worker("/js/workers/studentsWorker.js");
+const tutorsWorkers = new Worker("/js/workers/tutorsWorker.js");
+const messagesWorker = new Worker("/js/workers/messagesWorker.js");
+
+const classesCard = document.getElementById("classes-card");
+const studentsCard = document.getElementById("students-card");
+const tutorsCard = document.getElementById("tutors-card");
+const messagesCard = document.getElementById("messages-card");
+
+classesCard.onclick = () => {
+  window.location.href = "/pages/admin/classes.html";
+};
+
+studentsCard.onclick = () => {
+  window.location.href = "/pages/admin/students.html";
+};
+
+tutorsCard.onclick = () => {
+  window.location.href = "/pages/admin/tutors.html";
+};
+
+messagesCard.onclick = () => {
+  window.location.href = "/pages/mainPages/messages.html";
+};
 
 const reloadClasses = () => {
   const args = getArgs();
@@ -13,23 +36,24 @@ const reloadStudents = () => {
   studentsWorker.postMessage(args);
 };
 
-const deleteClass = (params) => {
+const reloadTutors = () => {
   const args = getArgs();
-  args.updateType = "delete";
-  args.updateBody = params;
-  classesWorker.postMessage(args);
+  args.updateType = "";
+  tutorsWorkers.postMessage(args);
+};
+
+const reloadChats = () => {
+  const args = getArgs();
+  args.updateType = "get";
+  messagesWorker.postMessage(args);
 };
 
 classesWorker.addEventListener("message", function (e) {
   handleNotifications(e);
 
   if (e.data.classes) {
-    renderClasses(
-      e.data.classes,
-      args,
-      (id) => deleteClass({ classId: id }),
-      () => null
-    );
+    const classesCount = document.getElementById("classes-count");
+    classesCount.textContent = `(${e.data.classes.length})  classes`;
   }
 });
 
@@ -37,12 +61,26 @@ studentsWorker.addEventListener("message", function (e) {
   handleNotifications(e);
 
   if (e.data.students) {
-    renderStudents(
-      e.data.students,
-      args,
-      () => {},
-      () => null
-    );
+    const studentsCount = document.getElementById("students-count");
+    studentsCount.textContent = `(${e.data.students.length})  students`;
+  }
+});
+
+tutorsWorkers.addEventListener("message", function (e) {
+  handleNotifications(e);
+
+  if (e.data.tutors) {
+    const tutorsCount = document.getElementById("tutors-count");
+    tutorsCount.textContent = `(${e.data.tutors.length})  tutors`;
+  }
+});
+
+messagesWorker.addEventListener("message", function (e) {
+  handleNotifications(e);
+
+  if (e.data.chats) {
+    const messagesCount = document.getElementById("messages-count");
+    messagesCount.textContent = `(${e.data.chats.length})  chats`;
   }
 });
 
@@ -52,4 +90,6 @@ addCallback(() => {
   adminName.textContent = user.fullName;
   reloadClasses();
   reloadStudents();
+  reloadTutors();
+  reloadChats();
 });

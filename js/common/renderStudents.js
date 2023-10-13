@@ -97,15 +97,19 @@ function renderStudent(student, args, handleEdit, handleDelete) {
 function renderStudentRows(students, handleDelete) {
   const studentsTable = document.getElementById("students-table");
   studentsTable.innerHTML = `
+    <thead>
       <tr>
-          <th>No.</th>
+          <th></th>
           <th>Name</th>
           <th>Contact No.</th>
           <th class="hideable">Email</th>
           <th>Parent's Contact No.</th>
           <th class="hideable">Parent's Email</th>
           <th></th>
-      </tr>`;
+      </tr>
+    </thead>`;
+  const body = document.createElement("tbody");
+  studentsTable.appendChild(body);
 
   if (students.length === 0) {
     const row = document.createElement("tr");
@@ -113,7 +117,7 @@ function renderStudentRows(students, handleDelete) {
           <tr>
               <td colspan="7">No students found</td>
           </tr>`;
-    studentsTable.appendChild(row);
+    body.appendChild(row);
   }
   students.map((student, index) => {
     const row = document.createElement("tr");
@@ -122,7 +126,7 @@ function renderStudentRows(students, handleDelete) {
           <td>${index + 1}</td>
           <td><a href="/pages/mainPages/detailedStudents.html?studentId=${
             student.id
-          }">${student.user.fullName}</a></td>
+          }" class="button-link">${student.user.fullName}</a></td>
           <td>${student.contact}</td>
           <td class="hideable">${student.user.email}</td>
           <td>${student.parent.contact}</td>
@@ -131,7 +135,7 @@ function renderStudentRows(students, handleDelete) {
             student.id
           }"><i class="fa fa-close"></i></button></td>
       </tr>`;
-    studentsTable.appendChild(row);
+    body.appendChild(row);
     const removeStudentButton = document.getElementById(
       `remove-student-${student.id}`
     );

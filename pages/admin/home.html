@@ -21,27 +21,29 @@
         <h1>Welcome <span id="admin-name"></span>,</h1>
       </header>
       <main>
-        <div class="grid-container">
-          <div class="dir-card">
+        <div class="home-grid-container">
+          <div class="hide"></div>
+          <div class="dir-card" id="classes-card">
             <h3>View Classes</h3>
             <i class="fa fa-school icon"></i>
-            <p>(23) classes</p>
+            <p id="classes-count">-</p>
           </div>
-          <div class="dir-card">
+          <div class="dir-card" id="students-card">
             <h3>View Students</h3>
             <i class="fa fa-pen-ruler icon"></i>
-            <p>(23) students</p>
+            <p id="students-count">-</p>
           </div>
-          <div class="dir-card">
+          <div class="dir-card" id="tutors-card">
             <h3>View Tutors</h3>
             <i class="fa fa-chalkboard-user icon"></i>
-            <p>(23) tutors</p>
+            <p id="tutors-count">-</p>
           </div>
-          <div class="dir-card">
+          <div class="dir-card" id="messages-card">
             <h3>View Messages</h3>
             <i class="fa fa-message icon"></i>
-            <p>(0) messages unread</p>
+            <p id="messages-count">-</p>
           </div>
+          <div class="hide"></div>
         </div>
       </main>
       <button
