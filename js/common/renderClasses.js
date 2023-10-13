@@ -1,5 +1,15 @@
 function renderClasses(classes, args, handleDelete, handleAddClass) {
   const classesGrid = document.getElementById("classes-grid");
+  const colors = [
+    "#DAC4F7",
+    "#D6F6DD",
+    "#F4989C",
+    "#ACECF7",
+    "#DEE7E7",
+    "#D0A5C0",
+    "#F0B7B3",
+  ];
+
   if (!classesGrid) {
     return;
   }
@@ -16,6 +26,11 @@ function renderClasses(classes, args, handleDelete, handleAddClass) {
   classes.forEach((classInfo) => {
     const card = document.createElement("div");
     card.classList.add("card");
+
+    const randomColorIndex = Math.floor(Math.random() * colors.length);
+    const randomColor = colors[randomColorIndex];
+
+    card.style.backgroundColor = randomColor;
 
     card.innerHTML = `
         <h4><b>${classInfo.name}</b></h4>

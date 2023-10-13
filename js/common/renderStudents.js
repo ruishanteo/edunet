@@ -1,5 +1,15 @@
 function renderStudents(students, args, handleDelete, handleAddStudent) {
   const studentsGrid = document.getElementById("students-grid");
+  const colors = [
+    "#DAC4F7",
+    "#D6F6DD",
+    "#F4989C",
+    "#ACECF7",
+    "#DEE7E7",
+    "#D0A5C0",
+    "#F0B7B3",
+  ];
+
   if (!studentsGrid) {
     return;
   }
@@ -23,6 +33,12 @@ function renderStudents(students, args, handleDelete, handleAddStudent) {
     if (enrolledClasses.length > 2) {
       enrolledClasses[2] += "...";
     }
+
+    const randomColorIndex = Math.floor(Math.random() * colors.length);
+    const randomColor = colors[randomColorIndex];
+
+    card.style.backgroundColor = randomColor;
+
     card.innerHTML = `
       <h4><b>${studentInfo.user.fullName}</b></h4>
 

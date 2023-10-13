@@ -64,6 +64,16 @@ function renderMessages(args, messages, receiver, handleSendMessage) {
 
 function renderChats(args, chats, handleAddMessage) {
   const chatsList = document.getElementById("chats-grid");
+  const colors = [
+    "#DAC4F7",
+    "#D6F6DD",
+    "#F4989C",
+    "#ACECF7",
+    "#DEE7E7",
+    "#D0A5C0",
+    "#F0B7B3",
+  ];
+
   if (!chatsList) {
     return;
   }
@@ -73,6 +83,11 @@ function renderChats(args, chats, handleAddMessage) {
   chats.forEach((chatInfo) => {
     const card = document.createElement("div");
     card.classList.add("card");
+    const randomColorIndex = Math.floor(Math.random() * colors.length);
+    const randomColor = colors[randomColorIndex];
+
+    card.style.backgroundColor = randomColor;
+
     card.innerHTML = `
       <div class="subclass">
         <div class="message-body">

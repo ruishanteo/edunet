@@ -44,6 +44,24 @@
       </button>
     </div>
 
+    <script>
+      const colors = [
+        "#DAC4F7",
+        "#D6F6DD",
+        "#F4989C",
+        "#ACECF7",
+        "#DEE7E7",
+        "#D0A5C0",
+        "#F0B7B3",
+      ];
+      const cards = document.querySelectorAll(".card");
+
+      cards.forEach((card) => {
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        card.style.backgroundColor = randomColor;
+        card.dataset.color = randomColor;
+      });
+    </script>
     <script src="/js/common/auth.js"></script>
     <script src="/js/common/modal.js"></script>
     <script src="/js/common/renderClasses.js"></script>

@@ -1,5 +1,15 @@
 function renderTutors(tutors, args, handleDelete) {
   const tutorsGrid = document.getElementById("tutors-grid");
+  const colors = [
+    "#DAC4F7",
+    "#D6F6DD",
+    "#F4989C",
+    "#ACECF7",
+    "#DEE7E7",
+    "#D0A5C0",
+    "#F0B7B3",
+  ];
+
   if (!tutorsGrid) {
     return;
   }
@@ -16,6 +26,12 @@ function renderTutors(tutors, args, handleDelete) {
     if (enrolledClasses.length > 2) {
       enrolledClasses[2] += "...";
     }
+
+    const randomColorIndex = Math.floor(Math.random() * colors.length);
+    const randomColor = colors[randomColorIndex];
+
+    card.style.backgroundColor = randomColor;
+
     card.innerHTML = `
     <h4><b>${tutorInfo.user.fullName}</b></h4>
 
