@@ -279,7 +279,7 @@ const assignTutor = (params) => {
         const title = document.getElementById("form-title").value;
         const content = document.getElementById("form-content").value;
 
-        createHomework(classId, { title, content });
+        createAnnouncement(classId, { title, content });
         close();
       }
     );
