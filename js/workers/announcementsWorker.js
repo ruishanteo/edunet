@@ -23,10 +23,8 @@ async function reloadAnnouncements(args) {
 async function getAnnouncements(args) {
   try {
     const requestURL = args.studentId
-      ? `${args.baseUrl}/note/student/${args.studentId}`
-      : args.tutorId
-      ? `${args.baseUrl}/note/tutor/${args.tutorId}`
-      : `${args.baseUrl}/note`;
+      ? `${args.baseUrl}/announcement/student/${args.studentId}`
+      : `${args.baseUrl}/announcement/class/${args.classId}`;
 
     const response = await handleApiCall(
       fetch(requestURL, {
@@ -50,22 +48,15 @@ async function getAnnouncements(args) {
 
 async function createAnnouncement(args) {
   try {
-    const requestURL = args.studentId
-      ? `${args.baseUrl}/note/student`
-      : args.tutorId
-      ? `${args.baseUrl}/note/tutor`
-      : `${args.baseUrl}/note`;
-
     const response = await handleApiCall(
-      fetch(requestURL, {
+      fetch(`${args.baseUrl}/announcement`, {
         method: "POST",
         headers: {
           Authorization: `${args.accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          tutorId: args.tutorId,
-          studentId: args.studentId,
+          classId: args.classId,
           ...args.updateBody,
         }),
       })
@@ -87,7 +78,7 @@ async function createAnnouncement(args) {
 async function editAnnouncement(args) {
   try {
     const response = await handleApiCall(
-      fetch(`${args.baseUrl}/note`, {
+      fetch(`${args.baseUrl}/announcement`, {
         method: "PUT",
         headers: {
           Authorization: `${args.accessToken}`,
@@ -113,7 +104,7 @@ async function editAnnouncement(args) {
 async function deleteAnnouncement(args) {
   try {
     const response = await handleApiCall(
-      fetch(`${args.baseUrl}/note`, {
+      fetch(`${args.baseUrl}/announcement`, {
         method: "DELETE",
         headers: {
           Authorization: `${args.accessToken}`,

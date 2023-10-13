@@ -50,6 +50,15 @@ p {
   height: fit-content;
 }
 
+.announcement-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  margin: -10px 0;
+}
+
 .announcement-content {
   text-align: left;
   overflow: hidden;

@@ -5,6 +5,7 @@ let tutors = null;
 
 const tutorsWorker = new Worker("/js/workers/tutorsWorker.js");
 const classesWorker = new Worker("/js/workers/classesWorker.js");
+const announcementsWorker = new Worker("/js/workers/announcementsWorker.js");
 
 const reloadTutors = () => {
   const args = getArgs();
@@ -17,6 +18,38 @@ const reloadClass = () => {
   args.updateType = "get";
   args.classId = classId;
   classesWorker.postMessage(args);
+};
+
+const reloadAnnouncements = () => {
+  const args = getArgs();
+  args.updateType = "";
+  args.classId = classId;
+  announcementsWorker.postMessage(args);
+};
+
+const createAnnouncement = (classId, params) => {
+  const args = getArgs();
+  args.updateType = "create";
+  args.updateBody = params;
+  args.classId = classId;
+  announcementsWorker.postMessage(args);
+};
+
+const deleteAnnouncement = (params) => {
+  console.log(params);
+  const args = getArgs();
+  args.updateType = "delete";
+  args.updateBody = params;
+  args.classId = classId;
+  announcementsWorker.postMessage(args);
+};
+
+const editAnnouncement = (params) => {
+  const args = getArgs();
+  args.updateType = "edit";
+  args.updateBody = params;
+  args.classId = classId;
+  announcementsWorker.postMessage(args);
 };
 
 const deleteClass = (params) => {
@@ -131,10 +164,35 @@ const assignTutor = (params) => {
   });
 }
 
+{
+  announcementsWorker.addEventListener("message", function (e) {
+    handleNotifications(e);
+
+    if (e.data.announcements) {
+      renderAnnouncements(
+        e.data.announcements,
+        args.isAdmin || args.isTutor,
+        (id) => deleteAnnouncement({ announcementId: id }),
+        (id, title, content) =>
+          editAnnouncement({
+            announcementId: id,
+            title,
+            content,
+          })
+      );
+    }
+  });
+}
+
 addCallback(() => {
   reloadClass();
   reloadTutors();
-  getAnnouncements(false, classId);
+  reloadAnnouncements();
+
+  if (!args.isAdmin && !args.isTutor) {
+    const rightControls = document.querySelectorAll(".tab__right_controls");
+    rightControls.forEach((control) => control.remove());
+  }
 });
 
 window.addEventListener("load", function () {
@@ -191,3 +249,29 @@ window.addEventListener("load", function () {
     menu.style.setProperty("--timeOut", "none");
   });
 });
+
+{
+  const addAnnouncementButton = document.getElementById(
+    "add-announcement-button"
+  );
+  addAnnouncementButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    addModal(
+      "Add Announcement",
+      "add-announcement-form",
+      `<div class="section">
+            <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
+            <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
+            <button type="submit">Add</button>
+        </div>`,
+      null,
+      (close) => {
+        const title = document.getElementById("form-title").value;
+        const content = document.getElementById("form-content").value;
+
+        createAnnouncement(classId, { title, content });
+        close();
+      }
+    );
+  });
+}

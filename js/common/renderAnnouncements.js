@@ -1,18 +1,29 @@
-function renderAnnouncements(announcements, canEdit) {
+function renderAnnouncements(announcements, canEdit, onDelete, onEdit) {
   const args = getArgs();
 
   const announcementsContainer = document.getElementById("announcements-list");
+
+  announcementsContainer.innerHTML = "";
   announcements.map((announcement, index) => {
     const announcementCard = document.createElement("div");
     announcementCard.classList.add("announcement-card");
-    if (announcement.unread) {
-      announcementCard.classList.add("announcement-unread");
-    }
+
+    const canEditAnnouncement =
+      canEdit || args.user.id === announcement.creator.id;
 
     announcementCard.innerHTML = `
-        <h4 class="announcement-title">
-            <b>${announcement.title}</b>
-        </h4>
+        <div class="announcement-header">
+          <h4 class="announcement-title">
+              <b>${announcement.title}</b>
+          </h4>
+          ${
+            canEditAnnouncement
+              ? `<button class="icon-button" id="delete-announcement-button-${index}">
+            <i class="fa fa-trash"></i>
+          </button>`
+              : ""
+          }
+        </div>
 
         <p class="announcement-content">
             ${announcement.content}
@@ -26,14 +37,24 @@ function renderAnnouncements(announcements, canEdit) {
         </p>`;
 
     announcementsContainer.appendChild(announcementCard);
-    if (index !== announcement.length - 1) {
+    if (index <= announcements.length - 2) {
       const divider = document.createElement("hr");
       divider.classList.add("divider");
       announcementsContainer.appendChild(divider);
     }
 
-    const canEditAnnouncement =
-      canEdit || args.user.id === announcement.creator.id;
+    const deleteAnnouncementButton = document.getElementById(
+      `delete-announcement-button-${index}`
+    );
+
+    if (canEditAnnouncement) {
+      deleteAnnouncementButton.onclick = (event) => {
+        event.stopPropagation();
+        addConfirmModal("delete an announcement", "delete-announcement", () => {
+          onDelete(announcement.id);
+        });
+      };
+    }
 
     announcementCard.onclick = () => {
       addModal(
@@ -57,7 +78,15 @@ function renderAnnouncements(announcements, canEdit) {
               const title = document.getElementById("form-title").value;
               const content = document.getElementById("form-content").value;
 
-              //   editNote({ noteId: noteInfo.id, title, content });
+              if (
+                title === announcement.title &&
+                content === announcement.content
+              ) {
+                close();
+                return;
+              }
+
+              onEdit(announcement.id, title, content);
               close();
             }
           : null
