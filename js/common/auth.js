@@ -22,7 +22,7 @@ function getHomePage(user) {
   return "/pages/mainPages/notFound.html";
 }
 
-const URL = "https://edunet.dynv6.net";
+const URL = "http://localhost:8000";
 const args = getArgs();
 
 function getArgs() {

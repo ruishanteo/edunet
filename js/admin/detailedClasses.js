@@ -134,4 +134,60 @@ const assignTutor = (params) => {
 addCallback(() => {
   reloadClass();
   reloadTutors();
+  getAnnouncements(false, classId);
+});
+
+window.addEventListener("load", function () {
+  const body = document.body;
+  const menu = body.querySelector(".tab__menu");
+  const menuItems = menu.querySelectorAll(".menu__item");
+  const menuBorder = menu.querySelector(".menu__border");
+  let activeItem = menu.querySelector(".active");
+
+  const tabTitle = body.querySelector(".tab__title");
+  const tabItems = body.querySelectorAll(".tab__content__item");
+
+  function clickItem(item, index) {
+    menu.style.removeProperty("--timeOut");
+
+    if (activeItem == item) return;
+
+    if (activeItem) {
+      activeItem.classList.remove("active");
+    }
+
+    item.classList.add("active");
+    tabTitle.textContent = item.getAttribute("data-tab");
+    tabItems.forEach((tabItem) => {
+      if (tabItem.getAttribute("data-tab") === item.getAttribute("data-tab")) {
+        tabItem.classList.add("tab_active");
+      } else {
+        tabItem.classList.remove("tab_active");
+      }
+    });
+    activeItem = item;
+    offsetMenuBorder(activeItem, menuBorder);
+  }
+
+  function offsetMenuBorder(element, menuBorder) {
+    const offsetActiveItem = element.getBoundingClientRect();
+    const left =
+      Math.floor(
+        offsetActiveItem.left -
+          menu.offsetLeft -
+          (menuBorder.offsetWidth - offsetActiveItem.width) / 2
+      ) + "px";
+    menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
+  }
+
+  offsetMenuBorder(activeItem, menuBorder);
+
+  menuItems.forEach((item, index) => {
+    item.addEventListener("click", () => clickItem(item, index));
+  });
+
+  window.addEventListener("resize", () => {
+    offsetMenuBorder(activeItem, menuBorder);
+    menu.style.setProperty("--timeOut", "none");
+  });
 });
