@@ -95,13 +95,18 @@ function renderHomeworkRows(
           (close) => {
             const title = document.getElementById("form-title").value;
             const content = document.getElementById("form-description").value;
+            const dueDate = document.getElementById("form-due-date").value;
 
-            if (title === homework.title && content === homework.description) {
+            if (
+              title === homework.title &&
+              content === homework.description &&
+              dueDate === homework.dueDate.slice(0, 16)
+            ) {
               close();
               return;
             }
 
-            onEdit(homework.id, title, content);
+            onEdit(homework.id, title, content, dueDate);
             close();
           }
         );

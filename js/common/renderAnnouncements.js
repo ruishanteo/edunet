@@ -39,7 +39,9 @@ function renderAnnouncements(announcements, canEdit, onDelete, onEdit) {
         </p>
 
         <p class="announcement-detail">
-            Posted on: <span id="timestamp">${announcement.createdAt}</span>
+            Posted on: <span id="timestamp">${moment(
+              announcement.createdAt
+            ).format("MMMM Do YYYY, h:mm a")}</span>
         </p>
         <p class="announcement-detail">
             <span id="poster">${announcement.creator.fullName}</span>
@@ -71,15 +73,26 @@ function renderAnnouncements(announcements, canEdit, onDelete, onEdit) {
         "detailed-announcement-form",
         canEdit
           ? `<div class="section">
-              <h3 class="content-title">Title</h3> <input value="${announcement.title}" type="text" id="form-title" maxlength="100" required/><br />
-              <h3 class="content-title">Content</h3> <textarea type="text" id="form-content" rows="20" maxlength="2500" required>${announcement.content}</textarea> <br />
+              <h3 class="content-title">Title</h3> <input value="${
+                announcement.title
+              }" type="text" id="form-title" maxlength="30" required/><br />
+              <h3 class="content-title">Content</h3> <textarea type="text" id="form-content" rows="20" maxlength="2500" required>${
+                announcement.content
+              }</textarea> <br />
+              <label class="announcement-detail">${moment(
+                announcement.createdAt
+              ).format("MMMM Do YYYY, h:mm a")}</label><br />
               <button type="submit">Update</button>
             </div>`
           : `<div class="section">
                 <h3 class="content-title">${announcement.title}</h3><br />
                 <p class="content-text">${announcement.content}</p><br />
-                <label class="announcement-detail">Created by ${announcement.creator.fullName}</label><br />
-                <label class="announcement-detail">Created at ${announcement.createdAt}</label><br />
+                <label class="announcement-detail">Created by ${
+                  announcement.creator.fullName
+                }</label><br />
+                <label class="announcement-detail">${moment(
+                  announcement.createdAt
+                ).format("MMMM Do YYYY, h:mm a")}</label><br />
               </div>`,
         null,
         canEdit

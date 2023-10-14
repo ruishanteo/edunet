@@ -145,9 +145,10 @@ const assignTutor = (params) => {
       reloadHomework();
       reloadAnnouncements();
       if (
-        (args.isAdmin || args.isTutor) &&
-        e.data.class.tutors.length > 0 &&
-        e.data.class.tutors[0].id === args.user.tutorId
+        args.isAdmin ||
+        (args.isTutor &&
+          e.data.class.tutors.length > 0 &&
+          e.data.class.tutors[0].id === args.user.tutorId)
       ) {
         renderStudentRows(e.data.class.students, args.isAdmin, (id) =>
           removeStudent({ studentId: id })
@@ -287,7 +288,7 @@ const assignTutor = (params) => {
       "Add Announcement",
       "add-announcement-form",
       `<div class="section">
-            <h3 class="content-title">Title</h3> <input type="text" id="form-title" maxlength="100" required/><br />
+            <h3 class="content-title">Title</h3> <input type="text" id="form-title" maxlength="30" required/><br />
             <h3 class="content-title">Content</h3> <textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
             <button type="submit">Add</button>
         </div>`,
@@ -412,6 +413,16 @@ addCallback(() => {
   if (!args.isAdmin) {
     if (!args.isTutor) {
       removeAllControls();
+    }
+
+    const messageTutorButton = document.getElementById("message-tutor-button");
+    if (args.isTutor) {
+      messageTutorButton.remove();
+    } else {
+      messageTutorButton.onclick = (event) => {
+        event.preventDefault();
+        window.location.href = `/pages/mainPages/detailedMessage.html?receiverId=${classInfo.tutors[0].user.id}`;
+      };
     }
 
     const adminOnly = document.querySelectorAll("#admin-only");

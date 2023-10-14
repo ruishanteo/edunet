@@ -167,6 +167,7 @@ textarea {
 
 .content-title {
   text-align: left;
+  overflow-y: scroll;
 }
 
 .content-text {

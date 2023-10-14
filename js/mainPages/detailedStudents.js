@@ -406,4 +406,22 @@ addCallback((args) => {
   fetchAllClasses();
   reloadStudent();
   reloadNotes();
+
+  const messageParentButton = document.getElementById("message-parent-button");
+  const messageStudentButton = document.getElementById(
+    "message-student-button"
+  );
+  if (!args.isAdmin && !args.isTutor) {
+    messageParentButton.remove();
+    messageStudentButton.remove();
+  } else {
+    messageParentButton.onclick = (event) => {
+      event.preventDefault();
+      window.location.href = `/pages/mainPages/detailedMessage.html?receiverId=${student.parent.user.id}`;
+    };
+    messageStudentButton.onclick = (event) => {
+      event.preventDefault();
+      window.location.href = `/pages/mainPages/detailedMessage.html?receiverId=${student.user.id}`;
+    };
+  }
 });
