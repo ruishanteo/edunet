@@ -2,7 +2,8 @@ const classesWorker = new Worker("/js/workers/classesWorker.js");
 
 const reloadClasses = () => {
   args.updateType = "";
-  args.studentId = args.user.studentId;
+  args.studentId = !args.isTutor && args.user.studentId;
+  args.tutorId = args.isTutor && args.user.tutorId;
   classesWorker.postMessage(args);
 };
 
