@@ -142,16 +142,24 @@ const assignTutor = (params) => {
 
     if (e.data.class) {
       classInfo = e.data.class;
+      reloadHomework();
+      reloadAnnouncements();
+      if (
+        (args.isAdmin || args.isTutor) &&
+        e.data.class.tutors.length > 0 &&
+        e.data.class.tutors[0].id === args.user.tutorId
+      ) {
+        renderStudentRows(e.data.class.students, args.isAdmin, (id) =>
+          removeStudent({ studentId: id })
+        );
+      } else {
+        removeAllControls();
+      }
       renderClass(e.data.class, args, (id) =>
         addConfirmModal("delete a class", "delete-class", () =>
           deleteClass({ classId: id })
         )
       );
-      if (args.isAdmin || args.isTutor) {
-        renderStudentRows(e.data.class.students, args.isAdmin, (id) =>
-          removeStudent({ studentId: id })
-        );
-      }
     }
   });
 
@@ -257,7 +265,8 @@ const assignTutor = (params) => {
     if (e.data.announcements) {
       renderAnnouncements(
         e.data.announcements,
-        args.isAdmin || args.isTutor,
+        args.isAdmin ||
+          (args.isTutor && classInfo.tutors[0].id === args.user.tutorId),
         (id) => deleteAnnouncement({ announcementId: id }),
         (id, title, content) =>
           editAnnouncement({
@@ -301,7 +310,8 @@ const assignTutor = (params) => {
     if (e.data.homework) {
       renderHomeworkRows(
         e.data.homework,
-        args.isAdmin || args.isTutor,
+        args.isAdmin ||
+          (args.isTutor && classInfo.tutors[0].id === args.user.tutorId),
         (id) => deleteHomework({ homeworkId: id }),
         (id, title, description, dueDate) =>
           editHomework({
@@ -387,19 +397,21 @@ const assignTutor = (params) => {
   });
 }
 
+function removeAllControls() {
+  const rightControls = document.querySelectorAll(".tab__right_controls");
+  rightControls.forEach((control) => control.remove());
+
+  const studentsTab = document.querySelectorAll("#Students");
+  studentsTab.forEach((tab) => tab.remove());
+}
+
 addCallback(() => {
   reloadClass();
   reloadTutors();
-  reloadHomework();
-  reloadAnnouncements();
 
   if (!args.isAdmin) {
     if (!args.isTutor) {
-      const rightControls = document.querySelectorAll(".tab__right_controls");
-      rightControls.forEach((control) => control.remove());
-
-      const studentsTab = document.querySelectorAll("#Students");
-      studentsTab.forEach((tab) => tab.remove());
+      removeAllControls();
     }
 
     const adminOnly = document.querySelectorAll("#admin-only");

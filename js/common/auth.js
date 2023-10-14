@@ -177,8 +177,12 @@ function handleNotifications(e) {
   }
 
   if (e.data.errorResponse) {
+    const errorResponse = e.data.errorResponse;
     setLoadingStatus(false);
-    showStatus(e.data.errorResponse.message, "error");
+    showStatus(
+      errorResponse.error ? errorResponse.error : errorResponse.message,
+      "error"
+    );
   }
 
   if (e.data.failedGet || e.data.isDeleted) {
