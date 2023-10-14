@@ -161,7 +161,7 @@ const assignTutor = (params) => {
       "Assign Tutor",
       "assign-tutor-form",
       `<div class="section">
-            <label>Tutors:</label>
+          <h3 class="content-title">Tutors:</h3>
             <div>
              <br>
               ${
@@ -215,10 +215,10 @@ const assignTutor = (params) => {
         "Edit Class Information",
         "edit-class-form",
         `<div class="section">
-            <label>Name</label> <input value="${classInfo.name}" type="text" id="form-name" maxlength="100" required/><br />
-            <label>Day</label> <input <input value="${classInfo.day}" type="text" id="form-day" maxlength="100" required/><br />
-            <label>Time</label> <input <input value="${classInfo.time}" type="text" id="form-time" maxlength="100" required/><br />
-            <label>Venue</label> <input <input value="${classInfo.venue}" type="text" id="form-venue" maxlength="100" required/><br />
+            <h3 class="content-title">Name</h3> <input value="${classInfo.name}" type="text" id="form-name" maxlength="100" required/><br />
+            <h3 class="content-title">Day</h3> <input <input value="${classInfo.day}" type="text" id="form-day" maxlength="100" required/><br />
+            <h3 class="content-title">Time</h3> <input <input value="${classInfo.time}" type="text" id="form-time" maxlength="100" required/><br />
+            <h3 class="content-title">Venue</h3> <input <input value="${classInfo.venue}" type="text" id="form-venue" maxlength="100" required/><br />
             <button type="submit">Update</button>
         </div>`,
         null,
@@ -270,8 +270,8 @@ const assignTutor = (params) => {
       "Add Announcement",
       "add-announcement-form",
       `<div class="section">
-            <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
-            <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
+            <h3 class="content-title">Title</h3> <input type="text" id="form-title" maxlength="100" required/><br />
+            <h3 class="content-title">Content</h3> <textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
             <button type="submit">Add</button>
         </div>`,
       null,
@@ -313,9 +313,9 @@ const assignTutor = (params) => {
       "Add Homework",
       "add-homework-form",
       `<div class="section">
-            <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
-            <label>Description</label><textarea type="text" id="form-description" rows="20" maxlength="1000" required></textarea> <br />
-            <label>Due Date</label><input type="datetime-local" id="form-due-date" required/><br />
+            <h3 class="content-title">Title</h3> <input type="text" id="form-title" maxlength="100" required/><br />
+            <h3 class="content-title">Description</h3> <textarea type="text" id="form-description" rows="20" maxlength="1000" required></textarea> <br />
+            <h3 class="content-title">Due Date</h3> <input type="datetime-local" id="form-due-date" required/><br />
             <button type="submit">Add</button>
         </div>`,
       null,

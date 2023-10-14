@@ -25,10 +25,10 @@ const handleAddClass = () =>
     "Add Class",
     "add-class-form",
     `<div class="section">
-        <label>Name</label> <input type="text" id="form-name" maxlength="20" required/><br />
-        <label>Day</label><input type="text" id="form-day" maxlength="15" required/> <br />
-        <label>Time</label><input type="text" id="form-time" maxlength="15" required/> <br /> 
-        <label>Venue</label> <input type="text" id="form-venue" maxlength="20"/> 
+        <h3 class="content-title">Name</h3> <input type="text" id="form-name" maxlength="20" required/><br />
+        <h3 class="content-title">Day</h3> <input type="text" id="form-day" maxlength="15" required/> <br />
+        <h3 class="content-title">Time</h3> <input type="text" id="form-time" maxlength="15" required/> <br /> 
+        <h3 class="content-title">Venue</h3> <input type="text" id="form-venue" maxlength="20"/> 
         <button type="submit">Create</button>
     </div>`,
     null,

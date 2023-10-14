@@ -1,3 +1,13 @@
+h3 {
+  width: auto;
+}
+
+p,
+label {
+  margin: 0;
+  width: auto;
+}
+
 html {
   box-sizing: border-box;
   --bgColorMenu: #ebd2b4;

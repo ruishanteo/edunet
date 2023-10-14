@@ -35,13 +35,13 @@ const handleAddStudent = () =>
     "Add Student",
     "add-tutor-form",
     `<div class="section">
-        <label>Name</label> <input type="text" id="form-student-name" required/><br />
-        <label>Contact No.</label><input type="text" id="form-student-contact" required/> <br />
-        <label>Email</label><input type="email" id="form-student-email" required/> <br /> 
-        <label>Parent's Full Name</label><input type="text" id="form-parent-name" required/> <br />
-        <label>Parent's Contact No.</label><input type="text" id="form-parent-contact" required/> <br />
-        <label>Parent's Email</label><input type="email" id="form-parent-email" required/> <br /> 
-        <label>Classes Enrolled:</label>
+        <h3 class="content-title">Full Name</h3> <input type="text" id="form-student-name" required/><br />
+        <h3 class="content-title">Contact No.</h3><input type="text" id="form-student-contact" required/> <br />
+        <h3 class="content-title">Email</h3> <input type="email" id="form-student-email" required/> <br /> 
+        <h3 class="content-title">Parent's Full Name</h3> <input type="text" id="form-parent-name" required/> <br />
+        <h3 class="content-title">Parent's Contact No.</h3> <input type="text" id="form-parent-contact" required/> <br />
+        <h3 class="content-title">Parent's Email</h3><input type="email" id="form-parent-email" required/> <br /> 
+        <h3 class="content-title">Classes Enrolled</h3>
         <div>
            <br>
           ${

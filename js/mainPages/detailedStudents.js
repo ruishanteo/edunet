@@ -122,10 +122,10 @@ const deleteAssessment = (params) => {
       "Edit Student",
       "edit-student-form",
       `<div class="section">
-        <label>Full Name</label> <input value="${student?.user?.fullName}" type="name" id="form-name" required/><br />
-        <label>Contact No.</label><input value="${student?.contact}" type="num" id="form-contact" required/> <br />
-        <label>Parent Full Name</label> <input value="${student?.parent?.user?.fullName}" type="name" id="form-parent-name" required/><br />
-        <label>Parent Contact No.</label><input value="${student?.parent?.contact}" type="num" id="form-parent-contact" required/> <br />
+        <h3 class="content-title">Full Name</h3> <input value="${student?.user?.fullName}" type="name" id="form-name" required/><br />
+        <h3 class="content-title">Contact No.</h3> <input value="${student?.contact}" type="num" id="form-contact" required/> <br />
+        <h3 class="content-title">Parent's Full Name</h3> <input value="${student?.parent?.user?.fullName}" type="name" id="form-parent-name" required/><br />
+        <h3 class="content-title">Parent's Contact No.</h3> <input value="${student?.parent?.contact}" type="num" id="form-parent-contact" required/> <br />
         <button type="submit">Update</button>
       </div>`,
       null,
@@ -183,7 +183,7 @@ const deleteAssessment = (params) => {
       "Add Class",
       "add-class-form",
       `<div class="section">
-            <label>Classes Assigned:</label>
+          <h3 class="content-title">Classes Assigned:</h3>
             <div>
              <br>
               ${
@@ -264,13 +264,13 @@ const deleteAssessment = (params) => {
             "edit-note-form",
             canEdit
               ? `<div class="section">
-              <label>Title</label> <input value="${noteInfo.title}" type="text" id="form-title" maxlength="100" required/><br />
-              <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required>${noteInfo.content}</textarea> <br />
+              <h3 class="content-title">Title</h3> <input value="${noteInfo.title}" type="text" id="form-title" maxlength="100" required/><br />
+              <h3 class="content-title">Content</h3> <textarea type="text" id="form-content" rows="20" maxlength="2500" required>${noteInfo.content}</textarea> <br />
               <button type="submit">Update</button>
             </div>`
               : `<div class="section">
-                <label>Title</label><p class="content-title">${noteInfo.title}</p><br />
-                <label>Content</label><p class="content-text">${noteInfo.content}</p><br />
+                <h3 class="content-title">Title</h3> <p class="content-title">${noteInfo.title}</p><br />
+                <h3 class="content-title">Content</h3> <p class="content-text">${noteInfo.content}</p><br />
                 <label>Created by ${noteInfo.creator.fullName}</label><br />
               </div>`,
             null,
@@ -299,8 +299,8 @@ const deleteAssessment = (params) => {
         "Add Note",
         "add-note-form",
         `<div class="section">
-          <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
-          <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
+          <h3 class="content-title">Title</h3> <input type="text" id="form-title" maxlength="100" required/><br />
+          <h3 class="content-title">Content</h3><textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
           <button type="submit">Create</button>
       </div>`,
         null,
@@ -322,9 +322,9 @@ const deleteAssessment = (params) => {
       "Add Assessment",
       "add-assessment-form",
       `<div class="section">
-        <label>Name</label> <input type="text" id="form-name" maxlength="30" required/><br />
-        <label>Score</label> <input type="number" id="form-score" min="0" max="9999" required/><br />
-        <label>Total</label><input type="number" id="form-total" min="0" max="9999" required/> <br />
+        <h3 class="content-title">Name</h3> <input type="text" id="form-name" maxlength="30" required/><br />
+        <h3 class="content-title">Score</h3> <input type="number" id="form-score" min="0" max="9999" required/><br />
+        <h3 class="content-title">Score</h3> <input type="number" id="form-total" min="0" max="9999" required/> <br />
         <button type="submit">Create</button>
     </div>`,
       null,
@@ -343,9 +343,9 @@ const deleteAssessment = (params) => {
       "Update Assessment",
       "add-assessment-form",
       `<div class="section">
-        <label>Name</label> <input value=${assessment.name} type="text" id="form-name" required/><br />
-        <label>Score</label> <input value=${assessment.score} type="number" id="form-score" required/><br />
-        <label>Total</label><input value=${assessment.total} type="number" id="form-total" required/> <br />
+        <h3 class="content-title">Name</h3> <input value=${assessment.name} type="text" id="form-name" required/><br />
+        <h3 class="content-title">Score</h3> <input value=${assessment.score} type="number" id="form-score" required/><br />
+        <h3 class="content-title">Score</h3> <input value=${assessment.total} type="number" id="form-total" required/> <br />
         <button type="submit">Update</button>
     </div>`,
       null,

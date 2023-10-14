@@ -176,6 +176,12 @@ tr:nth-child(even) {
   align-items: center;
 }
 
+.responsive-button {
+  width: 150px;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+}
+
 @media screen and (max-width: 850px) {
   th,
   td {
@@ -192,7 +198,7 @@ tr:nth-child(even) {
   }
   .responsive-button {
     padding: 0.5rem;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
   .empty-table-row {
     margin-top: 0 !important;

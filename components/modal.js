@@ -124,12 +124,12 @@ if (addStudentModal) {
     modalTitle: "Add Student",
     modalText: `
       <div class="section">
-        <label>Name</label> <input type="name" required/><br />
-        <label>Contact No.</label><input type="num" required/> <br />
-        <label>Email</label><input type="email" required/> <br /> 
-        <label>Parent's Contact No.</label><input type="p_num" required/> <br />
-        <label>Parent's Email</label><input type="p_email" required/> <br /> 
-        <label>Classes Enrolled</label> <input type="location" /> 
+        <h3 class="content-title">Name</h3> <input type="name" required/><br />
+        <h3 class="content-title">Contact No.</h3> <input type="num" required/> <br />
+        <h3 class="content-title">Email</h3> <input type="email" required/> <br /> 
+        <h3 class="content-title">Parent's Contact No.</h3> <input type="p_num" required/> <br />
+        <h3 class="content-title">Parent's Email</h3><input type="p_email" required/> <br /> 
+        <h3 class="content-title">Classes Enrolled</h3> <input type="location" /> 
         <button type="submit">Create</button>
       </div>`,
     formID: "add-student-form",
@@ -143,9 +143,9 @@ if (addTutorModal) {
     modalTitle: "Add Tutor",
     modalText: `
       <div class="section">
-        <label>Name</label> <input type="name" required/><br />
-        <label>Contact No.</label><input type="num" required/> <br />
-        <label>Email</label><input type="email" required/> <br /> 
+        <h3 class="content-title">Name</h3> <input type="name" required/><br />
+        <h3 class="content-title">Contact No.</h3> <input type="num" required/> <br />
+        <h3 class="content-title">Email</h3> <input type="email" required/> <br /> 
         <button type="submit">Create</button>
       </div>`,
     formID: "add-tutor-form",
@@ -159,8 +159,8 @@ if (addNoteModal) {
     modalTitle: "Add Note",
     modalText: `
       <div class="section">
-        <label>Title</label> <input type="title" required/><br />
-        <label>Text</label><input type="text" required/> <br />
+        <h3 class="content-title">Title</h3> <input type="title" required/><br />
+        <h3 class="content-title">Text</h3> <input type="text" required/> <br />
         <button type="submit">Create</button>
       </div>`,
     formID: "add-note-form",
@@ -174,8 +174,8 @@ if (addMessageModal) {
     modalTitle: "Send Message",
     modalText: `
       <div class="section">
-        <label>To:</label> <input type="to" required/><br />
-        <label>Text:</label> <textarea placeholder="Type message.." name="msg" required></textarea> <br />
+        <h3 class="content-title">To:</h3> <input type="to" required/><br />
+        <h3 class="content-title">Text:</h3> <textarea placeholder="Type message.." name="msg" required></textarea> <br />
         <button type="submit"><i class="fa fa-paper-plane"></i> Send</button>
       </div>`,
     formID: "add-message-form",

@@ -1,11 +1,3 @@
-label {
-  margin-bottom: 6px;
-  margin-right: 10px;
-  font-weight: bold;
-  text-align: left;
-  width: 80%; /* Make labels 80% wide */
-}
-
 form {
   display: flex;
   flex-direction: column;
@@ -72,9 +64,8 @@ form {
   top: 10px;
 }
 
-/* Change the color of the close icon on hover */
 .close-modal:hover {
-  color: #1e1b5f; /* Change to your desired hover color */
+  color: #1e1b5f;
 }
 
 textarea {
@@ -181,9 +172,9 @@ textarea {
 .content-text {
   text-align: left;
   white-space: pre-wrap;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 15px;
-  height: 100px;
+  height: 300px;
   resize: vertical;
-  background-color: #f1f1f1;
+  background-color: #fff;
 }

@@ -145,7 +145,7 @@ const deleteStudent = (params) => {
       "Add Class",
       "add-class-form",
       `<div class="section">
-            <label>Classes Assigned:</label>
+        <h3 class="content-title">Classes Assigned:</h3>
             <div>
              <br>
               ${
@@ -224,13 +224,13 @@ const deleteStudent = (params) => {
             "edit-note-form",
             canEdit
               ? `<div class="section">
-              <label>Title</label> <input value="${noteInfo.title}" type="text" id="form-title" maxlength="100" required/><br />
-              <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required>${noteInfo.content}</textarea> <br />
+              <h3 class="content-title">Title</h3> <input value="${noteInfo.title}" type="text" id="form-title" maxlength="100" required/><br />
+              <h3 class="content-title">Content</h3> <textarea type="text" id="form-content" rows="20" maxlength="2500" required>${noteInfo.content}</textarea> <br />
               <button type="submit">Update</button>
             </div>`
               : `<div class="section">
-                <label>Title</label><p class="content-title">${noteInfo.title}</p><br />
-                <label>Content</label><p class="content-text">${noteInfo.content}</p><br />
+                <h3 class="content-title">Title</h3> <p class="content-title">${noteInfo.title}</p><br />
+                <h3 class="content-title">Content</h3> <p class="content-text">${noteInfo.content}</p><br />
                 <label>Created by ${noteInfo.creator.fullName}</label><br />
               </div>`,
             null,
@@ -259,8 +259,8 @@ const deleteStudent = (params) => {
         "Add Note",
         "add-note-form",
         `<div class="section">
-        <label>Title</label> <input type="text" id="form-title" maxlength="100" required/><br />
-        <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
+        <h3 class="content-title">Title</h3> <input type="text" id="form-title" maxlength="100" required/><br />
+        <h3 class="content-title">Content</h3> <textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
         <button type="submit">Create</button>
       </div>`,
 

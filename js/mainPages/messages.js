@@ -20,7 +20,7 @@ const sendMesage = (params) => {
       "Send Message",
       "send-message-form",
       `<div class="section">
-        <label>To</label> <input type="text" placeholder="Start searching..." id="form-name" />
+        <h3 class="content-title">To</h3> <input type="text" placeholder="Start searching..." id="form-name" />
         <div id="name-dropdown" class="dropdown-content"></div><br />
         <label>Message</label><textarea type="text" id="form-message" rows="15" maxlength="1500" required></textarea> <br />
         <button type="submit"><i class="fa fa-paper-plane"></i> Send</button>

@@ -67,8 +67,8 @@ function renderHomeworkRows(homework, canEdit, onDelete, onEdit) {
           "Edit Homework",
           "edit-homework-form",
           `<div class="section">
-                <label>Title</label> <input value="${homework.title}" type="text" id="form-title" maxlength="100" required/><br />
-                <label>Description</label><textarea type="text" id="form-description" rows="20" maxlength="1000" required>${homework.description}</textarea> <br />
+                <h3 class="content-title">Title</h3> <input value="${homework.title}" type="text" id="form-title" maxlength="100" required/><br />
+                <h3 class="content-title">Description</h3> <textarea type="text" id="form-description" rows="20" maxlength="1000" required>${homework.description}</textarea> <br />
                 <button type="submit">Update</button>
               </div>`,
           null,

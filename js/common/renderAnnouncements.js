@@ -71,15 +71,15 @@ function renderAnnouncements(announcements, canEdit, onDelete, onEdit) {
         "detailed-announcement-form",
         canEdit
           ? `<div class="section">
-              <label>Title</label> <input value="${announcement.title}" type="text" id="form-title" maxlength="100" required/><br />
-              <label>Content</label><textarea type="text" id="form-content" rows="20" maxlength="2500" required>${announcement.content}</textarea> <br />
+              <h3 class="content-title">Title</h3> <input value="${announcement.title}" type="text" id="form-title" maxlength="100" required/><br />
+              <h3 class="content-title">Content</h3> <textarea type="text" id="form-content" rows="20" maxlength="2500" required>${announcement.content}</textarea> <br />
               <button type="submit">Update</button>
             </div>`
           : `<div class="section">
-                <p class="content-title">${announcement.title}</p><br />
+                <h3 class="content-title">${announcement.title}</h3><br />
                 <p class="content-text">${announcement.content}</p><br />
-                <label>Created by ${announcement.creator.fullName}</label><br />
-                <label>Created at ${announcement.createdAt}</label><br />
+                <label class="announcement-detail">Created by ${announcement.creator.fullName}</label><br />
+                <label class="announcement-detail">Created at ${announcement.createdAt}</label><br />
               </div>`,
         null,
         canEdit

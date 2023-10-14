@@ -36,9 +36,9 @@ addTutorButton.addEventListener("click", (event) => {
     "Add Tutor",
     "add-tutor-form",
     `<div class="section">
-          <label>Full Name</label> <input type="text" id="form-name" required/><br />
-          <label>Contact No.</label><input type="text" id="form-contact" required/> <br />
-          <label>Email</label><input type="email" id="form-email" required/> <br /> 
+          <h3 class="content-title">Full Name</h3> <input type="text" id="form-name" required/><br />
+          <h3 class="content-title">Contact No.</h3> <input type="text" id="form-contact" required/> <br />
+          <h3 class="content-title">Email</h3> <input type="email" id="form-email" required/> <br /> 
           <button type="submit">Create</button>
       </div>`,
     null,
