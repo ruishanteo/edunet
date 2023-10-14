@@ -1,4 +1,11 @@
-function renderHomeworkRows(homework, canEdit, onDelete, onEdit) {
+function renderHomeworkRows(
+  homework,
+  canEdit,
+  onDelete,
+  onEdit,
+  onUpload,
+  onDownload
+) {
   const homeworkTable = document.getElementById("homework-table");
   homeworkTable.innerHTML = `
     <thead>
@@ -9,7 +16,9 @@ function renderHomeworkRows(homework, canEdit, onDelete, onEdit) {
         <th>Due Date</th>
         ${
           canEdit
-            ? `<th class="smallest-column"></th>
+            ? `<th class="smallest-column hideable"></th>
+                <th class="smallest-column hideable"></th>
+                <th class="smallest-column"></th>
                 <th class="smallest-column"></th>`
             : ""
         }
@@ -36,8 +45,11 @@ function renderHomeworkRows(homework, canEdit, onDelete, onEdit) {
           <td>${moment(homework.dueDate).format("MMMM Do YYYY, h:mm a")}</td>
           ${
             canEdit
-              ? `<td><button id="edit-homework-${homework.id}"><i class="fa fa-pencil"></i></button></td>
-          <td><button id="delete-homework-${homework.id}"><i class="fa fa-close"></i></button></td>`
+              ? `
+              <td class="hideable"><button id="upload-grade-${homework.id}"><i class="fa-solid fa-arrow-up-from-bracket"></i></button></td>
+              <td class="hideable"><button id="download-grade-${homework.id}"><i class="fa-solid fa-arrow-down"></i></button></td>
+              <td><button id="edit-homework-${homework.id}"><i class="fa fa-pencil"></i></button></td>
+              <td><button id="delete-homework-${homework.id}"><i class="fa fa-close"></i></button></td>`
               : ""
           }
       </tr>`;
@@ -46,7 +58,6 @@ function renderHomeworkRows(homework, canEdit, onDelete, onEdit) {
     const deleteHomework = document.getElementById(
       `delete-homework-${homework.id}`
     );
-
     if (deleteHomework) {
       deleteHomework.onclick = (event) => {
         event.stopPropagation();
@@ -59,7 +70,6 @@ function renderHomeworkRows(homework, canEdit, onDelete, onEdit) {
     const editHomework = document.getElementById(
       `edit-homework-${homework.id}`
     );
-
     if (editHomework) {
       editHomework.onclick = (event) => {
         event.stopPropagation();
@@ -85,6 +95,40 @@ function renderHomeworkRows(homework, canEdit, onDelete, onEdit) {
             close();
           }
         );
+      };
+    }
+
+    const uploadGrade = document.getElementById(`upload-grade-${homework.id}`);
+    if (uploadGrade) {
+      uploadGrade.onclick = (event) => {
+        event.stopPropagation();
+        addModal(
+          "Upload Grade",
+          "upload-grade-form",
+          `<div class="section">
+                <label>Total Score</label> <input type="number" id="form-grade" min="0" max="100" required/><br />
+                <label>File</label> <input type="file" id="form-file" required/><br />
+                <button type="submit">Upload</button>
+              </div>`,
+          null,
+          (close) => {
+            const grade = document.getElementById("form-grade").value;
+            const file = document.getElementById("form-file").files[0];
+
+            onUpload(homework, grade, file);
+            close();
+          }
+        );
+      };
+    }
+
+    const downloadGrade = document.getElementById(
+      `download-grade-${homework.id}`
+    );
+    if (downloadGrade) {
+      downloadGrade.onclick = (event) => {
+        event.stopPropagation();
+        onDownload(homework.title);
       };
     }
   });

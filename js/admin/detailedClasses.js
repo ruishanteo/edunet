@@ -94,6 +94,14 @@ const editHomework = (params) => {
   homeworkWorker.postMessage(args);
 };
 
+const uploadHomeworkGrades = (params) => {
+  const args = getArgs();
+  args.updateType = "upload";
+  args.updateBody = params;
+  args.classId = classId;
+  homeworkWorker.postMessage(args);
+};
+
 const deleteClass = (params) => {
   const args = getArgs();
   args.updateType = "delete";
@@ -301,7 +309,55 @@ const assignTutor = (params) => {
             title,
             description,
             dueDate,
-          })
+          }),
+        (homework, total, file) => {
+          const reader = new FileReader();
+
+          reader.onload = function (e) {
+            const content = e.target.result;
+            const lines = content.split("\n");
+
+            const headers = lines[0].replace("\r", "").split(",");
+
+            const data = [];
+
+            for (let i = 1; i < lines.length; i++) {
+              const values = lines[i].split(",");
+              const entry = {};
+
+              for (let j = 0; j < headers.length; j++) {
+                const cleanedValue = values[j].replace("\r", "");
+                entry[headers[j]] = cleanedValue;
+              }
+
+              data.push(entry);
+            }
+
+            uploadHomeworkGrades({
+              homeworkId: homework.id,
+              assessmentName: homework.title,
+              total: parseInt(total),
+              data,
+            });
+          };
+
+          reader.readAsText(file);
+        },
+        (homeworkTitle) => {
+          const students = classInfo.students;
+          const csvRows = students.map(
+            (student) => `${student.id},${student.user.fullName},`
+          );
+          csvRows.splice(0, 0, "Student ID,Student Name,Score");
+          const csv = csvRows.join("\n");
+          const csvContent = `data:text/csv;charset=utf-8,${csv}`;
+          const encodedUri = encodeURI(csvContent);
+          const link = document.createElement("a");
+          link.setAttribute("href", encodedUri);
+          link.setAttribute("download", `${homeworkTitle}.csv`);
+          document.body.appendChild(link);
+          link.click();
+        }
       );
     }
   });
