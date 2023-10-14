@@ -173,7 +173,9 @@ function handleNotifications(e) {
   }
 
   if (e.data.doneLoading) {
-    setLoadingStatus(false);
+    setTimeout(() => {
+      setLoadingStatus(false);
+    }, 200);
   }
 
   if (e.data.errorResponse) {

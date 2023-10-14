@@ -479,7 +479,9 @@ window.addEventListener("load", function () {
     menuBorder.style.transform = `translate3d(${left}, 0 , 0)`;
   }
 
-  offsetMenuBorder(activeItem, menuBorder);
+  setTimeout(() => {
+    offsetMenuBorder(activeItem, menuBorder);
+  }, 100);
 
   menuItems.forEach((item, index) => {
     item.addEventListener("click", () => clickItem(item, index));
