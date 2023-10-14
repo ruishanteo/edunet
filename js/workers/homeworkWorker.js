@@ -10,6 +10,8 @@ self.addEventListener("message", (e) => {
       return editHomework(args);
     case "delete":
       return deleteHomework(args);
+    case "upload":
+      return uploadGrade(args);
     default:
       return getHomework(args);
   }
@@ -111,6 +113,32 @@ async function deleteHomework(args) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(args.updateBody),
+      })
+    );
+
+    if (!response.ok) {
+      return;
+    }
+
+    response.json().then((res) => {
+      reloadHomework(args);
+      self.postMessage(res);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function uploadGrade(args) {
+  try {
+    const response = await handleApiCall(
+      fetch(`${args.baseUrl}/homework/upload`, {
+        method: "POST",
+        headers: {
+          Authorization: `${args.accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ classId: args.classId, ...args.updateBody }),
       })
     );
 
