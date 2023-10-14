@@ -168,8 +168,8 @@ textarea {
 .content-title {
   text-align: left;
   word-wrap: break-word;
-  line-height: 1.5em;
-  height: 3em;
+  line-height: 1em;
+  max-height: 2em;
   overflow: hidden;
 }
 
