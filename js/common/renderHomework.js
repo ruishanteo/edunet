@@ -42,7 +42,9 @@ function renderHomeworkRows(
           <td>${index + 1}</td>
           <td>${homework.title}</td>
           <td class="hideable">${homework.description}</td>
-          <td>${moment(homework.dueDate).format("MMMM Do YYYY, h:mm a")}</td>
+          <td>${moment(homework.dueDate.slice(0, 16)).format(
+            "MMMM Do YYYY, hh:mm a"
+          )}</td>
           ${
             canEdit
               ? `
@@ -77,8 +79,16 @@ function renderHomeworkRows(
           "Edit Homework",
           "edit-homework-form",
           `<div class="section">
-                <h3 class="content-title">Title</h3> <input value="${homework.title}" type="text" id="form-title" maxlength="100" required/><br />
-                <h3 class="content-title">Description</h3> <textarea type="text" id="form-description" rows="20" maxlength="1000" required>${homework.description}</textarea> <br />
+                <h3 class="content-title">Title</h3> <input value="${
+                  homework.title
+                }" type="text" id="form-title" maxlength="100" required/><br />
+                <h3 class="content-title">Description</h3> <textarea type="text" id="form-description" rows="20" maxlength="1000" required>${
+                  homework.description
+                }</textarea> <br />
+                <h3 class="content-title">Due Date</h3> <input value="${homework.dueDate.slice(
+                  0,
+                  16
+                )}" type="datetime-local" id="form-due-date" required/><br />
                 <button type="submit">Update</button>
               </div>`,
           null,
