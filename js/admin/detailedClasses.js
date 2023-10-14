@@ -161,6 +161,20 @@ const assignTutor = (params) => {
           deleteClass({ classId: id })
         )
       );
+
+      const messageTutorButton = document.getElementById(
+        "message-tutor-button"
+      );
+      if (messageTutorButton) {
+        if ((args.isTutor && !args.isAdmin) || classInfo.tutors.length === 0) {
+          messageTutorButton.remove();
+        } else {
+          messageTutorButton.onclick = (event) => {
+            event.preventDefault();
+            window.location.href = `/pages/mainPages/detailedMessage.html?receiverId=${classInfo.tutors[0].user.id}`;
+          };
+        }
+      }
     }
   });
 
@@ -288,7 +302,7 @@ const assignTutor = (params) => {
       "Add Announcement",
       "add-announcement-form",
       `<div class="section">
-            <h3 class="content-title">Title</h3> <input type="text" id="form-title" maxlength="30" required/><br />
+            <h3 class="content-title">Title</h3> <input type="text" id="form-title" maxlength="50" required/><br />
             <h3 class="content-title">Content</h3> <textarea type="text" id="form-content" rows="20" maxlength="2500" required></textarea> <br />
             <button type="submit">Add</button>
         </div>`,
@@ -413,16 +427,6 @@ addCallback(() => {
   if (!args.isAdmin) {
     if (!args.isTutor) {
       removeAllControls();
-    }
-
-    const messageTutorButton = document.getElementById("message-tutor-button");
-    if (args.isTutor) {
-      messageTutorButton.remove();
-    } else {
-      messageTutorButton.onclick = (event) => {
-        event.preventDefault();
-        window.location.href = `/pages/mainPages/detailedMessage.html?receiverId=${classInfo.tutors[0].user.id}`;
-      };
     }
 
     const adminOnly = document.querySelectorAll("#admin-only");

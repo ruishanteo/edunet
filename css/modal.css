@@ -167,7 +167,10 @@ textarea {
 
 .content-title {
   text-align: left;
-  overflow-y: scroll;
+  word-wrap: break-word;
+  line-height: 1.5em;
+  height: 3em;
+  overflow: hidden;
 }
 
 .content-text {

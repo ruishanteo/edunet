@@ -75,7 +75,7 @@ function renderAnnouncements(announcements, canEdit, onDelete, onEdit) {
           ? `<div class="section">
               <h3 class="content-title">Title</h3> <input value="${
                 announcement.title
-              }" type="text" id="form-title" maxlength="30" required/><br />
+              }" type="text" id="form-title" maxlength="50" required/><br />
               <h3 class="content-title">Content</h3> <textarea type="text" id="form-content" rows="20" maxlength="2500" required>${
                 announcement.content
               }</textarea> <br />
