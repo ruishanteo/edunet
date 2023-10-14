@@ -5,7 +5,7 @@ function renderHomeworkRows(homework, canEdit, onDelete, onEdit) {
       <tr>
         <th></th>
         <th>Homework Name</th>
-        <th>Description</th>
+        <th class="hideable">Description</th>
         <th>Due Date</th>
         ${
           canEdit

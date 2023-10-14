@@ -11,18 +11,11 @@
 
 .info {
   margin-top: 50px;
-  display: grid;
-  grid-template-columns: auto auto;
+  display: flex;
   flex-direction: row;
   justify-content: stretch;
   width: 100%;
   gap: 20px;
-}
-
-@media (max-width: 800px) {
-  .info {
-    grid-template-columns: auto;
-  }
 }
 
 .home-box {
@@ -30,14 +23,19 @@
   border-color: #1e1b5f;
   border-style: solid;
   border-radius: 10px;
-
   word-wrap: break-word;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-
-  max-width: 50%;
   width: 50%;
-  min-width: 50%;
+}
+
+@media (max-width: 1000px) {
+  .info {
+    flex-direction: column;
+  }
+  .home-box {
+    width: 90%;
+  }
 }
