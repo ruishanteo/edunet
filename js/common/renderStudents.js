@@ -1,4 +1,10 @@
-function renderStudents(students, args, handleDelete, handleAddStudent) {
+function renderStudents(
+  students,
+  args,
+  handleDelete,
+  handleAddStudent,
+  specialHref
+) {
   const studentsGrid = document.getElementById("students-grid");
   const colors = [
     "#DAC4F7",
@@ -51,7 +57,9 @@ function renderStudents(students, args, handleDelete, handleAddStudent) {
 
     card.onclick = (event) => {
       event.stopPropagation();
-      window.location.href = `/pages/mainPages/detailedStudents.html?studentId=${studentInfo.id}`;
+      window.location.href = specialHref
+        ? `${specialHref}?studentId=${studentInfo.id}`
+        : `/pages/mainPages/detailedStudents.html?studentId=${studentInfo.id}`;
     };
 
     studentsGrid.appendChild(card);

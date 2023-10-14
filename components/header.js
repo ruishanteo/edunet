@@ -46,7 +46,9 @@ const checkUser = setInterval(() => {
 
 function setupHeader(user) {
   const menu = document.getElementById("header-links");
-  menu.innerHTML = `<li><a id="nav-classes" href="/pages/mainPages/classes.html">Classes</a></li>`;
+  if (user.type !== "parent") {
+    menu.innerHTML = `<li><a id="nav-classes" href="/pages/mainPages/classes.html">Classes</a></li>`;
+  }
   if (user.type === "admin") {
     menu.innerHTML += `
     <li><a id="nav-students" href="/pages/mainPages/students.html">Students</a></li>

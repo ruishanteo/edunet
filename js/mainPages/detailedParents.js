@@ -16,7 +16,13 @@ const reloadStudents = () => {
 
     if (e.data.students) {
       renderParent(getArgs());
-      renderStudents(e.data.students, args, null, null);
+      renderStudents(
+        e.data.students,
+        args,
+        null,
+        null,
+        "/pages/mainPages/studentHome.html"
+      );
     }
   });
 }

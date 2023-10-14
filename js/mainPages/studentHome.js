@@ -1,3 +1,6 @@
+const urlParams = new URLSearchParams(window.location.search);
+let studentId = parseInt(urlParams.get("studentId"));
+
 const announcementsWorker = new Worker("/js/workers/announcementsWorker.js");
 const homeworkWorker = new Worker("/js/workers/homeworkWorker.js");
 const classesWorker = new Worker("/js/workers/classesWorker.js");
@@ -8,13 +11,14 @@ const profileCard = document.getElementById("profile-card");
 const messagesCard = document.getElementById("messages-card");
 
 classesCard.onclick = () => {
-  window.location.href = "/pages/mainPages/classes.html";
+  window.location.href =
+    getArgs().user.type === "parent"
+      ? `/pages/mainPages/classes.html?studentId=${studentId}`
+      : "/pages/mainPages/classes.html";
 };
 
 profileCard.onclick = () => {
-  window.location.href = `/pages/mainPages/detailedStudents.html?studentId=${
-    getArgs().user.studentId
-  }`;
+  window.location.href = `/pages/mainPages/detailedStudents.html?studentId=${studentId}`;
 };
 
 messagesCard.onclick = () => {
@@ -24,21 +28,21 @@ messagesCard.onclick = () => {
 const reloadAnnouncements = () => {
   const args = getArgs();
   args.updateType = "";
-  args.studentId = args.user.studentId;
+  args.studentId = studentId;
   announcementsWorker.postMessage(args);
 };
 
 const reloadHomework = () => {
   const args = getArgs();
   args.updateType = "";
-  args.studentId = args.user.studentId;
+  args.studentId = studentId;
   homeworkWorker.postMessage(args);
 };
 
 const reloadClasses = () => {
   const args = getArgs();
   args.updateType = "";
-  args.studentId = args.user.studentId;
+  args.studentId = studentId;
   classesWorker.postMessage(args);
 };
 
@@ -96,6 +100,10 @@ addCallback(() => {
   const user = getArgs().user;
   const studentName = document.getElementById("student-name");
   studentName.textContent = user.fullName;
+
+  console.log(studentId, user.type);
+  studentId = user.type === "student" ? user.studentId : studentId;
+  console.log(studentId, user.type);
 
   reloadAnnouncements();
   reloadHomework();

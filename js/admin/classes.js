@@ -1,8 +1,16 @@
+const urlParams = new URLSearchParams(window.location.search);
+const studentId = parseInt(urlParams.get("studentId"));
+
 const classesWorker = new Worker("/js/workers/classesWorker.js");
 
 const reloadClasses = () => {
   args.updateType = "";
-  args.studentId = !args.isTutor && args.user.studentId;
+  args.studentId =
+    args.user.type === "student"
+      ? args.user.studentId
+      : args.user.type === "parent"
+      ? studentId
+      : null;
   args.tutorId = args.isTutor && args.user.tutorId;
   classesWorker.postMessage(args);
 };
