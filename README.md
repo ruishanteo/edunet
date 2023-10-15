@@ -55,4 +55,6 @@ EduNet serves as a centralized platform where classes, tutors, students, and par
 - ExpressJs
 - Sequelize
 
-[**Video Demo**](https://www.youtube.com/watch?v=3W0nrmE6ISU)
+## Other Links
+- [**Video Demo**](https://www.youtube.com/watch?v=3W0nrmE6ISU)
+- [**Backend Repo**](https://github.com/mfjkri/edunet-backend)
