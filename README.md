@@ -1,64 +1,58 @@
-## Inspiration
-
-The inspiration behind EduNet came from recognizing the need for a comprehensive platform to bridge the communication gap between students, parents, tutors, and administrators. We observed a lack of tools to effectively track student performance, grades, and improvements, as well as a need for a database system to efficiently assign tutors to specific classes.
-
-## What it does
+<img src="https://github.com/ruishanteo/edunet/assets/111447603/8c7355ff-3a2b-45bc-87b0-efde6808cd28" width="500">
 
 EduNet serves as a centralized platform where classes, tutors, students, and parents can be effortlessly managed. It provides intuitive controls to add, edit, and remove classes. Additionally, it streamlines the process of adding and managing tutors by automatically creating accounts and sending email notifications. When a student enrolls, it triggers the automatic creation of a parent account, ensuring instant connectivity.
 
+## Features
+
 - **Class Management**:
+  - <img src="https://github.com/ruishanteo/edunet/assets/111447603/7ac188cc-496c-4679-a93f-11052b206356" width="500">
   - Effortlessly add, edit, and remove classes.
   - Intuitive controls for seamless management.
-- **Tutor Management**:
-  - Streamlined process for adding and managing tutors. - Automatic account creation for tutors with email notifications.
-- **Student Enrollment**:
-  - Triggers automatic parent account creation for instant connectivity.
+  <img src="https://github.com/ruishanteo/edunet/assets/111447603/9ac9b3d2-123f-4d4c-ad9a-de19ef1c18bd" width="400">
+  <img src="https://github.com/ruishanteo/edunet/assets/111447603/311ec30f-7be8-4e5b-97e6-f8b2f4ca6c57" width="400">
+  <img src="https://github.com/ruishanteo/edunet/assets/111447603/282db70b-afc2-4fad-8992-838eb13cb3f2" width="400">
+  <img src="https://github.com/ruishanteo/edunet/assets/111447603/b4740da0-f468-40aa-ac2d-dc17c9c08a86" width="400">
+
+- **Automatic Account Creation**:
+  - Streamlined process for adding and managing tutors and students.
+  - Automatic account creation for tutors, students and parents with email notifications.
+  - Ensures instant connectivity.
+
 - **Assessment and Grading**:
-  - Tutors can input assessment grades for each student in every class.
+  - <img src="https://github.com/ruishanteo/edunet/assets/111447603/0fb98f06-de9b-4991-8af8-610e5746699c" width="500">
+  -  Assessment grades are automatically loaded from file upload at homework tab.
+  - Tutors can manually input assessment grades for each student in every class.
+
+- **Grade and Progress Visibility**:
+  - <img src="https://github.com/ruishanteo/edunet/assets/111447603/6e35fbdf-7873-4aef-a3a7-7858ed4e1f76" width="500">
+  - Students and parents can easily view grades for every class.
+  - Provides a visual representation of grades by class.
+  
 - **Notes for Reference:**
   - Tutors can write notes for every student and class for future reference.
-    **Communication Channels**:
+
+- **Communication Channels**:
+  - <img src="https://github.com/ruishanteo/edunet/assets/111447603/1d1dfc6b-075b-47b6-a615-7c586243d44d" width="500">
   - In-app channels facilitate communication between parents, students, tutors, and administrators.
-- **Grade and Progress Visibility**:
-  - Students and parents can easily view grades and tutor's notes for every class.
-  - Provides a visual representation of grades by class.
+
+- **Student Account Quick Access**
+  - Student accounts get access to classes, announcements and grades.
+  <img src="https://github.com/ruishanteo/edunet/assets/111447603/0e104142-4b16-4988-a049-c1d1bc523318" width="300">
+  <img src="https://github.com/ruishanteo/edunet/assets/111447603/3830978a-17d5-4a74-9f80-095c33d368c4" width="300">
+
 - **Parent Account Support**:
   - One parent account can manage multiple children's profiles.
 
-## How we built it
+## Tech Stack
+**Frontend**
+- HTML
+- CSS
+- D3.js (for data visualization)
+- Moment.js (for datetime)
 
-We built EduNet using HTML and CSS exclusively, without relying on external libraries. This decision was made as a personal challenge, and it demonstrates our proficiency in crafting a user-friendly interface without additional frameworks.
+**Backend**
+- Postgres
+- ExpressJs
+- Sequelize
 
-For the backend, we deployed it on an AWS EC2 instance, utilizing a custom domain name. The frontend is hosted on Netlify, ensuring a seamless and reliable user experience.
-
-## Challenges we ran into
-
-1. **Developing a dynamic and asynchronous application without using libraries like React and Redux for state management**
-
-   Creating a dynamic application with features like real-time updates, asynchronous data fetching, and interactive user interfaces without the assistance of modern JavaScript libraries like React and Redux presented a significant challenge.
-   Ensuring smooth interactions and responsiveness across different components required meticulous attention to detail and a deep understanding of vanilla JavaScript.
-
-2. **Implementing different views tailored to the needs of various stakeholders (admin, tutor, student)**
-
-   Designing and implementing distinct user interfaces for administrators, tutors, and students was a complex task. Each user type had unique requirements, functionalities, and access levels.
-   Balancing the user experience to provide an intuitive interface for each stakeholder, while maintaining a cohesive overall design, demanded careful planning and execution.
-
-3. **Ensuring precise user access level control**
-
-   Managing user access levels and permissions accurately was a crucial aspect of the application. It required creating a robust system to control what each user type could view, modify, and access within the platform.
-   Implementing a granular access control system demanded thorough testing and validation to prevent unauthorized actions or data exposure.
-   These challenges required a combination of in-depth technical knowledge, meticulous planning, and creative problem-solving to overcome. They also provided valuable learning opportunities and pushed us to enhance our skills in web development and user interface design.
-
-## Accomplishments that we're proud of
-
-We take pride in successfully creating a platform that addresses the specific needs we identified. The seamless integration of features such as class management, tutor assignment, and communication channels showcases our dedication to providing a comprehensive solution.
-
-Successfully integrating a diverse set of features, such as class management, tutor assignment, grade tracking, and robust communication channels, showcased our team's prowess in creating a multifaceted platform that caters to various aspects of educational management.
-
-## What we learned
-
-The process of developing EduNet allowed us to deepen our understanding of HTML and CSS, reinforcing our skills in creating visually appealing and functional interfaces. Additionally, we gained valuable experience in deploying and managing the backend on an AWS EC2 instance.
-
-## What's next for EduNet
-
-One of the upcoming features we plan to implement is a scheduling system for tutors to prevent conflicts. This addition will further enhance the platform's efficiency and usability, ensuring a seamless experience for all users. We are committed to continuously improving EduNet and exploring opportunities for growth and expansion.
+[**Video Demo**](https://www.youtube.com/watch?v=3W0nrmE6ISU)
